@@ -130,7 +130,6 @@ Basically, the properties object would be in this configuration:
       // attribute: value
       // ...
     },
-    content: /* custom text content */ ,
     listeners: {
       // event: callback function
       // ...
