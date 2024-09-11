@@ -113,6 +113,7 @@ main() {
     add_files "$@"
     commit_and_push
     # auto_push
+    git remote show origin
 }
 
 main "$@"

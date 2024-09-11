@@ -13,6 +13,9 @@
   - [Running](#running)
 - [**Usage**](#usage)
   - [GEDOM](#gedom)
+    - [Virtual Node](#virtual-node)
+    - [Router](#router)
+    - [State](#state)
 - [**Gameplay**](#gameplay)
 - [**Aknowledgements**](#aknowledgements)
   - [Contributors](#contributors)
@@ -58,6 +61,53 @@ $ cd bomberman-dom/
 ```
 ### File System
 
+    .
+    ├── public
+    │   ├── assets
+    │   │   ├── avatar
+    │   │   │   ├── actor.png
+    │   │   │   ├── ennemi.png
+    │   │   │   └── money.png
+    │   │   ├── bomb
+    │   │   │   └── bomb.png
+    │   │   ├── map
+    │   │   │   ├── bloc.png
+    │   │   │   └── mur.png
+    │   │   ├── soundEffect
+    │   │   │   ├── sound_bomb.mp3
+    │   │   │   └── title-screen.mp3
+    │   │   ├── bumberman.png
+    │   │   ├── images-removebg-preview.png
+    │   │   └── mainbg.jpeg
+    │   ├── src
+    │   │   ├── components
+    │   │   │   ├── avatar.js
+    │   │   │   ├── bomb.js
+    │   │   │   ├── grid.js
+    │   │   │   └── powerUp.js
+    │   │   ├── core
+    │   │   │   ├── node.js
+    │   │   │   ├── router.js
+    │   │   │   └── state.js
+    │   │   ├── interface
+    │   │   │   ├── barreScore.js
+    │   │   │   ├── menuPause.js
+    │   │   │   └── sound.js
+    │   │   ├── utils
+    │   │   │   └── viewport.js
+    │   │   └── app.js
+    │   ├── index.css
+    │   └── index.html
+    ├── audit.todo
+    ├── gitify.sh
+    ├── go.mod
+    ├── LICENSE
+    ├── main.go
+    └── README.md
+
+    11 directories, 31 files
+
+
 ### Running
 
 ###### [_Table of Contents ⤴️_](#table-of-contents)
@@ -65,6 +115,44 @@ $ cd bomberman-dom/
 ## Usage
 
 ### GEDOM
+
+_GEDOM_ is a framework-like tool that is meant to be used in any web application to simplify **DOM Manipulation**. It uses the concept of **DOM Abstraction** to create web components without having to use all those DOM methods. As an example, _GEDOM_ will be use to create a basic [**TodoMVC**](https://todomvc.com/) web application.
+
+#### [Virtual Node](./public/src/core/node.js)
+
+The Virtual Node is a class that generates a component, given a 'properties' object as arguments.  
+Basically, the properties object would be in this configuration:
+
+```js
+  const properties = {
+    tag: /* HTML tag name (default: 'div') */ ,
+    attrs: {
+      // attribute: value
+      // ...
+    },
+    content: /* custom text content */ ,
+    listeners: {
+      // event: callback function
+      // ...
+    },
+    children: [
+      // Virtual Node || Properties object
+      // ...
+    ]
+  }
+```
+
+Calling the **render()** method on an instance of a Virtual Node will **create the element** through the tag field value, then **set attributes, content and listeners**, then **add all given children** and finally **return** the created element that can now be append to any element of the **DOM**.
+
+###### [_Table of Contents ⤴️_](#table-of-contents)
+
+
+#### [Router](./public/src/core/router.js)
+
+###### [_Table of Contents ⤴️_](#table-of-contents)
+
+
+#### [State](./public/src/core/state.js)
 
 ###### [_Table of Contents ⤴️_](#table-of-contents)
 
