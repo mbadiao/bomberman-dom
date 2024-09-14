@@ -153,7 +153,26 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 			handleJoin(Conn, data.Name)
 		case "playerJoin":
 			{
-				broadcastPlayerMsg(data)
+				broadcast <- Data{
+					Type:    "playerJoin",
+					Content: data.Name + "join the game ",
+				}
+			}
+		case "Msg":
+			{
+				broadcast <- Data{
+					Type:    "Msg",
+					Name:    data.Name,
+					Content: data.Content,
+				}
+			}
+		case "Action":
+			{
+				broadcast <- Data{
+					Type:    "Action",
+					Name:    data.Name,
+					Content: data.Content,
+				}
 			}
 		default:
 			Conn.WriteJSON(Data{Type: "error", Content: "Invalid Data format"})
