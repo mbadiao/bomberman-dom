@@ -24,14 +24,10 @@ export function
         b -> bloc, m -> mur, c -> chemin, x -> bonus
     */
 
-
-   // const main = document.querySelector('main')
     const container = document.querySelector('.container')
     let timer = new TimerCpn()
     let chat = new ChatCpn()
     container.appendChild(timer.render())
-    //let main = document.createElement("main")
-
     let main = new VirtualNode({
         tag : "main"
     })
@@ -50,8 +46,6 @@ export function
             main.elem.appendChild(div.render())
         }
     }
-    
     container.appendChild(chat.render())
-
 }
 

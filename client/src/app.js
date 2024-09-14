@@ -7,12 +7,9 @@ import {
   domLifeScore,
   domNombreBombe,
 } from "./interface/barreScore.js";
-<<<<<<< Updated upstream:client/src/app.js
+
 import { ajoutPowersUp } from "./components/powerUp.js";
-=======
-import { ajoutPowersUp } from "./component/powerUp.js";
 import VirtualNode from "./core/node.js";
->>>>>>> Stashed changes:public/src/app.js
 // import { pauseGame } from "./interface/menuPause.js";
 let header = new VirtualNode({
   tag : "header"
