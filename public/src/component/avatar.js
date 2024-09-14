@@ -29,15 +29,15 @@ export class Avatar {
   addAvatarInGrid(actorID, avatar) {
     // Recuperation de l'ancienne coordonnee de l'avatar avec coordinate
     const div = document.querySelector("main > div");
-    const iconAvatar = document.createElement("img");
+    const iconAvatar = document.createElement("div");
     iconAvatar.id = `avatar${actorID}`;
-    iconAvatar.src = `./assets/avatar/${avatar}.png`;
+    // iconAvatar.style.color = `./assets/avatar/${avatar}.png`;
     // requestAnimationFrame(() => {
-      iconAvatar.style.transform = `translate(${
-        this.initX * this.#blocSize
+    iconAvatar.style.transform = `translate(${this.initX * this.#blocSize
       }px, ${this.initY * this.#blocSize}px)`;
-      // iconAvatar.style.transition = "transform 100ms linear";
+    // iconAvatar.style.transition = "transform 100ms linear";
     // });
+    iconAvatar.innerText = "👨‍🚀";
     div.appendChild(iconAvatar);
   }
 
@@ -50,52 +50,56 @@ export class Avatar {
         // console.log("y: ", (y0+this.posY-this.#blocSize)/this.#blocSize, " x: ", (x0 + this.posX)/this.#blocSize)
         if (
           originGrid[(y0 + this.posY - this.#blocSize) / this.#blocSize][
-            (x0 + this.posX) / this.#blocSize
+          (x0 + this.posX) / this.#blocSize
           ] === "c"
         ) {
-          avatar.style.transform = `translate(${x0 + this.posX}px, ${
-            y0 + this.posY - this.#blocSize
-          }px)`;
-          this.posY -= this.#blocSize;
+          requestAnimationFrame(() => {
+            avatar.style.transform = `translate(${x0 + this.posX}px, ${y0 + this.posY - this.#blocSize
+              }px)`;
+            this.posY -= this.#blocSize;
+          });
         }
         break;
       case "ArrowDown":
         // console.log("y: ", (y0+this.posY)/this.#blocSize, " x: ", (x0 + this.posX)/this.#blocSize)
         if (
           originGrid[(y0 + this.posY + this.#blocSize) / this.#blocSize][
-            (x0 + this.posX) / this.#blocSize
+          (x0 + this.posX) / this.#blocSize
           ] === "c"
         ) {
-          avatar.style.transform = `translate(${x0 + this.posX}px, ${
-            y0 + this.posY + this.#blocSize
-          }px)`;
-          this.posY += this.#blocSize;
+          requestAnimationFrame(() => {
+            avatar.style.transform = `translate(${x0 + this.posX}px, ${y0 + this.posY + this.#blocSize
+              }px)`;
+            this.posY += this.#blocSize;
+          });
         }
         break;
       case "ArrowRight":
         // console.log("y: ", (y0+this.posY)/this.#blocSize, " x: ", (x0 + this.posX+this.#blocSize)/this.#blocSize)
         if (
           originGrid[(y0 + this.posY) / this.#blocSize][
-            (x0 + this.posX + this.#blocSize) / this.#blocSize
+          (x0 + this.posX + this.#blocSize) / this.#blocSize
           ] === "c"
         ) {
-          avatar.style.transform = `translate(${
-            x0 + this.posX + this.#blocSize
-          }px, ${y0 + this.posY}px)`;
-          this.posX += this.#blocSize;
+          requestAnimationFrame(() => {
+            avatar.style.transform = `translate(${x0 + this.posX + this.#blocSize
+              }px, ${y0 + this.posY}px)`;
+            this.posX += this.#blocSize;
+          });
         }
         break;
       case "ArrowLeft":
         // console.log("y: ", (y0+this.posY)/this.#blocSize, " x: ", (x0 + this.posX-this.#blocSize)/this.#blocSize)
         if (
           originGrid[(y0 + this.posY) / this.#blocSize][
-            (x0 + this.posX - this.#blocSize) / this.#blocSize
+          (x0 + this.posX - this.#blocSize) / this.#blocSize
           ] === "c"
         ) {
-          avatar.style.transform = `translate(${
-            x0 + this.posX - this.#blocSize
-          }px, ${y0 + this.posY}px)`;
-          this.posX -= this.#blocSize;
+          requestAnimationFrame(() => {
+            avatar.style.transform = `translate(${x0 + this.posX - this.#blocSize
+              }px, ${y0 + this.posY}px)`;
+            this.posX -= this.#blocSize;
+          });
         }
         break;
     }

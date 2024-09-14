@@ -1,16 +1,17 @@
 :root {
     --bloc-size: 40px;
-    --animate-transition: 40px
+    /* --animate-transition: 40px */
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
 body {
-    background: url('../assets/mainbg.jpeg') no-repeat;
+    background: url('./assets/mainbg.jpeg') no-repeat;
     background-size: cover;
     height: 100vh;
 }
@@ -34,12 +35,12 @@ main>div img {
 }
 
 .b {
-    background: url('../assets/map/bloc.png');
+    background: url('./assets/map/bloc.png');
     background-size: cover;
 }
 
 .m {
-    background: url('../assets/map/mur.png');
+    background: url('./assets/map/mur.png');
     background-size: cover;
 }
 
@@ -50,6 +51,12 @@ main>div img {
 main div img {
     height: calc(var(--bloc-size) - 3px);
 
+}
+
+#avatarActor {
+    position: absolute;
+    z-index: 10;
+    font-size: 30px;
 }
 
 /* .bomb {
@@ -74,7 +81,6 @@ main div img {
 
 header {
     background-color: rgba(164, 164, 164, 0.5);
-    margin-bottom: 30px;
 }
 
 header ul {
@@ -86,6 +92,7 @@ header ul li {
     color: rgb(66, 62, 62);
     font-size: .9em;
     font-weight: bold;
+
 }
 
 /* Mis en forme du menu pause  */
@@ -184,6 +191,7 @@ header ul li {
 .cards .card p.second-text {
     font-size: .7em;
 }
+
 /* 
 .cards .card:hover {
     transform: scale(1.1, 1.1);

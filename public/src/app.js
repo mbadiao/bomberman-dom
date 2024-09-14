@@ -31,21 +31,21 @@ export function keyHandler(e) {
   //   // } else if (e.key == 'Escape') {
   //   //     pauseGame(actor)
   // } else {
-    
-    // if (counter % 5 == 0) {
-      //   requestAnimationFrame(() => {
-      actor.move(avatarActor, e.key, true);
-      // actor.takePowerUpBomb(divs, boom);
-      //   });
-      // On regarde tranquille si on a pas plongé sur un ennemi
-      // for (let i = 0; i < arrayOfGhost.length; i++) {
-      //     if (arrayOfGhost[i].position() == actor.position() && arrayOfGhost[i].life != 0) {
-      //         updateLifeScore(actor)
-      //     }
-      // }
-      // On regarde si on doit pas prendre de powerUp
-    // }
-    // counter++;
+
+  // if (counter % 5 == 0) {
+  // requestAnimationFrame(() => {
+    actor.move(avatarActor, e.key, true);
+    // actor.takePowerUpBomb(divs, boom);
+  // });
+  // On regarde tranquille si on a pas plongé sur un ennemi
+  // for (let i = 0; i < arrayOfGhost.length; i++) {
+  //     if (arrayOfGhost[i].position() == actor.position() && arrayOfGhost[i].life != 0) {
+  //         updateLifeScore(actor)
+  //     }
+  // }
+  // On regarde si on doit pas prendre de powerUp
+  // }
+  // counter++;
   // }
 }
 
