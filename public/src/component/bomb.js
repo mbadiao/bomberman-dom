@@ -1,5 +1,6 @@
 import { originGrid } from "./grid.js";
 import { updateLifeScore, updateScore } from "../interface/barreScore.js";
+import VirtualNode from "../core/node.js";
 // import { arrayOfGhost, intervalIDs } from "./avatar.js"
 // import { gameOver, winner } from "../interface/menuPause.js"
 // import { playSound } from "../interface/sound.js";
@@ -9,7 +10,7 @@ export let argBombe = [];
 let deathCounter = 0;
 export class Bomb {
   constructor() {
-    this.max = 5;
+    this.max = 100;
     this.delay = 2000; // en milliseconde
   }
 
@@ -21,11 +22,17 @@ export class Bomb {
     }
 
     if (this.max > 0) {
-      const iconBomb = document.createElement("img");
-      iconBomb.src = "./assets/bomb/bomb.png";
-      iconBomb.className = "bomb";
+      const iconBomb = new VirtualNode({
+        tag: "p",
+        attrs: {
+          class: "bomb",
+          style: `font-size: 35px;`,
+        },
+        children: ["💣"],
+      })
+
       if (divs[position].innerHTML == "") {
-        divs[position].appendChild(iconBomb);
+        divs[position].appendChild(iconBomb.render());
       }
       argBombe = [divs, position];
       detonationID = setTimeout(() => {

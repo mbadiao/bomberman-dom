@@ -6,6 +6,7 @@
 import { originGrid } from "./grid.js";
 // import { updateLifeScore } from "../interface/barreScore.js"
 import { domNombreBombe } from "../interface/barreScore.js";
+import VirtualNode from "../core/node.js";
 // import { pause } from "../interface/menuPause.js"
 
 export class Avatar {
@@ -28,17 +29,18 @@ export class Avatar {
 
   addAvatarInGrid(actorID, avatar) {
     // Recuperation de l'ancienne coordonnee de l'avatar avec coordinate
+    const iconAvatar = new VirtualNode({
+      tag: "p",
+      attrs: {
+        id: `avatar${actorID}`,
+        class: "avatarGame",
+        style: `transform: translate(${this.initX * this.#blocSize}px, ${this.initY * this.#blocSize}px)`,
+      },
+      children: ["👨‍🚀"],
+    })
     const div = document.querySelector("main > div");
-    const iconAvatar = document.createElement("div");
-    iconAvatar.id = `avatar${actorID}`;
-    // iconAvatar.style.color = `./assets/avatar/${avatar}.png`;
-    // requestAnimationFrame(() => {
-    iconAvatar.style.transform = `translate(${this.initX * this.#blocSize
-      }px, ${this.initY * this.#blocSize}px)`;
-    // iconAvatar.style.transition = "transform 100ms linear";
-    // });
-    iconAvatar.innerText = "👨‍🚀";
-    div.appendChild(iconAvatar);
+    
+    div.appendChild(iconAvatar.render());
   }
 
   // canCall = true;

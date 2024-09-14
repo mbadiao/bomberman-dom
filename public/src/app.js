@@ -13,28 +13,34 @@ import { ajoutPowersUp } from "./component/powerUp.js";
 grid();
 // chronometre();
 // ajoutPowersUp();
+const actors = [];
+actors.push(new Avatar(1, 1), new Avatar(2, 1));
 
-let actor = new Avatar(1, 1);
-// export let boom = new Bomb();
+export let boom = new Bomb();
+actors.forEach((actor, index) => {
+  actor.addAvatarInGrid(`Actor${index}`, "actor");
+})
 
-actor.addAvatarInGrid("Actor", "actor");
-const avatarActor = document.getElementById("avatarActor");
-// const divs = document.querySelector("main").querySelectorAll("div");
+const avatarActor = document.getElementsByClassName("avatarGame");
+const divs = document.querySelector("main").querySelectorAll("div");
 // domLifeScore(actor);
 // domNombreBombe(boom);
 
 // let counter = 0;
 export function keyHandler(e) {
-  // if (e.key == " ") {
-  //   boom.poserBomb(divs, actor.position(), actor);
+  if (e.key == " ") {
+    boom.poserBomb(divs, actor.position(), actor);
   //   domNombreBombe(boom);
   //   // } else if (e.key == 'Escape') {
   //   //     pauseGame(actor)
-  // } else {
+  } 
+  // else {
 
   // if (counter % 5 == 0) {
   // requestAnimationFrame(() => {
-    actor.move(avatarActor, e.key, true);
+    actors.forEach((actor,i) => {
+      actor.move(avatarActor[i], e.key, true);
+    });
     // actor.takePowerUpBomb(divs, boom);
   // });
   // On regarde tranquille si on a pas plongé sur un ennemi

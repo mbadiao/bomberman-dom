@@ -1,3 +1,5 @@
+import VirtualNode from "../core/node.js"
+
 export let originGrid = [
     ['b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b'],
     ['b', 'c', 'c', 'c', 'c', 'm', 'm', 'c', 'm', 'c', 'c', 'c', 'c', 'c', 'b'],
@@ -20,14 +22,20 @@ grid() {
         b -> bloc, m -> mur, c -> chemin, x -> bonus
     */
 
+    
+
     const main = document.querySelector('main')
     // On enleve tout le contenu de main
     main.innerHTML = ''
     for (let i = 0; i < originGrid.length; i++) {
         for (let j = 0; j < originGrid[i].length; j++) {
-            const div = document.createElement('div')
-            div.className = originGrid[i][j]
-            main.appendChild(div)
+            let div = new VirtualNode({
+                tag: 'div',
+                attrs: {
+                    class: originGrid[i][j]
+                }
+            })
+            main.appendChild(div.render())
         }
     }
 }
