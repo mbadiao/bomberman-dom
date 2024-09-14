@@ -11,18 +11,27 @@
 }
 
 body {
-    background: url('./assets/mainbg.jpeg') no-repeat;
+    background: url('./assets/font.jpg') no-repeat;
     background-size: cover;
     height: 100vh;
 }
-
+.container{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
 main {
+    width: 45%;
     display: flex;
     flex-wrap: wrap;
     width: calc(var(--bloc-size)*15);
     height: calc(var(--bloc-size)*13);
     margin: auto;
     background-color: rgb(192, 192, 192);
+}
+
+.chatCpn {
+    width: 30%;
 }
 
 main div {
@@ -45,7 +54,7 @@ main>div img {
 }
 
 .c {
-    background: rgb(72, 141, 72);
+    background: rgb(55, 156, 134);
 }
 
 main div img {
@@ -57,6 +66,10 @@ main div img {
     position: absolute;
     z-index: 10;
     font-size: 30px;
+}
+
+header{
+    margin-bottom: 10%;
 }
 
 /* .bomb {
@@ -191,6 +204,195 @@ header ul li {
 .cards .card p.second-text {
     font-size: .7em;
 }
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .card {
+    width: 100%;
+    max-width: 400px;
+    background: #0a2038;
+    color: white;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .card-header {
+    padding: 20px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-title {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  
+  .card-content {
+    padding: 20px;
+    height: 400px;
+    overflow-y: auto;
+  }
+  
+  .scroll-area {
+    height: 100%;
+    padding-right: 10px;
+  }
+  
+  .message {
+    display: flex;
+    margin-bottom: 15px;
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  .avatar img {
+    width: 100%;
+    border-radius: 50%;
+  }
+  
+  .message-content {
+    background-color: rgba(92, 89, 89, 0.3);
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 80%;
+  }
+  
+  .sender {
+    font-weight: bold;
+  }
+  
+  .card-footer {
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  
+  .message-form {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .input-message {
+    flex-grow: 1;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  .send-button {
+    background-color: #0b2541;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .send-button:hover {
+    background-color: #123861;
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+.timer {
+    width: 25%;
+    /* display: flex; */
+    align-items: center;
+}
+
+  .time {
+    /* width: 100%; */
+    max-width: 350px;
+    margin: 20px auto;
+    padding: 20px;
+    color: #e7e7e7;
+    background-color: #081a2d;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .time-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .time-title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .time-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .time-display {
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+  }
+  
+  .input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .input-duration {
+    width: 60px;
+    padding: 5px;
+    font-size: 16px;
+  }
+  
+  .duration-unit {
+    font-size: 14px;
+    color: #888;
+  }
+  
 
 /* 
 .cards .card:hover {

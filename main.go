@@ -220,7 +220,6 @@ func startWaitingTime() {
 
 func main() {
 	http.HandleFunc("/", handleConnections)
-
 	go func() {
 		for {
 			msg := <-broadcast
