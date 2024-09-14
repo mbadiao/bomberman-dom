@@ -1,13 +1,13 @@
-import { grid } from "./component/grid.js";
-import { Avatar } from "./component/avatar.js";
-import { Bomb } from "./component/bomb.js";
+import { grid } from "./components/grid.js";
+import { Avatar } from "./components/avatar.js";
+import { Bomb } from "./components/bomb.js";
 import {
   updateLifeScore,
   chronometre,
   domLifeScore,
   domNombreBombe,
 } from "./interface/barreScore.js";
-import { ajoutPowersUp } from "./component/powerUp.js";
+import { ajoutPowersUp } from "./components/powerUp.js";
 // import { pauseGame } from "./interface/menuPause.js";
 
 grid();
