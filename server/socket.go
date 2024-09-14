@@ -1,5 +1,12 @@
 package main
 
+import (
+	"log"
+	"net/http"
+
+	"github.com/gorilla/websocket"
+)
+
 func handleConnections(w http.ResponseWriter, r *http.Request) {
 	Conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {

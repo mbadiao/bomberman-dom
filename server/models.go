@@ -1,5 +1,12 @@
 package main
 
+import (
+	"sync"
+	"time"
+
+	"github.com/gorilla/websocket"
+)
+
 type Data struct {
 	Type        string
 	Name        string

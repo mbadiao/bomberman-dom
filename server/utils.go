@@ -1,5 +1,12 @@
 package main
 
+import (
+	"log"
+	"time"
+
+	"github.com/gorilla/websocket"
+)
+
 func handleJoin(Conn *websocket.Conn, name string) {
 	room.playersMutex.Lock()
 	defer room.playersMutex.Unlock()
@@ -63,7 +70,6 @@ func handleJoin(Conn *websocket.Conn, name string) {
 // 	}
 // }
 
-
 func startWaitingTime() {
 	if room.PlayerCount == room.MaxPlayers {
 		room.GameStarted = true
@@ -91,7 +97,6 @@ func broadcastPlayerMsg(msg Data) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 func handlePlayerDisconnect(Conn *websocket.Conn) {
 	room.playersMutex.Lock()
