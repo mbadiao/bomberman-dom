@@ -1,4 +1,4 @@
-import VirtualNode from "../core/node";
+import VirtualNode from "../core/node.js";
 
 export default class ChatCpn extends VirtualNode {
     constructor() {
@@ -20,7 +20,7 @@ export default class ChatCpn extends VirtualNode {
                                 attrs: {
                                     class: "card-title",
                                 },
-                                children: "Chat de Jeu",
+                                children: ["Chat de Jeu"],
                             }
                         ]
                     },
@@ -49,10 +49,10 @@ export default class ChatCpn extends VirtualNode {
                                                 },
                                                 children: [
                                                     {
-                                                        tag: 'im',
+                                                        tag: 'img',
                                                         attrs: {
                                                             class: "avatar",
-                                                            src: "placeholder.svg",
+                                                            src: "https://ui-avatars.com/api/?name=Fatima+Keita&background=123861&color=fff",
                                                             alt: "Avatar"
                                                         },
 
@@ -70,14 +70,14 @@ export default class ChatCpn extends VirtualNode {
                                                         attrs: {
                                                             class: "sender",
                                                         },
-                                                        children: "Système",
+                                                        children: ["Système"],
                                                     },
                                                     {
                                                         tag: 'p',
                                                         attrs: {
                                                             class: "text",
                                                         },
-                                                        children: "Bienvenue dans le chat du jeu!",
+                                                        children: ["Bienvenue dans le chat du jeu!"],
                                                     }
                                                 ]
 
@@ -115,7 +115,7 @@ export default class ChatCpn extends VirtualNode {
                                             type: "submit",
                                             class: "send-button"
                                         },
-                                        children: "Envoyer",
+                                        children: ["Envoyer"],
                                     }
                                 ]
                             }

@@ -1,4 +1,6 @@
 import VirtualNode from "../core/node.js"
+import ChatCpn from "./chat.js"
+import TimerCpn from "./timer.js"
 
 export let originGrid = [
     ['b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b'],
@@ -25,7 +27,13 @@ grid() {
     
 
     const main = document.querySelector('main')
+    const container = document.querySelector('.container')
+    
+    let timer = new TimerCpn()
+    container.appendChild(timer.render())
+   
     // On enleve tout le contenu de main
+    
     main.innerHTML = ''
     for (let i = 0; i < originGrid.length; i++) {
         for (let j = 0; j < originGrid[i].length; j++) {
@@ -37,6 +45,8 @@ grid() {
             })
             main.appendChild(div.render())
         }
-        
     }
+    let chat = new ChatCpn()
+    container.appendChild(chat.render())
+    
 }

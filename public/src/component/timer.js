@@ -1,4 +1,4 @@
-import VirtualNode from "../core/node";
+import VirtualNode from "../core/node.js";
 
 export default class TimerCpn extends VirtualNode {
     constructor() {
@@ -25,6 +25,9 @@ export default class TimerCpn extends VirtualNode {
                                     attrs: {
                                         class: "time-title"
                                     },
+                                    children:[
+                                        "Bomber-Chat"
+                                    ]
                                 }
                             ]
                         },
@@ -45,6 +48,9 @@ export default class TimerCpn extends VirtualNode {
                                             attrs: {
                                                 id: "formattedTime",
                                             },
+                                            children:[
+                                                "00:00"
+                                            ]
                                         }
                                     ]
                                 }
