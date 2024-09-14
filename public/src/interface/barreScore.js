@@ -2,13 +2,13 @@
     Implementation de la logique du score dependant du temps
 */
 
-import { gameOver } from "./menuPause.js"
+// import { gameOver } from "./menuPause.js"
 
 export let chronoId
 
 export function updateLifeScore(actor) {
     setTimeout(() => {
-        gameOver(actor.life, "Vous n'avez plus de vie")
+        // gameOver(actor.life, "Vous n'avez plus de vie")
         actor.life--
         domLifeScore(actor)
     }, 100)
