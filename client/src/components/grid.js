@@ -18,22 +18,26 @@ export let originGrid = [
     ['b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b'],
 ]
 
-export function 
-grid() {
+export function
+    grid() {
     /* 
         b -> bloc, m -> mur, c -> chemin, x -> bonus
     */
 
-    
 
-    const main = document.querySelector('main')
+   // const main = document.querySelector('main')
     const container = document.querySelector('.container')
-    
     let timer = new TimerCpn()
+    let chat = new ChatCpn()
     container.appendChild(timer.render())
-   
+    //let main = document.createElement("main")
+
+    let main = new VirtualNode({
+        tag : "main"
+    })
+    container.appendChild(main.render())
     // On enleve tout le contenu de main
-    
+
     main.innerHTML = ''
     for (let i = 0; i < originGrid.length; i++) {
         for (let j = 0; j < originGrid[i].length; j++) {
@@ -43,10 +47,11 @@ grid() {
                     class: originGrid[i][j]
                 }
             })
-            main.appendChild(div.render())
+            main.elem.appendChild(div.render())
         }
     }
-    let chat = new ChatCpn()
-    container.appendChild(chat.render())
     
+    container.appendChild(chat.render())
+
 }
+
