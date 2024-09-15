@@ -4,8 +4,8 @@ export default class State {
     this.subscribers = [];
   }
 
-  get() {
-    return this.current;
+  get(state) {
+    return this.current[state];
   }
 
   set(newState, callback = () => {}) {

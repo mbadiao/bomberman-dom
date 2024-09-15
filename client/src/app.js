@@ -28,6 +28,7 @@ let container = new VirtualNode({
 
 const gameState = new State({
   nickname: "",
+  playerCount: 0
 });
 
 //------------------------------------------------------------------------------
@@ -39,13 +40,18 @@ router.add("/", () => {
 });
 
 router.add("/room", () => {
-  if (gameState.current.nickname === "") {
+  if (gameState.get('nickname') === "") {
     window.location.hash = "/";
     return
   }
 
   document.body.innerHTML = '';
-  console.log("Joining room with nickname: ", gameState.current.nickname);
+  console.log("Joining room with nickname: ", gameState.get('nickname'));
+  console.log('Number of players: ', gameState.get('playerCount'))
+
+  setTimeout(() => {
+    window.location.hash = '/game';
+  }, 30000);
 });
 
 router.add("/game", () => {

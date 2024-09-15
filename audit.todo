@@ -2,11 +2,11 @@ Functional:
 
 Inspect the game source code.
 
-☐ Was the `mini-framework` the only technology/framework used to develop the project? Any other framework or technology such as canvas or Web-GL are not allowed.
+✔ Was the `mini-framework` the only technology/framework used to develop the project? Any other framework or technology such as canvas or Web-GL are not allowed. @done(24-09-15 02:55)
 
 Try to open the game.
 
-☐ Were you asked for a nickname?
+✔ Were you asked for a nickname? @done(24-09-15 02:56)
 
 ☐ After entering your nickname, were you redirected to a waiting page presenting a player counter?
 

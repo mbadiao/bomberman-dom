@@ -27,7 +27,8 @@ class Input extends VirtualNode {
     #joinRoom(nickname) {
         window.location.hash = '/room'
         gameState.set({
-            nickname: nickname
+            nickname: nickname,
+            playerCount: gameState.get('playerCount') + 1
         })
         // TODO: Send join request to server and handle response
       }
