@@ -15,11 +15,13 @@ body {
     background-size: cover;
     height: 100vh;
 }
+
 .container{
     display: flex;
     width: 90%;
     justify-content: space-between;
 }
+
 main {
     width: 45%;
     display: flex;
@@ -71,6 +73,15 @@ main>div img {
 main div img {
     height: calc(var(--bloc-size) - 3px);
 
+}
+
+.bomb {
+  animation: countdown .5s alternate infinite;
+}
+
+@keyframes countdown {
+  from {transform: scale(1);}
+  to {transform: scale(1.5)}
 }
 
 .avatarGame {

@@ -1,6 +1,6 @@
 import { grid } from "./components/grid.js";
 import { Avatar } from "./components/avatar.js";
-import { Bomb } from "./components/bomb.js";
+// import { Bomb } from "./components/bomb.js";
 import {
   updateLifeScore,
   chronometre,
@@ -13,6 +13,7 @@ import VirtualNode from "./core/node.js";
 import State from "./core/state.js";
 import router from "./core/router.js";
 import nameInput from "./components/atoms/input.js";
+import Bomb from './components/molecules/bomb.js';
 
 let header = new VirtualNode({
   tag : "header"
@@ -46,6 +47,7 @@ router.add("/room", () => {
   }
 
   document.body.innerHTML = '';
+  document.body.appendChild(new Bomb().render())
   console.log("Joining room with nickname: ", gameState.get('nickname'));
   console.log('Number of players: ', gameState.get('playerCount'))
 
