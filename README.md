@@ -4,9 +4,9 @@
 
 - [**Description**](#description)
 - [**Tech Stack**](#tech-stack)
-    - [Languages](#languages)
-    - [Development](#development)
-    - [OS & Version Control](#os-version-control)
+  - [Languages](#languages)
+  - [Development](#development)
+  - [OS & Version Control](#os-version-control)
 - [**Installation**](#installation)
   - [Cloning](#cloning)
   - [File System](#file-system)
@@ -17,6 +17,8 @@
     - [Router](#router)
     - [State](#state)
 - [**Gameplay**](#gameplay)
+- [**Blueprints**](#blueprints)
+  - [Models](#models)
 - [**Aknowledgements**](#aknowledgements)
   - [Contributors](#contributors)
   - [Peers](#peers)
@@ -59,6 +61,7 @@ Click on badges to get to the code...
 $ git clone http://learn.zone01dakar.sn/git/jefaye/bomberman-dom
 $ cd bomberman-dom/
 ```
+
 ### File System
 
     .
@@ -107,7 +110,6 @@ $ cd bomberman-dom/
 
     11 directories, 31 files
 
-
 ### Running
 
 ###### [_Table of Contents ⤴️_](#table-of-contents)
@@ -144,129 +146,118 @@ Basically, the properties object would be in this configuration:
 Calling the **render()** method on an instance of a Virtual Node will **create the element** through the tag field value, then **set attributes and listeners**, then **add all given children** of one of these types:
 
 **virtual node**
+
 ```js
-  const TodoApp = new VirtualNode({
-    tag: "section",
-    attrs: {
-      class: "todoapp",
-    },
-    children: [
-      todoHeader,
-      todoMain,
-      todoFooter
-    ],
-  });
+const TodoApp = new VirtualNode({
+  tag: "section",
+  attrs: {
+    class: "todoapp",
+  },
+  children: [todoHeader, todoMain, todoFooter],
+});
 ```
 
 **object**
 
 ```js
-  class TodoHeader extends VirtualNode {
-    constructor() {
-      super({
-        tag: "header",
-        attrs: {
-          class: "header",
+class TodoHeader extends VirtualNode {
+  constructor() {
+    super({
+      tag: "header",
+      attrs: {
+        class: "header",
+      },
+      children: [
+        {
+          tag: "h1",
+          children: ["todos"],
         },
-        children: [
-          {
-            tag: "h1",
-            children: ["todos"],
+        {
+          tag: "input",
+          attrs: {
+            class: "new-todo",
+            placeholder: "What needs to be done?",
+            autofocus: "",
           },
-          {
-            tag: "input",
-            attrs: {
-              class: "new-todo",
-              placeholder: "What needs to be done?",
-              autofocus: "",
-            },
-            listeners: {
-              onchange: event => {
-                if (event.target.value.trim() !== "") {
-                  todoList.addTodo(event.target.value);
-                  event.target.value = "";
-                }
-              },
+          listeners: {
+            onchange: (event) => {
+              if (event.target.value.trim() !== "") {
+                todoList.addTodo(event.target.value);
+                event.target.value = "";
+              }
             },
           },
-        ],
-      });
-    }
+        },
+      ],
+    });
   }
+}
 ```
 
 **string**
 
 ```js
-  export default new VirtualNode({
-    tag: "footer",
-    attrs: {
-      class: "info",
+export default new VirtualNode({
+  tag: "footer",
+  attrs: {
+    class: "info",
+  },
+  children: [
+    {
+      tag: "p",
+      children: ["Double-click to edit  a todo"],
     },
-    children: [
-      {
-        tag: "p",
-        children: [
-          "Double-click to edit  a todo"
-        ],
-      },
-      {
-        tag: "p",
-        children: [
-          "Created by the Todo01   team"
-        ],
-      },
-      {
-        tag: "p",
-        children: [
-          "Part of ",
-          new Link ("https://todomvc.com/", "TodoMVC")
-        ],
-      },
-    ],
-  });
+    {
+      tag: "p",
+      children: ["Created by the Todo01   team"],
+    },
+    {
+      tag: "p",
+      children: ["Part of ", new Link("https://todomvc.com/", "TodoMVC")],
+    },
+  ],
+});
 ```
 
 Finally, the VirtualNode class will **returns** the created element that can now be append to any element of the **DOM**.
 
-
 #### [State](./client/src/core/state.js)
 
 The State of the application is set using an object that can contain any sort of data. The power of the state manager resides in the facts that it is the **ONE** source of truth for the entire application.  
-First, an instance of the **State** class is initialized with all data of the application that can be changed by the components logic.  
+First, an instance of the **State** class is initialized with all data of the application that can be changed by the components logic.
 
 ```js
-  const todoState = new State({
-    todos: [],
-    filter: "all",
-    counter: {
-      active: 0,
-      completed: 0,
-    }
-  });
+const todoState = new State({
+  todos: [],
+  filter: "all",
+  counter: {
+    active: 0,
+    completed: 0,
+  },
+});
 ```
 
 The **subscribe()** method will basically add any **funtion**, **method** or **callback** that needs to update one or more elements of the application.
 
 ```js
-  todoState.subscribe(todoMain.toggleDisplay.bind(todoMain));
-  todoState.subscribe(todoFooter.toggleDisplay.bind(todoFooter));
-  todoState.subscribe(todoList.display.bind(todoList));
-  todoState.subscribe(clearCompleted.toggleDisplay.bind(clearCompleted));
-  todoState.subscribe(todoCount.refresh.bind(todoCount));
+todoState.subscribe(todoMain.toggleDisplay.bind(todoMain));
+todoState.subscribe(todoFooter.toggleDisplay.bind(todoFooter));
+todoState.subscribe(todoList.display.bind(todoList));
+todoState.subscribe(clearCompleted.toggleDisplay.bind(clearCompleted));
+todoState.subscribe(todoCount.refresh.bind(todoCount));
 ```
 
 Instead of changing the element directly, the modifications will be done in the State using the **set()** method.  
-The method contains a private method (**#notify()**) that will call all the subscribed functions, which will update all elements without needing to refresh the entire page/template.  
+The method contains a private method (**#notify()**) that will call all the subscribed functions, which will update all elements without needing to refresh the entire page/template.
 
 ```js
-    todoState.set({
-      todos: todoState.current.todos.filter(todo => !todo.state.completed),
-      counter: {
-        ...todoState.current.counter,
-        completed: 0,
-      },
-    });
+todoState.set({
+  todos: todoState.current.todos.filter((todo) => !todo.state.completed),
+  counter: {
+    ...todoState.current.counter,
+    completed: 0,
+  },
+});
 ```
 
 Optionally, the **set()** method can take a callback as an argument for more complex operations.
@@ -277,18 +268,18 @@ The Router as the name implies is supposed to in conjunction with the **State** 
 Once the router instance is created, the routes are registered using the **add()** method that takes the endpoint of the URL and the handler that basically apply the rendering of the allowed components.
 
 ```js
-  const router = new Router()
-  router.add("/", () => {
-    todoState.set({ filter: "all" });
-  })
+const router = new Router();
+router.add("/", () => {
+  todoState.set({ filter: "all" });
+});
 
-  router.add("/active", () => {
-    todoState.set({ filter: "active" });
-  });
+router.add("/active", () => {
+  todoState.set({ filter: "active" });
+});
 
-  router.add("/completed", () => {
-    todoState.set({ filter: "completed" });
-  });
+router.add("/completed", () => {
+  todoState.set({ filter: "completed" });
+});
 ```
 
 Whenever the address changes, the router get the resulting URL and change the state of the application so it can take care of the rest.  
@@ -299,6 +290,52 @@ The URL is supposed to be a hash link so it won't redirect to a different page w
 ## Gameplay
 
 ###### [_Table of Contents ⤴️_](#table-of-contents)
+
+## Blueprints
+
+### Models
+
+```mermaid
+classDiagram
+  class Avatar {
+    # nickname: String
+    + lives: Integer
+    - speed: Integer
+    + move(string direction) void
+    + drop() void
+    + struck() void
+    + die() void
+    + collect(PowerUp) void
+    # accelerate() void
+    # dualBomb() void
+    # hyperBomb() void
+  }
+
+  class Bomb {
+    + bomber: String
+    # range: Integer
+    # countdown() void
+    - explode() void
+    + amplify() void
+  }
+
+  class Brick {
+    + destroyed() void
+    + reveal() void
+  }
+
+  class PowerUp {
+    - type: String
+    + boost() void
+  }
+
+  Avatar "1" --* "0..*" Bomb: drops
+  Avatar "1" --* "0..*" PowerUp: collects
+  Bomb "0..*" --* "0..*" Avatar: blows up
+  Bomb "1" --* "0..*" Brick: destroys
+  Brick "1" -- "1" PowerUp: reveals
+  PowerUp "0..*" --* "1" Avatar: boosts
+```
 
 ## Aknowledgements
 
