@@ -1,6 +1,6 @@
 import ErrorPage from '../components/pages/error.js'
 
-export default class Router {
+class Router {
   constructor() {
     this.routes = {};
     window.onload = this.#navigate.bind(this);
@@ -28,6 +28,8 @@ export default class Router {
 
   #error() {
     document.body.innerHTML = '',
-    document.body.appendChild(new ErrorPage('404', 'File not found!').render())
+    document.body.appendChild(new ErrorPage('404', 'Not Found !').render())
   }
 }
+
+export default new Router();

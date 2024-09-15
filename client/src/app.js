@@ -7,10 +7,13 @@ import {
   domLifeScore,
   domNombreBombe,
 } from "./interface/barreScore.js";
-
 import { ajoutPowersUp } from "./components/powerUp.js";
 import VirtualNode from "./core/node.js";
 // import { pauseGame } from "./interface/menuPause.js";
+import State from "./core/state.js";
+import router from "./core/router.js";
+import nameInput from "./components/atoms/input.js";
+
 let header = new VirtualNode({
   tag : "header"
 })
@@ -20,8 +23,46 @@ let container = new VirtualNode({
       class : "container",
   }
 })
-document.body.append(header.render(), container.render())
-grid();
+
+//------------------------------------------------------------------------------
+
+const gameState = new State({
+  nickname: "",
+});
+
+//------------------------------------------------------------------------------
+
+router.add("/", () => {
+  document.body.innerHTML = '';
+  document.body.appendChild(nameInput.render());
+  nameInput.elem.focus();
+});
+
+router.add("/room", () => {
+  if (gameState.current.nickname === "") {
+    window.location.hash = "/";
+    return
+  }
+
+  document.body.innerHTML = '';
+  console.log("Joining room with nickname: ", gameState.current.nickname);
+});
+
+router.add("/game", () => {
+  if (gameState.current.nickname === "") {
+    window.location.hash = "/";
+    return
+  }
+  document.body.innerHTML = '';
+  document.body.append(header.render(), container.render())
+  grid();
+});
+
+export default gameState;
+
+//------------------------------------------------------------------------------
+
+
 // chronometre();
 // ajoutPowersUp();
 const actors = [];
@@ -44,7 +85,7 @@ export function keyHandler(e) {
   //   domNombreBombe(boom);
   //   // } else if (e.key == 'Escape') {
   //   //     pauseGame(actor)
-  } 
+  }
   // else {
 
   // if (counter % 5 == 0) {
