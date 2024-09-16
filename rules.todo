@@ -26,7 +26,8 @@ Game Mechanics:
         ☐ Life: 3 lives
         ☐ Spawn: Corners
 
-    Map configuration:
+    Map Matrix:
+        ☐ Has fixed dimensions: 
         ☐ Blocks on the edges should permanently contain wall.
         ☐ Inner blocks with walls shouldn't be next to each other.
         ☐ Blocks on the corners should be empty with a `L shape`.

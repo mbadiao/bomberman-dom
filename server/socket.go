@@ -26,7 +26,7 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 			handlePlayerDisconnect(Conn)
 			continue
 		}
-		
+
 		switch data.Type {
 		case "join":
 			handleJoin(Conn, data.Name)

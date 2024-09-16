@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"time"
+	"math/rand"
 
 	"github.com/gorilla/websocket"
 )
@@ -10,10 +11,12 @@ import (
 func handleJoin(Conn *websocket.Conn, name string) {
 	room.playersMutex.Lock()
 	defer room.playersMutex.Unlock()
+
 	if room.GameStarted {
 		Conn.WriteJSON(Data{Type: "gameStarted", Content: "the game has already started please retry later"})
 		return
 	}
+
 	if _, found := room.Players[name]; !found {
 		player := &Player{
 			Name:       name,
@@ -101,6 +104,7 @@ func broadcastPlayerMsg(msg Data) {
 func handlePlayerDisconnect(Conn *websocket.Conn) {
 	room.playersMutex.Lock()
 	defer room.playersMutex.Unlock()
+
 	for _, player := range room.Players {
 		if player.Connection == Conn {
 			removePlayer(player)
@@ -130,9 +134,42 @@ func CloseConn(Conn *websocket.Conn) {
 		return
 	}
 	err := Conn.Close()
+
 	if err != nil {
 		if websocket.IsUnexpectedCloseError(err) {
 			log.Println("Error closing connection: ", err)
 		}
 	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+func Matrix() [][]rune {
+	matrix := [][]rune{
+		{'m', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm'},
+		{'m', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'm'},
+		{'m', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm'},
+		{'m', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'm'},
+		{'m', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm'},
+		{'m', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'm'},
+		{'m', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm'},
+		{'m', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'm'},
+		{'m', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm'},
+		{'m', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'm'},
+		{'m', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm'},
+		{'m', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'm'},
+		{'m', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm'},
+		{'m', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'm'},
+		{'m', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm'},
+	}
+
+	for x, row := range matrix {
+		for y, col := range row {
+			if col == ' ' && (i != 1 && ) && rand.Intn(99) % 3  {
+				matrix[x][y] = 'b'
+			}
+		}
+	}
+
+	return matrix
 }
