@@ -13,9 +13,6 @@ import VirtualNode from "./core/node.js";
 import State from "./core/state.js";
 import router from "./core/router.js";
 import nameInput from "./components/atoms/input.js";
-<<<<<<< Updated upstream
-;
-=======
 import entry from "./components/entry.js";
 import logo from "./components/atoms/logo.js";
 import startBtn from "./components/atoms/startBtn.js";
@@ -23,8 +20,6 @@ import titre from "./components/atoms/titre.js";
 import TimerCpn from "./components/timer.js";
 import ChatCpn from "./components/chat.js";
 import Bomb from './components/molecules/bomb.js'
->>>>>>> Stashed changes
-
 let header = new VirtualNode({
   tag: "header"
 })
