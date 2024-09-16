@@ -12,6 +12,7 @@ import VirtualNode from "../core/node.js";
 export class Avatar {
   #blocSize = 40;
   constructor(x, y) {
+    this.name = ""
     this.initX = x; // coordonnee de la case de depart genre (0, 1) ou (2...
     this.initY = y;
     this.posX = 0;

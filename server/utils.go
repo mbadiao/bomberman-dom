@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"time"
 	"math/rand"
@@ -28,7 +29,7 @@ func handleJoin(Conn *websocket.Conn, name string) {
 
 		broadcast <- Data{
 			Type:        "playerJoin",
-			Content:     name + " joined the game ",
+			Content:     takePlayersNames(room.Players),
 			PlayerCount: room.PlayerCount,
 		}
 		startWaitingTime()
@@ -36,6 +37,14 @@ func handleJoin(Conn *websocket.Conn, name string) {
 		Conn.WriteJSON(Data{Type: "InvalidName", Content: "This pseudo is already used, please choose another one"})
 		return
 	}
+}
+
+func takePlayersNames(players map[string]*Player) string {
+	var names string
+	for name := range players {
+		names += name + "*"
+	}
+	return names
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -92,7 +101,8 @@ func startWaitingTime() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 func broadcastPlayerMsg(msg Data) {
-	for _, player := range room.Players {
+	for name, player := range room.Players {
+		fmt.Println("name", name)
 		player.mu.Lock()
 		player.Connection.WriteJSON(Data{Type: msg.Type, Name: player.Name, Content: msg.Content, PlayerCount: room.PlayerCount})
 		player.mu.Unlock()

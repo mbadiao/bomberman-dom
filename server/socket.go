@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -18,7 +19,9 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 	for {
 		var data Data
 		err := Conn.ReadJSON(&data)
+		fmt.Println("Data", data)
 		if err != nil {
+			fmt.Println("Error reading JSON: ", err)
 			if websocket.IsCloseError(err, websocket.CloseGoingAway) {
 				handlePlayerDisconnect(Conn)
 				break

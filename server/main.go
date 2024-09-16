@@ -29,7 +29,7 @@ func main() {
 		for {
 			msg := <-broadcast
 			broadcastPlayerMsg(msg)
-			fmt.Println("room", room)
+			fmt.Println("room", room.Players)
 		}
 	}()
 
