@@ -1,0 +1,39 @@
+Forbidden:
+    ☐ JS frameworks
+    ☐ Canvas
+    ☐ Web-GL
+
+Naming Conventions:
+    Cases:
+        ☐ File name: `kebab-case`
+        ☐ Go function & struct & interface: `camelCase`/`PascalCase`
+        ☐ JS functions: `camelCase`
+        ☐ JS classes: `PascalCase`
+        ☐ HTML attributes: `kebab-case`
+    
+    Entities:
+        ✔ Player: `Avatar` @done(24-09-16 16:15)
+        ✔ Bomb: Bomb @done(24-09-16 16:15)
+        ✔ Destroyable block: `Brick` @done(24-09-16 16:15)
+        ☐ Non-destructable block: `Wall`
+        ✔ Power up: `PowerUp` @done(24-09-16 16:15)
+        ☐ Life Point: `Life`
+        ✔ Countdown: `Timer` @done(24-09-16 16:15)
+
+Game Mechanics:
+    Players:
+        ☐ Number of players: 2-4
+        ☐ Life: 3 lives
+        ☐ Spawn: Corners
+
+    Map configuration:
+        ☐ Blocks on the edges should permanently contain wall.
+        ☐ Inner blocks with walls shouldn't be next to each other.
+        ☐ Blocks on the corners should be empty with a `L shape`.
+        ☐ Remaining blocks should contain `brick` randomly.
+        ☐ A power up randomly appear on blocks destruction.
+
+    Power Ups:
+        ☐ `Dual Bomb`: Increases the `amount of bombs` dropped `at a time` by `1`.
+        ☐ `Hyper Bomb`: Increases the `explosion range` by `1 block` in `4 directions`.
+        ☐ `Accelerate`: Increases the `movement speed`.

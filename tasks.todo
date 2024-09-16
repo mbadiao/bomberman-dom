@@ -1,0 +1,24 @@
+Technologies:
+    ✔ Integrate the GEDOM framework. @done(24-09-16 15:59)
+    ☐ Open a websocket connection to the server.
+
+Registration Page:
+    ✔ Prompt the player for a nickname. @done(24-09-16 15:59)
+    ☐ Check the nickname validity in the server.
+    ☐ Add the player to the list if his nickname is valid.
+    ☐ Redirect the player to the waiting page.
+
+Waiting Page:
+    ☐ Append a player counter element.
+    ✔ Append a chatbox element. @done(24-09-16 15:59)
+    ☐ Handle the real-time messaging.
+    ☐ Append a 10s countdown after 20s or once a 4th player is added.
+    ☐ Redirect the player to the game page after the countdown.
+
+Game Page:
+    ☐ Generate the map matrix from the server.
+    ☐ Send the map matrix to the clients.
+    ☐ Build the map from the matrix.
+    ☐ Implememt the movement mechanics.
+    ☐ Implement the bombs placement mechanics.
+    

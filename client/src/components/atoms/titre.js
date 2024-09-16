@@ -9,7 +9,7 @@ class Titre extends VirtualNode {
                 class : "title",
                 "aria-label" :"Bomberman-Dom",
             },
-            children: [
+            children: [ //REVIEW: Atomic components shouldn't have children.
                 {
                     tag: 'span',
                     attrs : {

@@ -5,7 +5,7 @@ class StartBtn extends VirtualNode {
     constructor() {
         super({
             tag: 'div',
-            children: [
+            children: [ //REVIEW: Atomic components shouldn't have children.
                 {
                     tag: 'button',
                     children: [
