@@ -26,7 +26,7 @@ export default class TimerCpn extends VirtualNode {
                                         class: "time-title"
                                     },
                                     children:[
-                                        "Bomber-Chat"
+                                        "Bomber-Time"
                                     ]
                                 }
                             ]

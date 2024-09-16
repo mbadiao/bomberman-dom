@@ -13,17 +13,30 @@ import VirtualNode from "./core/node.js";
 import State from "./core/state.js";
 import router from "./core/router.js";
 import nameInput from "./components/atoms/input.js";
-import Bomb from './components/molecules/bomb.js';
+<<<<<<< Updated upstream
+;
+=======
+import entry from "./components/entry.js";
+import logo from "./components/atoms/logo.js";
+import startBtn from "./components/atoms/startBtn.js";
+import titre from "./components/atoms/titre.js";
+import TimerCpn from "./components/timer.js";
+import ChatCpn from "./components/chat.js";
+import Bomb from './components/molecules/bomb.js'
+>>>>>>> Stashed changes
 
 let header = new VirtualNode({
-  tag : "header"
+  tag: "header"
 })
 let container = new VirtualNode({
   tag: "div",
-  attrs : {
-      class : "container",
+  attrs: {
+    class: "container",
   }
 })
+let ws = new WebSocket(`ws://localhost:8989/`);
+
+
 
 //------------------------------------------------------------------------------
 
@@ -36,24 +49,52 @@ const gameState = new State({
 
 router.add("/", () => {
   document.body.innerHTML = '';
-  document.body.appendChild(nameInput.render());
+  document.body.appendChild(entry.render())
+  entry.elem.append(logo.render(), titre.render(), startBtn.render())
+});
+
+router.add("/insert", () => {
+  document.body.innerHTML = '';
+  let info = new VirtualNode({
+    tag: "h1",
+    attrs: {
+      class: "info"
+    },
+    children: [
+      "Please enter your nickname "
+    ]
+  })
+  document.body.append(info.render())
+  info.elem.append(nameInput.render())
   nameInput.elem.focus();
 });
 
 router.add("/room", () => {
   if (gameState.get('nickname') === "") {
-    window.location.hash = "/";
+    window.location.hash = "/insert";
     return
   }
-
   document.body.innerHTML = '';
   document.body.appendChild(new Bomb().render())
   console.log("Joining room with nickname: ", gameState.get('nickname'));
   console.log('Number of players: ', gameState.get('playerCount'))
-
-  setTimeout(() => {
-    window.location.hash = '/game';
-  }, 30000);
+  document.body.append(header.render(), container.render())
+  let timer = new TimerCpn();
+  let chat = new ChatCpn();
+  let main = new VirtualNode({
+    tag: "main",
+  });
+  container.elem.append(timer.render(), main.render(), chat.render());
+  main.elem.appendChild(new VirtualNode({
+    tag: "div",
+    attrs: {
+      class:"waiting-text"
+    },
+    children:["Waiting..."]
+  }).render())
+   setTimeout(() => {
+     window.location.hash = '/game';
+   }, 30000);
 });
 
 router.add("/game", () => {
@@ -61,8 +102,15 @@ router.add("/game", () => {
     window.location.hash = "/";
     return
   }
-  document.body.innerHTML = '';
-  document.body.append(header.render(), container.render())
+  let data ={
+      Type : "join",
+      Name : gameState.current.nickname,
+  }
+  ws.send(JSON.stringify(data))
+  document.querySelector("main").innerHTML = "";
+
+  //document.body.innerHTML = '';
+
   grid();
 });
 
@@ -90,18 +138,18 @@ const divs = document.querySelector("main").querySelectorAll("div");
 export function keyHandler(e) {
   if (e.key == " ") {
     boom.poserBomb(divs, actor.position(), actor);
-  //   domNombreBombe(boom);
-  //   // } else if (e.key == 'Escape') {
-  //   //     pauseGame(actor)
+    //   domNombreBombe(boom);
+    //   // } else if (e.key == 'Escape') {
+    //   //     pauseGame(actor)
   }
   // else {
 
   // if (counter % 5 == 0) {
   // requestAnimationFrame(() => {
-    actors.forEach((actor,i) => {
-      actor.move(avatarActor[i], e.key, true);
-    });
-    // actor.takePowerUpBomb(divs, boom);
+  actors.forEach((actor, i) => {
+    actor.move(avatarActor[i], e.key, true);
+  });
+  // actor.takePowerUpBomb(divs, boom);
   // });
   // On regarde tranquille si on a pas plongé sur un ennemi
   // for (let i = 0; i < arrayOfGhost.length; i++) {

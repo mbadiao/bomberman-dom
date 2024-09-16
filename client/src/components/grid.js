@@ -23,14 +23,9 @@ export function grid() {
         b -> bloc, m -> mur, c -> chemin, x -> bonus
     */
 
-  const container = document.querySelector(".container");
-  let timer = new TimerCpn();
-  let chat = new ChatCpn();
-  container.appendChild(timer.render());
-  let main = new VirtualNode({
-    tag: "main",
-  });
-  container.appendChild(main.render());
+  const main = document.querySelector("main");
+  
+ 
   // On enleve tout le contenu de main
 
   main.innerHTML = "";
@@ -42,8 +37,7 @@ export function grid() {
           class: originGrid[i][j],
         },
       });
-      main.elem.appendChild(div.render());
+      main.appendChild(div.render());
     }
   }
-  container.appendChild(chat.render());
 }
