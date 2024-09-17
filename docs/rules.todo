@@ -1,15 +1,16 @@
 Forbidden:
-    ☐ JS frameworks
-    ☐ Canvas
-    ☐ Web-GL
+    ✔ JS frameworks @done(24-09-17 15:03)
+    ✔ Canvas @done(24-09-17 15:03)
+    ✔ Web-GL @done(24-09-17 15:03)
 
 Naming Conventions:
     Cases:
-        ☐ File name: `kebab-case`
-        ☐ Go function & struct & interface: `camelCase`/`PascalCase`
-        ☐ JS functions: `camelCase`
-        ☐ JS classes: `PascalCase`
-        ☐ HTML attributes: `kebab-case`
+        ✘ File name: `kebab-case` @fix(24-09-17 15:02)
+        ✘ Go functions : `PascalCase` @fix(24-09-17 15:02)
+        ✔ Go struct & interface: `PascalStruct` @done(24-09-17 15:26)
+        ✔ JS functions: `camelCase` @done(24-09-17 15:26)
+        ✔ JS classes: `PascalCase` @done(24-09-17 15:03)
+        ✔ HTML attributes: `kebab-case` @done(24-09-17 15:03)
     
     Entities:
         ✔ Player: `Avatar` @done(24-09-16 16:15)
@@ -22,17 +23,17 @@ Naming Conventions:
 
 Game Mechanics:
     Players:
-        ☐ Number of players: 2-4
+        ✔ Number of players: 2-4 @done(24-09-17 15:20)
         ☐ Life: 3 lives
-        ☐ Spawn: Corners
+        ✔ Spawn: Corners @done(24-09-17 14:57)
 
     Map Matrix:
-        ☐ Has fixed dimensions: 
-        ☐ Blocks on the edges should permanently contain wall.
-        ☐ Inner blocks with walls shouldn't be next to each other.
-        ☐ Blocks on the corners should be empty with a `L shape`.
-        ☐ Remaining blocks should contain `brick` randomly.
-        ☐ A power up randomly appear on blocks destruction.
+        ✔ Has fixed dimensions. @done(24-09-17 14:56)
+        ✔ Blocks on the edges should permanently contain wall. @done(24-09-17 14:56)
+        ✔ Inner blocks with walls shouldn't be next to each other. @done(24-09-17 14:56)
+        ✔ Blocks on the corners should be empty with a `L shape`. @done(24-09-17 14:56)
+        ✔ Remaining blocks should contain `brick` randomly. @done(24-09-17 14:56)
+        ✔ A power up randomly appear on blocks destruction. @done(24-09-17 14:56)
 
     Power Ups:
         ☐ `Dual Bomb`: Increases the `amount of bombs` dropped `at a time` by `1`.

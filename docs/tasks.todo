@@ -1,24 +1,43 @@
 Technologies:
-    ✔ Integrate the GEDOM framework. @done(24-09-16 15:59)
-    ☐ Open a websocket connection between the client and the server.
+    ✔ Integrate the `GEDOM` framework. @done(24-09-16 15:59)
+    ☐ Open a `websocket connection` between the client and the server.
 
 Registration Page:
-    ✔ Prompt the player for a nickname. @done(24-09-16 15:59)
-    ☐ Check the nickname validity in the server.
-    ☐ Add the player to the list if his nickname is valid.
-    ☐ Redirect the player to the waiting page.
+    ✔ Prompt the player for a `nickname`. @done(24-09-16 15:59)
+    ⭘ Check the nickname `validity` in the server. @started(24-09-17 14:59)
+    ✔ Add the player to the list if his nickname is `valid`. @done(24-09-17 14:59)
+    ☐ Redirect the player to the `waiting` page.
 
 Waiting Page:
-    ☐ Append a player counter element.
-    ✔ Append a chatbox element. @done(24-09-16 15:59)
-    ☐ Handle the real-time messaging.
-    ☐ Append a 10s countdown after 20s or once a 4th player is added.
-    ☐ Redirect the player to the game page after the countdown.
+    ☐ Append a player `counter` element.
+    ✔ Append a `chatbox` element. @done(24-09-16 15:59)
+    ☐ Handle the real-time `messaging`.
+    ✔ Append a `10s countdown` after `20s` or once a `4th` player is added. @done(24-09-17 15:00)
+    ✔ Redirect the player to the `game` page after the `countdown`. @done(24-09-17 15:00)
 
 Game Page:
-    ✔ Generate the map matrix from the server. @done(24-09-17 01:36)
-    ☐ Send the map matrix to the clients.
-    ☐ Build the map from the matrix.
-    ☐ Implememt the movement mechanics.
-    ☐ Implement the bombs placement mechanics.
+    Map:
+        ✔ Generate the `map matrix` from the server. @done(24-09-17 01:36)
+        ☐ Send the map `matrix` to the clients.
+        ☐ Build the `map` from the `matrix`.
     
+    Implementation:
+        Players:
+            ☐ `Movement` mechanics.
+                ☐ Power up: `Accelerate` logic.
+
+            ☐ `Bombs placement` mechanics.
+                ☐ Power up: `Dual Bomb` logic.
+
+            ☐ `Collision` logic.
+            ☐ `Life loss` logic.
+        
+        Bombs:
+            ☐ `Bomb explosion` logic.
+                ☐ Power up: `Hyper Bomb` logic.
+
+            ☐ `Blocks destruction` logic.
+
+        Power Ups:
+            ☐ `Power up spawn` mechanics.
+            ☐ `Power up boost` mechanics.

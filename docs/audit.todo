@@ -1,77 +1,91 @@
 Functional:
 
-Inspect the game source code.
+    Inspect the game source code:
 
-    ✔ Was the `mini-framework` the only technology/framework used to develop the project? Any other framework or technology such as canvas or Web-GL are not allowed. @done(24-09-15 02:55)
+        ✔ Was the `mini-framework` the only technology/framework used to develop the project? Any other framework or technology such as canvas or Web-GL are not allowed. @done(24-09-15 02:55)
 
-Try to open the game.
 
-    ✔ Were you asked for a `nickname`? @done(24-09-15 02:56)
+    Try to open the game:
 
-    ✔ After entering your nickname, were you redirected to a `waiting page` presenting a `player counter`? @started(24-09-16 16:15) @done(24-09-16 19:05) @lasted(2h50m6s)
+        ✔ Were you asked for a `nickname`? @done(24-09-15 02:56)
 
-    ✔ After entering your nickname, did you have `access to a chat`? @done(24-09-17 10:22)
+        ✔ After entering your nickname, were you redirected to a `waiting page` presenting a `player counter`? @done(24-09-17 15:24)
 
-Try to enter with another user (in another browser or in private browser).
+        ✔ After entering your nickname, did you have `access to a chat`? @done(24-09-17 10:22)
 
-    ✔ Did the player counter `increment by 1`? @started(24-09-17 10:21) @done(24-09-17 10:21) @lasted(20s)
 
-    ☐ After entering with another user, can all users chat with each other in `real time` (using websockets)?
+    Try to enter with another user (in another browser or in private browser):
 
-Wait 20 seconds with two users in the waiting page.
+        ✔ Did the player counter `increment by 1`? @started(24-09-17 10:21) @done(24-09-17 10:21) @lasted(20s)
 
-    ✔ After 20 seconds, did you get `10 second` game start countdown? @done(24-09-17 10:21)
+        ☐ After entering with another user, can all users chat with each other in `real time` (using websockets)?
 
-    ✔ After the 10 seconds did the `game start`? @done(24-09-17 10:22)
 
-Try to enter with 4 different users in the waiting page.
+    Wait 20 seconds with two users in the waiting page:
 
-    ! As soon as the `fourth player entered`, did you get 10 second game start countdown? @blocked(24-09-17 10:22)
+        ✔ After 20 seconds, did you get `10 second` game start countdown? @done(24-09-17 10:21)
+        
+        ✔ After the 10 seconds did the `game start`? @done(24-09-17 10:22)
 
-    ☐ While playing the game, are you able to `move` and `place bombs`?
 
-    ☐ Can players see the `whole map` at once?
+    Try to enter with 4 different users in the waiting page:
+        
+        ! As soon as the `fourth player entered`, did you get 10 second game start countdown? @blocked(24-09-17 10:22)
+        
+        ☐ While playing the game, are you able to `move` and `place bombs`?
+        
+        ☐ Can players see the `whole map` at once?
 
-Try placing a bomb and standing by it when it explodes.
 
-    ☐ Did you lose 1 of your `3 lives`?
+    Try placing a bomb and standing by it when it explodes:
+        
+        ☐ Did you lose 1 of your `3 lives`?
 
-Try to lose all your 3 lives.
 
-    ☐ Did you lose the game and are `not able to play` anymore?
+    Try to lose all your 3 lives:
+        
+        ☐ Did you lose the game and are `not able to play` anymore?
 
-Try placing a bomb next to another player.
 
-    ☐ Did the `other player` lose a life when the `bomb exploded`?
+    Try placing a bomb next to another player:
+        
+        ☐ Did the `other player` lose a life when the `bomb exploded`?
 
-Place a bomb next to a destroyable block.
 
-    ☐ Did the `block disappear` when the bomb exploded?
+    Place a bomb next to a destroyable block:
+        
+        ☐ Did the `block disappear` when the bomb exploded?
 
-Try to destroy every block on the map.
 
-    ☐ Did the `power ups` appear in place of `some` of the blocks?
+    Try to destroy every block on the map:
+        
+        ☐ Did the `power ups` appear in place of `some` of the blocks?
+        
+        ☐ Can you confirm that there are at least `3 types` of power ups?
 
-    ☐ Can you confirm that there are at least `3 types` of power ups?
 
-Open the Dev Tool in the Performance tab.
+    Open the Dev Tool in the Performance tab:
+        
+        ☐ Does the game run without `frame drops`?
 
-    ☐ Does the game run without `frame drops`?
 
-Open the Dev Tool in the Performance tab.
+    Open the Dev Tool in the Performance tab:
+        
+        ☐ Does the game run at or around `60fps`?
 
-    ☐ Does the game run at or around `60fps`?
 
-Open the Dev Tool in the performance tab and select the option rendering with the paint ON.
+    Open the Dev Tool in the performance tab and select the option rendering with the paint ON:
+        
+        ☐ Is `paint` used as little as possible?
 
-    ☐ Is `paint` used as little as possible?
 
-Open the Dev Tool in the performance tab and select the option rendering with the layer ON.
+    Open the Dev Tool in the performance tab and select the option rendering with the layer ON:
+        
+        ☐ Are `layers` used as little as possible?
+        
+        ☐ Are layers being `promoted` (https://developers.google.com/web/fundamentals/performance/rendering/stick-to-compositor-only-properties-and-manage-layer-count) properly?
 
-    ☐ Are `layers` used as little as possible?
-
-    ☐ Are layers being `promoted` (https://developers.google.com/web/fundamentals/performance/rendering/stick-to-compositor-only-properties-and-manage-layer-count) properly?
-
+        
 Bonus:
 
     ☐ Is there a `Solo + Co-Op mode` in the game as described in the subject?

@@ -25,11 +25,11 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 			fmt.Println("Error reading JSON: ", err)
 
 			if websocket.IsCloseError(err, websocket.CloseGoingAway) {
-				handlePlayerDisconnect(Conn)
+				handlePlayerDisconnect(Conn) // OPTIMIZE: Consider using a goroutine...
 				break
 			}
 
-			handlePlayerDisconnect(Conn)
+			handlePlayerDisconnect(Conn) // OPTIMIZE: Consider using a goroutine...
 			continue
 		}
 
