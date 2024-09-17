@@ -14,6 +14,7 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 		log.Println("Error upgrading the HTTP connection to WebSocket: ", err)
 		return
 	}
+	fmt.Println("New Connection : ", Conn.RemoteAddr())
 	defer CloseConn(Conn)
 
 	for {

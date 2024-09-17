@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	"bomberman-dom/utils"
+	// "bomberman-dom/utils"
 
 	"github.com/gorilla/websocket"
 )
@@ -21,7 +21,18 @@ var (
 		CountdownTime: 10 * time.Second,
 	}
 	broadcast = make(chan Data)
-	map = utils.Matrix()
+	// map = utils.Matrix()
+
+
+
+
+
+
+
+
+
+
+
 )
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

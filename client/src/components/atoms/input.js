@@ -28,13 +28,14 @@ class Input extends VirtualNode {
         gameState.set({
             nickname: nickname,
             playerCount: gameState.get('playerCount') + 1
-        });
-
-        ws.send(JSON.stringify({
-            type: "join",
-            name: this.elem.value,
-        }));
-
+        })
+        // TODO: Send join request to server and handle response
+        if (ws.readyState == 1) {
+            ws.send(JSON.stringify({
+                type: "join",
+                name: this.elem.value,
+            }));
+        }
         window.location.hash = "/room";
     }
 }

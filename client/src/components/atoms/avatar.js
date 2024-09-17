@@ -29,7 +29,7 @@ export class Avatar {
     );
   }
 
-  addAvatarInGrid(actorID, avatar) {
+  addAvatarInGrid(actorID) {
     // Recuperation de l'ancienne coordonnee de l'avatar avec coordinate
     const iconAvatar = new VirtualNode({
       tag: "p",
@@ -38,10 +38,9 @@ export class Avatar {
         class: "avatarGame",
         style: `transform: translate(${this.initX * this.#blocSize}px, ${this.initY * this.#blocSize}px)`,
       },
-      children: ["👨‍🚀"],
+      children: [this.representation],
     })
     const div = document.querySelector("main > div");
-    
     div.appendChild(iconAvatar.render());
   }
 

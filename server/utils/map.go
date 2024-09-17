@@ -1,5 +1,11 @@
 package utils
 
+import (
+	"crypto/rand"
+	"fmt"
+	"math/big"
+)
+
 func Matrix() [][]rune {
 	matrix := [][]rune{
 		{'m', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm'},

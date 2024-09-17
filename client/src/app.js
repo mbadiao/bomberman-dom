@@ -17,6 +17,9 @@ import Home from "./components/pages/home.js";
 import Insert from "./components/pages/insert.js";
 import Game from "./components/pages/game.js";
 import Room from "./components/pages/room.js";
+import avartarCard from "./components/atoms/avatarCard.js";
+import timer from "./components/molecules/timer.js";
+import { main } from "./components/orgarnism/main.js";
 
 
 export const ws = new WebSocket(`ws://localhost:8989/`);
@@ -34,6 +37,8 @@ export const gameState = new State({
 export const avatarsState = new State({
   avatars: [],
 });
+
+export const myAvatar = new State({ avatar: null });
 
 //------------------------------------------------------------------------------
 
@@ -58,25 +63,42 @@ ws.onopen = () => {
   console.log("connected");
 };
 
-const avatarsActor = document.getElementsByClassName("avatarGame");
-const divs = document.querySelector("main")?.querySelectorAll("div");
-let avatar;
-
-
 ws.onmessage = (e) => {
   let data = JSON.parse(e.data);
-  if (data.type == "Action") {
-    let i = data.playerCount - 1;
-    console.log('actors[i] :>> ', actors[i]);
-    console.log("action", data);
-    const avatarActor = document.getElementById(`avatar${actors[i].name}`);
-    actors[i].move(avatarActor, data.content, true);
-  } 
+  console.log('data :>> ', data);
+
+  if (data.type === 'playerJoin') {
+    joinRoomHandle(actors, data);
+    const avatars = avatarsState.get('avatars');
+    main.elem.innerHTML = "";
+    avatars.forEach(avatar => main.elem.appendChild(new avartarCard(avatar.representation).render()));
+  }
+
+  if (data.type === 'startCountDown') {
+    let countdown = 9;
+    let chrono = setInterval(() => {
+      timer.elem.querySelector("#formattedTime").innerText = "00:0" + countdown;
+      countdown--;
+    }, 1000);
+    setTimeout(() => {
+      clearInterval(chrono);
+      timer.elem.querySelector("#formattedTime").innerText = "00:00";
+      window.location.hash = '/game';
+    }, 10000);
+  }
+
+  if (data.type === 'Action') {
+    console.log('Action :>> ', Action);
+    console.log('actors :>> ', actors);
+    console.log('data :>> ', data);
+    const actionnedActor = actors.find(actor => actor.name === data.name)
+    console.log('actionnedActor :>> ', actionnedActor);
+    console.log('document.querySelector(`#avatar${actionnedActor.name}`) :>> ', document.querySelector(`#avatar${actionnedActor.name}`));
+    actionnedActor.move(document.querySelector(`#avatar${actionnedActor.name}`), true);
+  }
 }
 
-
-
-
+const divs = main.elem?.querySelectorAll("div");
 
 
 
@@ -89,16 +111,19 @@ export let boom = new Bomb();
 export function keyHandler(e) {
 
   if (e.key == " ") {
-    boom.poserBomb(divs, actor.position(), actor);
+    // boom.poserBomb(divs, actor.position(), actor);
     //   domNombreBombe(boom);
     //   // } else if (e.key == 'Escape') {
     //   //     pauseGame(actor)
   } else if (e.key.includes("Arrow")) {
-    ws.send(JSON.stringify({
-      type: "Action",
-      name: avatar.name,
-      content: e.key,
-    }));
+    if (myAvatar.get("avatar") != null) {
+      ws.send(JSON.stringify({
+        type: "Action",
+        name: myAvatar.get("avatar").name,
+        content: e.key,
+      }));
+
+    }
 
     // if (counter % 5 == 0) {
     // requestAnimationFrame(() => {

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"crypto/rand"
 	"fmt"
 	"log"
 	"time"
@@ -26,7 +25,6 @@ func handleJoin(Conn *websocket.Conn, name string) {
 		}
 		room.Players[name] = player
 		room.PlayerCount++
-
 		broadcast <- Data{
 			Type:        "playerJoin",
 			Content:     takePlayersNames(room.Players),
@@ -153,4 +151,3 @@ func CloseConn(Conn *websocket.Conn) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-

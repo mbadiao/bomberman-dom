@@ -1,6 +1,6 @@
 import VirtualNode from "../../core/node.js";
 
-export default class TimerCpn extends VirtualNode {
+class TimerCpn extends VirtualNode {
     constructor() {
         super({
             tag: 'div',
@@ -62,3 +62,5 @@ export default class TimerCpn extends VirtualNode {
         })
     }
 }
+
+export default new TimerCpn()
