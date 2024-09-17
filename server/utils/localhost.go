@@ -5,9 +5,9 @@ import (
 	"os/exec"
 	"runtime"
 )
-func Open_Local_Host(URL string) {
+func OpenLocalHost(URL string) {
 	var cmd *exec.Cmd
-	
+
 	// Set Up Command
 	switch runtime.GOOS {
 	case "linux":
@@ -22,7 +22,7 @@ func Open_Local_Host(URL string) {
 
 	// Start Command
 	if err := cmd.Start(); err != nil {
-		fmt.Println("Failed to auto launch localhost\n", err, "\nClick the link to open localhost")
-		fmt.Println("Server started on port http://localhost:8989")
+		fmt.Println("Failed to auto launch localhost\n\n", err, "\n\nClick the link to open localhost")
+		fmt.Println("Server started on: ", URL)
 	}
 }

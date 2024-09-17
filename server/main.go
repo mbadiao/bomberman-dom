@@ -21,7 +21,7 @@ var (
 		CountdownTime: 10 * time.Second,
 	}
 	broadcast = make(chan Data)
-	// map = utils.Matrix()
+	map = utils.Matrix()
 )
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -37,6 +37,6 @@ func main() {
 		}
 	}()
 
-	utils.Open_Local_Host("localhost:8989")
+	utils.OpenLocalHost("http://localhost:8989")
 	log.Fatal(http.ListenAndServe(":8989", nil))
 }

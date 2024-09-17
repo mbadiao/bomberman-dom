@@ -89,6 +89,8 @@ func takePlayersNames(players map[string]*Player) string { // REVIEW: Function N
 // 	}
 // }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 func startWaitingTime() { // REVIEW: Function Name... // TODO: startCountdown() {}...
 	if room.PlayerCount == room.MaxPlayers {
 		room.GameStarted = true

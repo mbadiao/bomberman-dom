@@ -88,5 +88,8 @@ func randomize() rune {
 		default:
 			return 'z'
 		}
+
+	default: 
+	return ' '
 	}
 }
