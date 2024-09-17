@@ -1,6 +1,6 @@
-import { originGrid } from "./grid.js";
-import { updateLifeScore, updateScore } from "../interface/barreScore.js";
-import VirtualNode from "../core/node.js";
+import { originGrid } from "../grid.js";
+import { updateLifeScore, updateScore } from "../../interface/barreScore.js";
+import VirtualNode from "../../core/node.js";
 // import { arrayOfGhost, intervalIDs } from "./avatar.js"
 // import { gameOver, winner } from "../interface/menuPause.js"
 // import { playSound } from "../interface/sound.js";

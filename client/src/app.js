@@ -1,5 +1,5 @@
 import { grid } from "./components/grid.js";
-import { Avatar } from "./components/avatar.js";
+import { Avatar } from "./components/atoms/avatar.js";
 // import { Bomb } from "./components/bomb.js";
 import {
   updateLifeScore,
@@ -8,107 +8,41 @@ import {
   domNombreBombe,
 } from "./interface/barreScore.js";
 import { ajoutPowersUp } from "./components/powerUp.js";
-import VirtualNode from "./core/node.js";
 import { joinRoomHandle } from "./services/join.js";
 // import { pauseGame } from "./interface/menuPause.js";
 import State from "./core/state.js";
 import router from "./core/router.js";
-import nameInput from "./components/atoms/input.js";
-import entry from "./components/entry.js";
-import logo from "./components/atoms/logo.js";
-import startBtn from "./components/atoms/startBtn.js";
-import titre from "./components/atoms/titre.js";
-import TimerCpn from "./components/timer.js";
-import ChatCpn from "./components/chat.js";
 import Bomb from './components/molecules/bomb.js'
-let header = new VirtualNode({
-  tag: "header"
-})
-let container = new VirtualNode({
-  tag: "div",
-  attrs: {
-    class: "container",
-  }
-})
-let ws = new WebSocket(`ws://localhost:8989/`);
+import Home from "./components/pages/home.js";
+import Insert from "./components/pages/insert.js";
+import Game from "./components/pages/game.js";
+import Room from "./components/pages/room.js";
 
+
+export const ws = new WebSocket(`ws://localhost:8989/`);
+export const actors = [];
 
 
 //------------------------------------------------------------------------------
 
-const gameState = new State({
+export const gameState = new State({
   nickname: "",
-  playerCount: 0
+  playerCount: 0,
+});
+
+export const avatarsState = new State({
+  avatars: [],
 });
 
 //------------------------------------------------------------------------------
 
-router.add("/", () => {
-  document.body.innerHTML = '';
-  document.body.appendChild(entry.render())
-  entry.elem.append(logo.render(), titre.render(), startBtn.render())
-});
+router.add("/", Home);
 
-router.add("/insert", () => {
-  document.body.innerHTML = '';
-  let info = new VirtualNode({
-    tag: "h1",
-    attrs: {
-      class: "info"
-    },
-    children: [
-      "Please enter your nickname "
-    ]
-  })
-  document.body.append(info.render())
-  info.elem.append(nameInput.render()) // REVIEW: Un <h1> ne devrait contenir que du texte. //TODO: document.body.appendChild(nameInput.render())
-  nameInput.elem.focus();
-});
+router.add("/insert", Insert);
 
-router.add("/room", () => {
-  if (gameState.get('nickname') === "") {
-    window.location.hash = "/insert";
-    return
-  }
-  document.body.innerHTML = '';
-  document.body.appendChild(new Bomb().render())
-  console.log("Joining room with nickname: ", gameState.get('nickname'));
-  console.log('Number of players: ', gameState.get('playerCount'))
-  document.body.append(header.render(), container.render())
-  let timer = new TimerCpn();
-  let chat = new ChatCpn();
-  let main = new VirtualNode({
-    tag: "main",
-  });
-  container.elem.append(timer.render(), main.render(), chat.render());
-  main.elem.appendChild(new VirtualNode({
-    tag: "div",
-    attrs: {
-      class:"waiting-text"
-    },
-    children:["Waiting..."]
-  }).render())
-   setTimeout(() => {
-     window.location.hash = '/game';
-   }, 30000);
-});
+router.add("/room", Room);
 
-router.add("/game", () => {
-  if (gameState.current.nickname === "") {
-    window.location.hash = "/";
-    return
-  }
-  let data ={
-      Type : "join",
-      Name : gameState.current.nickname,
-  }
-  ws.send(JSON.stringify(data))
-  document.querySelector("main").innerHTML = "";
-
-  //document.body.innerHTML = '';
-
-  grid();
-});
+router.add("/game", Game);
 
 export default gameState;
 
@@ -118,37 +52,25 @@ export default gameState;
 // chronometre();
 // ajoutPowersUp();
 let myName;
-const actors = [];
- 
+
 ws.onopen = () => {
   console.log("connected");
-  myName = prompt("Enter your name")
-  ws.send(JSON.stringify({
-    type: "join",
-    name: myName,
-  }));
 };
 
 const avatarsActor = document.getElementsByClassName("avatarGame");
-const divs = document.querySelector("main").querySelectorAll("div");
+const divs = document.querySelector("main")?.querySelectorAll("div");
 let avatar;
 
 
 ws.onmessage = (e) => {
   let data = JSON.parse(e.data);
-  console.log(data);
-  if (data.type == "join") {
-  } else if (data.type == "Action") {
+  if (data.type == "Action") {
     let i = data.playerCount - 1;
     console.log('actors[i] :>> ', actors[i]);
     console.log("action", data);
     const avatarActor = document.getElementById(`avatar${actors[i].name}`);
     actors[i].move(avatarActor, data.content, true);
-  } else if (data.type == "playerJoin") {
-    console.log("playerJoin", data);
-    avatar = joinRoomHandle(actors, data);
-    alert(data.content)
-  }
+  } 
 }
 
 

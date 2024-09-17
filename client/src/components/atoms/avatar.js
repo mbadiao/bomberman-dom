@@ -3,16 +3,17 @@
         -propriete
         -methode
 */
-import { originGrid } from "./grid.js";
+import { originGrid } from "../grid.js";
 // import { updateLifeScore } from "../interface/barreScore.js"
-import { domNombreBombe } from "../interface/barreScore.js";
-import VirtualNode from "../core/node.js";
+import { domNombreBombe } from "../../interface/barreScore.js";
+import VirtualNode from "../../core/node.js";
 // import { pause } from "../interface/menuPause.js"
 
 export class Avatar {
   #blocSize = 40;
   constructor(x, y) {
-    this.name = ""
+    this.name = "player";
+    this.representation = "👨";
     this.initX = x; // coordonnee de la case de depart genre (0, 1) ou (2...
     this.initY = y;
     this.posX = 0;

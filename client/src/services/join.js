@@ -1,33 +1,40 @@
-import { Avatar } from "../components/avatar.js";
+import { avatarsState } from "../app.js";
+import { Avatar } from "../components/atoms/avatar.js";
 
 export function joinRoomHandle(avatars, data) {
+    avatars = [];
     if (data.playerCount <= 4) {
         let avatar;
         let names = (data.content).split("*");
-
-        switch (avatars.length) {
-            case 0:
-                avatar = new Avatar(1, 1)
-                console.log('data **** :>> ', name);
+        names.map((name, i) => {
+            if (name !== "") {
+                switch (i) {
+                    case 0:
+                        avatar = new Avatar(1, 1)
+                        avatar.representation = "💂🏿"
+                        break;
+                    case 1:
+                        avatar = new Avatar(13, 1)
+                        avatar.representation = "👷🏿"
+                        break;
+                    case 2:
+                        avatar = new Avatar(1, 11)
+                        avatar.representation = "🕵"
+                        break;
+                    case 3:
+                        avatar = new Avatar(13, 11)
+                        avatar.representation = "👮🏾"
+                        break;
+                    default:
+                        console.log("error in joinRoomHandle")
+                        break
+                }
                 avatar.name = name;
-                avatar.addAvatarInGrid(name, "actor");
-                break;
-            case 1:
-                avatar = new Avatar(13, 1)
-                break;
-            case 2:
-                avatar = new Avatar(1, 11)
-                break;
-            case 3:
-                avatar = new Avatar(13, 13)
-                break;
-            default:
-                console.log("error in joinRoomHandle")
-                break
-        }
-
-        avatars.push(avatar)
-
-        return avatar
+                avatars.push(avatar)
+                avatarsState.set(avatar);
+            }
+        });
+        
+        return avatars
     }
 }

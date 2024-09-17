@@ -1,6 +1,4 @@
-import VirtualNode from "../core/node.js";
-import Logo from "./atoms/logo.js";
-import StartBtn from "./atoms/startBtn.js";
+import VirtualNode from "../../core/node.js";
 
 let entry = new VirtualNode({
     tag: "div",

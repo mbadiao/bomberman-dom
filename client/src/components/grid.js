@@ -1,6 +1,4 @@
 import VirtualNode from "../core/node.js";
-import ChatCpn from "./chat.js";
-import TimerCpn from "./timer.js";
 
 export let originGrid = [
   ["b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b"],

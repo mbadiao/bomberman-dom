@@ -1,4 +1,4 @@
-import VirtualNode from "../core/node.js";
+import VirtualNode from "../../core/node.js";
 
 export default class TimerCpn extends VirtualNode {
     constructor() {
