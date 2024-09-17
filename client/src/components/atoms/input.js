@@ -8,7 +8,7 @@ class Input extends VirtualNode {
             attrs: {
                 id: 'nickname-input',
                 required: true,
-                maxlength: 10,
+                maxlength: 7,
                 type: 'text',
                 name: 'nickname',
                 placeholder: `Enter nickname...`
@@ -29,13 +29,14 @@ class Input extends VirtualNode {
             nickname: nickname,
             playerCount: gameState.get('playerCount') + 1
         })
-        // TODO: Send join request to server and handle response
+
         if (ws.readyState == 1) {
             ws.send(JSON.stringify({
                 type: "join",
                 name: this.elem.value,
             }));
         }
+        
         window.location.hash = "/room";
     }
 }

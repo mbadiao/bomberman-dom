@@ -17,19 +17,24 @@ func handleJoin(Conn *websocket.Conn, name string) {
 		return
 	}
 
+	// Check if the player's name has already been taken
+	// before allowing him to play.
 	if _, found := room.Players[name]; !found {
 		player := &Player{
 			Name:       name,
 			Connection: Conn,
 			Lives:      3,
 		}
+
 		room.Players[name] = player
 		room.PlayerCount++
+
 		broadcast <- Data{
 			Type:        "playerJoin",
 			Content:     takePlayersNames(room.Players),
 			PlayerCount: room.PlayerCount,
 		}
+
 		startWaitingTime()
 	} else {
 		Conn.WriteJSON(Data{Type: "InvalidName", Content: "This pseudo is already used, please choose another one"})
@@ -37,11 +42,15 @@ func handleJoin(Conn *websocket.Conn, name string) {
 	}
 }
 
-func takePlayersNames(players map[string]*Player) string {
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+func takePlayersNames(players map[string]*Player) string { // REVIEW: Function Name...
 	var names string
+
 	for name := range players {
 		names += name + "*"
 	}
+
 	return names
 }
 
@@ -80,15 +89,17 @@ func takePlayersNames(players map[string]*Player) string {
 // 	}
 // }
 
-func startWaitingTime() {
+func startWaitingTime() { // REVIEW: Function Name... // TODO: startCountdown() {}...
 	if room.PlayerCount == room.MaxPlayers {
 		room.GameStarted = true
+
 		broadcast <- Data{
 			Type: "startCountDown",
 		}
-	} else if room.PlayerCount >= 2 {
+	} else if room.PlayerCount > 1 {
 		time.AfterFunc(room.WaitingTime, func() {
 			room.GameStarted = true
+
 			broadcast <- Data{
 				Type: "startCountDown",
 			}
@@ -100,9 +111,15 @@ func startWaitingTime() {
 
 func broadcastPlayerMsg(msg Data) {
 	for name, player := range room.Players {
-		fmt.Println("name", name)
+		fmt.Println("name", name) // DEBUG: Check Player Name...
+
 		player.mu.Lock()
-		player.Connection.WriteJSON(Data{Type: msg.Type, Name: player.Name, Content: msg.Content, PlayerCount: room.PlayerCount})
+		player.Connection.WriteJSON(Data{ // FIX: Handle Error...
+			Type:        msg.Type,
+			Name:        player.Name,
+			Content:     msg.Content,
+			PlayerCount: room.PlayerCount,
+		})
 		player.mu.Unlock()
 	}
 }
@@ -126,6 +143,7 @@ func handlePlayerDisconnect(Conn *websocket.Conn) {
 func removePlayer(Player *Player) {
 	delete(room.Players, Player.Name)
 	room.PlayerCount--
+
 	broadcast <- Data{
 		Type:        "playerLeave",
 		Name:        Player.Name,
@@ -141,8 +159,8 @@ func CloseConn(Conn *websocket.Conn) {
 		log.Println("Connection is already closed or nil")
 		return
 	}
-	err := Conn.Close()
 
+	err := Conn.Close()
 	if err != nil {
 		if websocket.IsUnexpectedCloseError(err) {
 			log.Println("Error closing connection: ", err)

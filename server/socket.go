@@ -20,13 +20,15 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 	for {
 		var data Data
 		err := Conn.ReadJSON(&data)
-		fmt.Println("Data", data)
+		fmt.Println("Data", data) // DEBUG: Check Received Data...
 		if err != nil {
 			fmt.Println("Error reading JSON: ", err)
+
 			if websocket.IsCloseError(err, websocket.CloseGoingAway) {
 				handlePlayerDisconnect(Conn)
 				break
 			}
+
 			handlePlayerDisconnect(Conn)
 			continue
 		}
@@ -34,6 +36,7 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 		switch data.Type {
 		case "join":
 			handleJoin(Conn, data.Name)
+
 		case "playerJoin":
 			{
 				broadcast <- Data{
@@ -41,6 +44,7 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 					Content: data.Name + "join the game ",
 				}
 			}
+
 		case "Msg":
 			{
 				broadcast <- Data{
@@ -49,6 +53,7 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 					Content: data.Content,
 				}
 			}
+
 		case "Action":
 			{
 				broadcast <- Data{
@@ -57,6 +62,7 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 					Content: data.Content,
 				}
 			}
+
 		default:
 			Conn.WriteJSON(Data{Type: "error", Content: "Invalid Data format"})
 		}

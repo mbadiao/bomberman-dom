@@ -63,9 +63,9 @@ ws.onopen = () => {
   console.log("connected");
 };
 
-ws.onmessage = (e) => {
+ws.onmessage = (e) => { //REVIEW: Consider using switch statement...
   let data = JSON.parse(e.data);
-  console.log('data :>> ', data);
+  console.log('data :>> ', data); // DEBUG: Chekck Data...
 
   if (data.type === 'playerJoin') {
     joinRoomHandle(actors, data);

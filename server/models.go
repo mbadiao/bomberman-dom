@@ -12,10 +12,10 @@ type Map struct {
 }
 
 type Data struct {
-    Type    string `json:"type"`
-	Name    string `json:"name"`
-    Content string `json:"content"`
-	PlayerCount int `json:"playerCount"`
+	Type        string `json:"type"`
+	Name        string `json:"name"`
+	Content     string `json:"content"`
+	PlayerCount int    `json:"playerCount"`
 }
 
 type Player struct {

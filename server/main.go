@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	// "bomberman-dom/utils"
+	"bomberman-dom/utils"
 
 	"github.com/gorilla/websocket"
 )
@@ -22,31 +22,21 @@ var (
 	}
 	broadcast = make(chan Data)
 	// map = utils.Matrix()
-
-
-
-
-
-
-
-
-
-
-
 )
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 func main() {
 	http.HandleFunc("/", handleConnections)
+
 	go func() {
 		for {
 			msg := <-broadcast
 			broadcastPlayerMsg(msg)
-			fmt.Println("room", room.Players)
+			fmt.Println("room", room.Players) // DEBUG: Check Player List...
 		}
 	}()
 
-	fmt.Println("Server is running on port: 8989...")
+	utils.Open_Local_Host("localhost:8989")
 	log.Fatal(http.ListenAndServe(":8989", nil))
 }
