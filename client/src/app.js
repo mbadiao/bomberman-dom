@@ -28,6 +28,7 @@ export const actors = [];
 export const gameState = new State({
   nickname: "",
   playerCount: 0,
+  avatars: []
 });
 
 export const avatarsState = new State({

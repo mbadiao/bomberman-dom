@@ -14,8 +14,6 @@ func Matrix() [][]rune {
 		{'m', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'm'},
 		{'m', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm'},
 		{'m', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'm'},
-		{'m', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm', ' ', 'm'},
-		{'m', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'm'},
 		{'m', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm', 'm'},
 	}
 
@@ -37,22 +35,22 @@ func Corner(x, y int) string {
 	// Will be usefull for players to spawn
 	case (x == 1 && y == 1):
 		return "top_left"
-	case (x == 1 && y == 13):
+	case (x == 1 && y == 11):
 		return "top_right"
-	case (x == 13 && y == 1):
+	case (x == 11 && y == 1):
 		return "bottom_left"
-	case (x == 13 && y == 13):
+	case (x == 11 && y == 11):
 		return "bottom_right"
 
 	// Neighbors to let enough space to players.
 	case (x == 1 && y == 2) ||
 		(x == 2 && y == 1) ||
-		(x == 1 && y == 12) ||
-		(x == 2 && y == 13) ||
-		(x == 13 && y == 2) ||
-		(x == 12 && y == 1) ||
-		(x == 13 && y == 12) ||
-		(x == 12 && y == 13):
+		(x == 1 && y == 10) ||
+		(x == 2 && y == 11) ||
+		(x == 11 && y == 2) ||
+		(x == 10 && y == 1) ||
+		(x == 11 && y == 10) ||
+		(x == 10 && y == 11):
 		return "neighbors"
 
 	default:

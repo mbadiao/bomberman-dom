@@ -16,7 +16,7 @@ const Insert = () => {
         
     })
     document.body.append(info.render())
-    info.elem.append(nameInput.render()) // REVIEW: Un <h1> ne devrait contenir que du texte. //TODO: document.body.appendChild(nameInput.render())
+    info.elem.append(nameInput.render()) // REVIEW: Should only contain text. //TODO: document.body.appendChild(nameInput.render())
     nameInput.elem.focus();
 }
 

@@ -10,23 +10,23 @@ Try to open the game.
 
     ✔ After entering your nickname, were you redirected to a `waiting page` presenting a `player counter`? @started(24-09-16 16:15) @done(24-09-16 19:05) @lasted(2h50m6s)
 
-    ⭘ After entering your nickname, did you have `access to a chat`? @started(24-09-16 16:16)
+    ✔ After entering your nickname, did you have `access to a chat`? @done(24-09-17 10:22)
 
 Try to enter with another user (in another browser or in private browser).
 
-    ☐ Did the player counter `increment by 1`?
+    ✔ Did the player counter `increment by 1`? @started(24-09-17 10:21) @done(24-09-17 10:21) @lasted(20s)
 
     ☐ After entering with another user, can all users chat with each other in `real time` (using websockets)?
 
 Wait 20 seconds with two users in the waiting page.
 
-    ☐ After 20 seconds, did you get `10 second` game start countdown?
+    ✔ After 20 seconds, did you get `10 second` game start countdown? @done(24-09-17 10:21)
 
-    ☐ After the 10 seconds did the `game start`?
+    ✔ After the 10 seconds did the `game start`? @done(24-09-17 10:22)
 
 Try to enter with 4 different users in the waiting page.
 
-    ☐ As soon as the `fourth player entered`, did you get 10 second game start countdown?
+    ! As soon as the `fourth player entered`, did you get 10 second game start countdown? @blocked(24-09-17 10:22)
 
     ☐ While playing the game, are you able to `move` and `place bombs`?
 
