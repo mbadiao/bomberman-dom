@@ -1,6 +1,6 @@
 Technologies:
     ✔ Integrate the GEDOM framework. @done(24-09-16 15:59)
-    ☐ Open a websocket connection to the server.
+    ☐ Open a websocket connection between the client and the server.
 
 Registration Page:
     ✔ Prompt the player for a nickname. @done(24-09-16 15:59)
@@ -16,7 +16,7 @@ Waiting Page:
     ☐ Redirect the player to the game page after the countdown.
 
 Game Page:
-    ☐ Generate the map matrix from the server.
+    ✔ Generate the map matrix from the server. @done(24-09-17 01:36)
     ☐ Send the map matrix to the clients.
     ☐ Build the map from the matrix.
     ☐ Implememt the movement mechanics.
