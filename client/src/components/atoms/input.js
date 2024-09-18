@@ -2,15 +2,14 @@ import VirtualNode from '../../core/node.js';
 import gameState from '../../core/state.js';
 import { ws } from '../../app.js';
 
-class Input extends VirtualNode {
-    constructor(id, ) {
+export default class Input extends VirtualNode {
+    constructor(id, placeholder, msgType, adds = {}) {
         super({
             tag: 'input',
             attrs: {
-                id: 'nickname-input',
-                required: true,
-                maxlength: 7,
-                placeholder: `Enter nickname...`
+                ...adds,
+                id: id,
+                placeholder: placeholder
             },
             listeners: {
                 onkeydown: event => {
@@ -23,17 +22,17 @@ class Input extends VirtualNode {
         })
     }
 
-    #send(nickname) {
+    #send(input) {
         if (ws.readyState == 1) {
             ws.send(JSON.stringify({
-                type: "join",
-                name: nickname,
+                type: msgType,
+                name: input,
             }));
         }
         
         // TODO: Transfert to the websocket handler
         gameState.set({
-            nickname: nickname,
+            nickname: input,
             playerCount: gameState.get('playerCount') + 1,
             // error: 'Error'
         })
@@ -44,5 +43,3 @@ class Input extends VirtualNode {
         }
     }
 }
-
-export default new Input();

@@ -3,7 +3,6 @@ import { ws } from "../../app.js";
 import ChatCpn from "../orgarnisms/chat.js";
 import timer from "../molecules/timer.js";
 import VirtualNode from "../../core/node.js";
-import header from "../atoms/header.js";
 import container from "../atoms/container.js";
 import { joinRoomHandle } from "../../services/join.js";
 import avartarCard from "../atoms/avatarCard.js";
@@ -15,7 +14,7 @@ const Room = () => {
     return;
   }
   document.body.innerHTML = "";
-  document.body.append(header.render(), container.render());
+  document.body.append(container.render());
   let chat = new ChatCpn();
   container.elem.append(timer.render(), main.render(), chat.render());
   main.elem.appendChild(
