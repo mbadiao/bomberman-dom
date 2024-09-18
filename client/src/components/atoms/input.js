@@ -28,7 +28,7 @@ class Input extends VirtualNode {
     #joinRoom(nickname) {
         gameState.set({
             nickname: nickname,
-            playerCount: gameState.get('playerCount') + 1
+            playerCount: gameState.get('playerCount') + 1,
         })
 
         if (ws.readyState == 1) {
@@ -37,8 +37,10 @@ class Input extends VirtualNode {
                 name: this.elem.value,
             }));
         }
-        
-        window.location.hash = "/room";
+
+        if (gameState.get('error') === '') {
+            window.location.hash = "/room";
+        }
     }
 }
 

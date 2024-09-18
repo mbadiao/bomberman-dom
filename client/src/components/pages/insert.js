@@ -2,6 +2,7 @@ import { ws } from "../../app.js";
 import VirtualNode from "../../core/node.js";
 import gameState from "../../core/state.js";
 import nameInput from "../atoms/input.js";
+import alert from '../atoms/alert.js';
 
 const Insert = () => {
     document.body.innerHTML = '';
@@ -15,8 +16,8 @@ const Insert = () => {
         ],
         
     })
-    document.body.append(info.render())
-    info.elem.append(nameInput.render()) // REVIEW: Should only contain text. //TODO: document.body.appendChild(nameInput.render())
+    document.body.append(info.render(), alert.render())
+    info.elem.appendChild(nameInput.render()) // REVIEW: Should only contain text. //TODO: document.body.appendChild(nameInput.render())
     nameInput.elem.focus();
 }
 

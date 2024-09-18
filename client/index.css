@@ -11,7 +11,7 @@
 }
 
 body {
-  background: url('./assets/font.jpg') no-repeat;
+  background: url('./assets/background.jpg') no-repeat;
   background-size: cover;
   height: 100vh;
 }
@@ -428,18 +428,18 @@ body {
   overflow: hidden;
 }
 
-.card-header {
+.chat-header {
   padding: 20px;
   text-align: center;
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-.card-title {
+.chat-title {
   font-size: 1.5em;
   font-weight: bold;
 }
 
-.card-content {
+.chat-main {
   padding: 20px;
   height: 400px;
   overflow-y: auto;
@@ -450,23 +450,19 @@ body {
   padding-right: 10px;
 }
 
-.message {
+.chat-bubble {
   display: flex;
   margin-bottom: 15px;
 }
 
 .avatar {
-  width: 40px;
+  border-radius: 50%;
   height: 40px;
   margin-right: 10px;
+  width: 40px;
 }
 
-.avatar img {
-  width: 100%;
-  border-radius: 50%;
-}
-
-.message-content {
+.chat-content {
   background-color: rgba(92, 89, 89, 0.3);
   border-radius: 10px;
   padding: 10px;
@@ -477,7 +473,7 @@ body {
   font-weight: bold;
 }
 
-.card-footer {
+.chat-footer {
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.2);
 }

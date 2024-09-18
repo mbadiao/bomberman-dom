@@ -16,7 +16,7 @@ export default class ErrorPage extends VirtualNode {
           children: [`ERROR ${code}`],
         },
         {
-          tag: 'p',
+          tag: 'h2',
           attrs: {
             class: 'error-page-content'
           },

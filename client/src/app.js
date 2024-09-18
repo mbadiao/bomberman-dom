@@ -14,6 +14,7 @@ import Room from "./components/pages/room.js";
 import avartarCard from "./components/atoms/avatarCard.js";
 import timer from "./components/molecules/timer.js";
 import { main } from "./components/orgarnisms/main.js";
+import alert from './components/atoms/alert.js';
 import {
   updateLifeScore,
   chronometre,
@@ -33,7 +34,10 @@ gameState.set({
   playerCount: 0,
   avatars: [],
   avatar: {},
+  error: ''
 });
+
+gameState.subscribe(alert.display.bind(alert))
 
 //------------------------------------------------------------------------------
 
