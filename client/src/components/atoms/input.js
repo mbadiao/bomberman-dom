@@ -3,21 +3,19 @@ import gameState from '../../core/state.js';
 import { ws } from '../../app.js';
 
 class Input extends VirtualNode {
-    constructor() {
+    constructor(id, ) {
         super({
             tag: 'input',
             attrs: {
                 id: 'nickname-input',
                 required: true,
                 maxlength: 7,
-                type: 'text',
-                name: 'nickname',
                 placeholder: `Enter nickname...`
             },
             listeners: {
                 onkeydown: event => {
                     if (event.key === 'Enter' && event.target.value.trim() !== '') {
-                        this.#joinRoom(event.target.value);
+                        this.#send(event.target.value);
                         event.target.value = '';
                     }
                 },
@@ -25,7 +23,7 @@ class Input extends VirtualNode {
         })
     }
 
-    #joinRoom(nickname) {
+    #send(nickname) {
         if (ws.readyState == 1) {
             ws.send(JSON.stringify({
                 type: "join",
@@ -33,12 +31,14 @@ class Input extends VirtualNode {
             }));
         }
         
+        // TODO: Transfert to the websocket handler
         gameState.set({
             nickname: nickname,
             playerCount: gameState.get('playerCount') + 1,
             // error: 'Error'
         })
-
+        
+        // TODO: Transfert to the websocket handler
         if (gameState.get('error') === '') {
             window.location.hash = "/room";
         }

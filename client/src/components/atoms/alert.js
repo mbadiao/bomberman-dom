@@ -17,9 +17,6 @@ class Alert extends VirtualNode {
             return
         }
 
-        // DEBUG: Check state for error message...
-        console.log(state.error);
-
         this.elem.style.display = 'block';
         this.elem.innerText = state.error;
     }

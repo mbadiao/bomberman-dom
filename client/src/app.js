@@ -1,12 +1,11 @@
 import { grid } from "./components/grid.js";
 import { Avatar } from "./components/atoms/avatar.js";
-// import { Bomb } from "./components/bomb.js";
+// import { Bomb } from "./atoms/bomb.js";
 import { ajoutPowersUp } from "./components/powerUp.js";
 import { joinRoomHandle } from "./services/join.js";
 // import { pauseGame } from "./interface/menuPause.js";
 import gameState from "./core/state.js";
 import router from "./core/router.js";
-import Bomb from "./components/molecules/bomb.js";
 import Home from "./components/pages/home.js";
 import Insert from "./components/pages/insert.js";
 import Game from "./components/pages/game.js";
@@ -83,6 +82,15 @@ ws.onmessage = (e) => {
       avatars.forEach((avatar) =>
         main.elem.appendChild(new avartarCard(avatar.representation).render())
       );
+
+      // gameState.set({
+      //   nickname: nickname,
+      //   playerCount: gameState.get("playerCount") + 1,
+      // });
+
+      // if (gameState.get("error") === "") {
+      //   window.location.hash = "/room";
+      // }
     },
 
     startCountDown: () => {
@@ -132,7 +140,7 @@ ws.onmessage = (e) => {
 
 const divs = main.elem?.querySelectorAll("div");
 
-export let boom = new Bomb();
+// export let boom = new Bomb();
 
 // domLifeScore(actor);
 // domNombreBombe(boom);

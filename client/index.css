@@ -11,6 +11,10 @@
 }
 
 body {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background: url('./assets/background.jpg') no-repeat;
   background-size: cover;
   height: 100vh;
