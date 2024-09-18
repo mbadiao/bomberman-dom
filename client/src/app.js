@@ -32,7 +32,7 @@ gameState.set({
   nickname: "",
   playerCount: 0,
   avatars: [],
-  avatar: {}
+  avatar: {},
 });
 
 //------------------------------------------------------------------------------
@@ -56,46 +56,68 @@ ws.onopen = () => {
 };
 
 ws.onmessage = (e) => {
-  //REVIEW: Consider using switch statement...
-  let data = JSON.parse(e.data);
-  console.log("data :>> ", data); // DEBUG: Chekck Data...
+  let data;
 
-  if (data.type === "playerJoin") {
-    joinRoomHandle(actors, data);
-    const avatars = gameState.get("avatars");
-    main.elem.innerHTML = "";
-    avatars.forEach((avatar) =>
-      main.elem.appendChild(new avartarCard(avatar.representation).render())
-    );
+  try {
+    data = JSON.parse(e.data);
+    console.log("data :>> ", data); // DEBUG: Check Data...
+  } catch (error) {
+    console.error("Error parsing message data: ", error);
+    return;
   }
 
-  if (data.type === "startCountDown") {
-    let countdown = 9;
-    let chrono = setInterval(() => {
-      timer.elem.querySelector("#formattedTime").innerText = "00:0" + countdown;
-      countdown--;
-    }, 1000);
-    setTimeout(() => {
-      clearInterval(chrono);
-      timer.elem.querySelector("#formattedTime").innerText = "00:00";
-      window.location.hash = "/game";
-    }, 10000);
-  }
+  const messageHandlers = {
+    InvalidName: () => {
+      gameState.set("error", data.content);
+    },
 
-  if (data.type === "Action") {
-    console.log("Action :>> ", Action);
-    console.log("actors :>> ", actors);
-    console.log("data :>> ", data);
-    const actionnedActor = actors.find((actor) => actor.name === data.name);
-    console.log("actionnedActor :>> ", actionnedActor);
-    console.log(
-      "document.querySelector(`#avatar${actionnedActor.name}`) :>> ",
-      document.querySelector(`#avatar${actionnedActor.name}`)
-    );
-    actionnedActor.move(
-      document.querySelector(`#avatar${actionnedActor.name}`),
-      true
-    );
+    playerJoin: () => {
+      joinRoomHandle(actors, data);
+      const avatars = gameState.get("avatars");
+      main.elem.innerHTML = "";
+      avatars.forEach((avatar) =>
+        main.elem.appendChild(new avartarCard(avatar.representation).render())
+      );
+    },
+
+    startCountDown: () => {
+      let countdown = 9;
+      let chrono = setInterval(() => {
+        timer.elem.querySelector("#formattedTime").innerText =
+          "00:0" + countdown;
+        countdown--;
+      }, 1000);
+      setTimeout(() => {
+        clearInterval(chrono);
+        timer.elem.querySelector("#formattedTime").innerText = "00:00";
+        window.location.hash = "/game";
+      }, 10000);
+    },
+
+    Action: () => {
+      console.log("Action :>> ", data);
+      console.log("actors :>> ", actors);
+      const actionnedActor = actors.find((actor) => actor.name === data.name);
+      if (actionnedActor) {
+        console.log("actionnedActor :>> ", actionnedActor);
+        const avatarElement = document.querySelector(
+          `#avatar${actionnedActor.name}`
+        );
+        if (avatarElement) {
+          actionnedActor.move(avatarElement, true);
+        } else {
+          console.error(`Avatar element for ${actionnedActor.name} not found`);
+        }
+      } else {
+        console.error(`Actor with name ${data.name} not found`);
+      }
+    },
+  };
+
+  if (messageHandlers[data.type]) {
+    messageHandlers[data.type]();
+  } else {
+    console.error(`Unhandled message type: ${data.type}`);
   }
 };
 

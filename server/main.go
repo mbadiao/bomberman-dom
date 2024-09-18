@@ -1,12 +1,11 @@
 package main
 
 import (
+	"bomberman-dom/server/utils"
 	"fmt"
 	"log"
 	"net/http"
 	"time"
-
-	"bomberman-dom/utils"
 
 	"github.com/gorilla/websocket"
 )
@@ -20,8 +19,9 @@ var ( // REVIEW: All global variables should be in UPPERCASE...
 		WaitingTime:   20 * time.Second,
 		CountdownTime: 10 * time.Second,
 	}
-	broadcast = make(chan Data)
-	MAP       = utils.Matrix()
+	broadcast             = make(chan Data)
+	MAP                   = utils.Matrix()
+	countdownStarted bool = false
 )
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

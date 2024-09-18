@@ -91,23 +91,34 @@ func takePlayersNames(players map[string]*Player) string { // REVIEW: Function n
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-func startWaitingTime() { // REVIEW: Function name could be more concise... // TODO: startTimer() {}...
+func startWaitingTime() {
+	if countdownStarted {
+		return
+	}
 	if room.PlayerCount == room.MaxPlayers {
-		room.GameStarted = true
-
-		broadcast <- Data{
-			Type: "startCountDown",
-		}
-	} else if room.PlayerCount > 1 {
+		startCountdown()
+	} else if room.PlayerCount >= 2 {
 		time.AfterFunc(room.WaitingTime, func() {
-			room.GameStarted = true
-
-			broadcast <- Data{
-				Type: "startCountDown",
+			room.playersMutex.Lock()
+			defer room.playersMutex.Unlock()
+			if !room.GameStarted && room.PlayerCount >= 2 {
+				startCountdown()
 			}
 		})
 	}
 }
+
+func startCountdown() {
+	if countdownStarted {
+		return
+	}
+	countdownStarted = true
+	room.GameStarted = true
+	broadcast <- Data{
+		Type: "startCountDown",
+	}
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
