@@ -1,6 +1,6 @@
-export default class State {
-  constructor(initial) {
-    this.current = initial || {};
+class State {
+  constructor() {
+    this.current = {};
     this.subscribers = [];
   }
 
@@ -26,3 +26,5 @@ export default class State {
     this.subscribers.forEach(callback => callback(this.current));
   }
 }
+
+export default new State();

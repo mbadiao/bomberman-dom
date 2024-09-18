@@ -1,4 +1,5 @@
-import gameState, {  avatarsState, ws } from "../../app.js";
+import gameState from "../../core/state.js";
+import { ws } from '../../app.js';
 import { grid } from "../grid.js";
 
 const Game = () => {
@@ -7,8 +8,8 @@ const Game = () => {
         return
     }
 
-    console.log('actors :>> ', avatarsState.get('avatars'));
-    const actors = avatarsState.get('avatars')
+    console.log('actors :>> ', gameState.get('avatars'));
+    const actors = gameState.get('avatars')
     grid();
     actors.forEach(actor => {
         actor.addAvatarInGrid(actor.name);

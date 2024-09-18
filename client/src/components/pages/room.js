@@ -1,4 +1,5 @@
-import gameState, { actors, avatarsState, ws } from "../../app.js";
+import gameState from '../../core/state.js'
+import { actors, ws } from "../../app.js";
 import ChatCpn from "../molecules/chat.js";
 import Bomb from "../molecules/bomb.js";
 import timer from "../molecules/timer.js";
@@ -7,7 +8,7 @@ import header from "../atoms/header.js";
 import container from "../atoms/container.js";
 import { joinRoomHandle } from "../../services/join.js";
 import avartarCard from "../atoms/avatarCard.js";
-import { main } from "../orgarnism/main.js";
+import { main } from "../orgarnisms/main.js";
 
 const Room = () => {
     if (gameState.get('nickname') === "") {
@@ -26,7 +27,6 @@ const Room = () => {
         },
         children: ["Waiting..."]
     }).render())
-
 }
 
 export default Room;

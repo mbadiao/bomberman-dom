@@ -1,5 +1,6 @@
 import VirtualNode from '../../core/node.js';
-import gameState, { ws } from '../../app.js';
+import gameState from '../../core/state.js';
+import { ws } from '../../app.js';
 
 class Input extends VirtualNode {
     constructor() {

@@ -1,44 +1,39 @@
 import { grid } from "./components/grid.js";
 import { Avatar } from "./components/atoms/avatar.js";
 // import { Bomb } from "./components/bomb.js";
-import {
-  updateLifeScore,
-  chronometre,
-  domLifeScore,
-  domNombreBombe,
-} from "./interface/barreScore.js";
 import { ajoutPowersUp } from "./components/powerUp.js";
 import { joinRoomHandle } from "./services/join.js";
 // import { pauseGame } from "./interface/menuPause.js";
-import State from "./core/state.js";
+import gameState from "./core/state.js";
 import router from "./core/router.js";
-import Bomb from './components/molecules/bomb.js'
+import Bomb from "./components/molecules/bomb.js";
 import Home from "./components/pages/home.js";
 import Insert from "./components/pages/insert.js";
 import Game from "./components/pages/game.js";
 import Room from "./components/pages/room.js";
 import avartarCard from "./components/atoms/avatarCard.js";
 import timer from "./components/molecules/timer.js";
-import { main } from "./components/orgarnism/main.js";
+import { main } from "./components/orgarnisms/main.js";
+import {
+  updateLifeScore,
+  chronometre,
+  domLifeScore,
+  domNombreBombe,
+} from "./interface/barreScore.js";
 
+//------------------------------------------------------------------------------
 
 export const ws = new WebSocket(`ws://localhost:8989/`);
 export const actors = [];
 
-
 //------------------------------------------------------------------------------
 
-export const gameState = new State({
+gameState.set({
   nickname: "",
   playerCount: 0,
-  avatars: []
-});
-
-export const avatarsState = new State({
   avatars: [],
+  avatar: null
 });
-
-export const myAvatar = new State({ avatar: null });
 
 //------------------------------------------------------------------------------
 
@@ -50,10 +45,7 @@ router.add("/room", Room);
 
 router.add("/game", Game);
 
-export default gameState;
-
 //------------------------------------------------------------------------------
-
 
 // chronometre();
 // ajoutPowersUp();
@@ -63,18 +55,21 @@ ws.onopen = () => {
   console.log("connected");
 };
 
-ws.onmessage = (e) => { //REVIEW: Consider using switch statement...
+ws.onmessage = (e) => {
+  //REVIEW: Consider using switch statement...
   let data = JSON.parse(e.data);
-  console.log('data :>> ', data); // DEBUG: Chekck Data...
+  console.log("data :>> ", data); // DEBUG: Chekck Data...
 
-  if (data.type === 'playerJoin') {
+  if (data.type === "playerJoin") {
     joinRoomHandle(actors, data);
-    const avatars = avatarsState.get('avatars');
+    const avatars = gameState.get("avatars");
     main.elem.innerHTML = "";
-    avatars.forEach(avatar => main.elem.appendChild(new avartarCard(avatar.representation).render()));
+    avatars.forEach((avatar) =>
+      main.elem.appendChild(new avartarCard(avatar.representation).render())
+    );
   }
 
-  if (data.type === 'startCountDown') {
+  if (data.type === "startCountDown") {
     let countdown = 9;
     let chrono = setInterval(() => {
       timer.elem.querySelector("#formattedTime").innerText = "00:0" + countdown;
@@ -83,24 +78,28 @@ ws.onmessage = (e) => { //REVIEW: Consider using switch statement...
     setTimeout(() => {
       clearInterval(chrono);
       timer.elem.querySelector("#formattedTime").innerText = "00:00";
-      window.location.hash = '/game';
+      window.location.hash = "/game";
     }, 10000);
   }
 
-  if (data.type === 'Action') {
-    console.log('Action :>> ', Action);
-    console.log('actors :>> ', actors);
-    console.log('data :>> ', data);
-    const actionnedActor = actors.find(actor => actor.name === data.name)
-    console.log('actionnedActor :>> ', actionnedActor);
-    console.log('document.querySelector(`#avatar${actionnedActor.name}`) :>> ', document.querySelector(`#avatar${actionnedActor.name}`));
-    actionnedActor.move(document.querySelector(`#avatar${actionnedActor.name}`), true);
+  if (data.type === "Action") {
+    console.log("Action :>> ", Action);
+    console.log("actors :>> ", actors);
+    console.log("data :>> ", data);
+    const actionnedActor = actors.find((actor) => actor.name === data.name);
+    console.log("actionnedActor :>> ", actionnedActor);
+    console.log(
+      "document.querySelector(`#avatar${actionnedActor.name}`) :>> ",
+      document.querySelector(`#avatar${actionnedActor.name}`)
+    );
+    actionnedActor.move(
+      document.querySelector(`#avatar${actionnedActor.name}`),
+      true
+    );
   }
-}
+};
 
 const divs = main.elem?.querySelectorAll("div");
-
-
 
 export let boom = new Bomb();
 
@@ -109,20 +108,20 @@ export let boom = new Bomb();
 
 // let counter = 0;
 export function keyHandler(e) {
-
   if (e.key == " ") {
     // boom.poserBomb(divs, actor.position(), actor);
     //   domNombreBombe(boom);
     //   // } else if (e.key == 'Escape') {
     //   //     pauseGame(actor)
   } else if (e.key.includes("Arrow")) {
-    if (myAvatar.get("avatar") != null) {
-      ws.send(JSON.stringify({
-        type: "Action",
-        name: myAvatar.get("avatar").name,
-        content: e.key,
-      }));
-
+    if (gameState.get("avatar") != null) {
+      ws.send(
+        JSON.stringify({
+          type: "Action",
+          name: gameState.get("avatar").name,
+          content: e.key,
+        })
+      );
     }
 
     // if (counter % 5 == 0) {

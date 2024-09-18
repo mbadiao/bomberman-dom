@@ -1,4 +1,4 @@
-import ErrorPage from '../components/pages/error.js'
+import ErrorPage from '../components/templates/error.js'
 
 class Router {
   constructor() {

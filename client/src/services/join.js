@@ -1,4 +1,4 @@
-import { avatarsState, myAvatar } from "../app.js";
+import gameState from "../core/state.js";
 import { Avatar } from "../components/atoms/avatar.js";
 
 export function joinRoomHandle(avatars, data) {
@@ -6,8 +6,8 @@ export function joinRoomHandle(avatars, data) {
     if (data.playerCount <= 4) {
         let avatar;
         let names = (data.content).split("*");
-        if (myAvatar.get('avatar') === null) {
-            myAvatar.set({ avatar: names[data.playerCount - 1] });
+        if (gameState.get('avatar') === null) {
+            gameState.set({ avatar: names[data.playerCount - 1] });
         }
         names.map((name, i) => {
             if (name !== "") {
@@ -36,6 +36,6 @@ export function joinRoomHandle(avatars, data) {
                 avatars.push(avatar)
             }
         });
-        avatarsState.set({ avatars: avatars });
+        gameState.set({ avatars: avatars });
     }
 }

@@ -1,5 +1,5 @@
 import VirtualNode from '../../core/node.js';
-// import gameState from '../../app.js';
+// import gameState from '../../core/state.js';
 
 class Logo extends VirtualNode {
     constructor() {
