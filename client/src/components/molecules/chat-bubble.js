@@ -3,30 +3,25 @@ import Image from '../atoms/image.js';
 import Text from '../atoms/text.js';
 
 export default class ChatBubble extends VirtualNode {
-    constructor() {
+    constructor(imgSrc, senderName, msgContent) {
         super({
-            tag: 'div',
+            tag: 'article',
             attrs: {
                 class: "chat-bubble",
             },
             children: [
-                new Image(
-                    'avatar',
-                    'https://ui-avatars.com/api/?name=Fatima+Keita&background=123861&color=fff'
-                ),
+                new Image('avatar', imgSrc),
                 {
                     tag: 'div',
                     attrs: {
                         class: "chat-content",
                     },
                     children: [
-                        new Text('sender', 'System'),
-                        new Text('message', 'Welcom to the chat!')
+                        new Text('sender', senderName),
+                        new Text('message', msgContent)
                     ]
-
                 }
             ]
-
         })
     }
 }

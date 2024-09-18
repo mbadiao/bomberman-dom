@@ -4,20 +4,16 @@ import ChatBubble from './chat-bubble.js';
 class ChatMain extends VirtualNode {
     constructor() {
         super({
-            tag: 'div',
+            tag: 'section',
             attrs: {
                 class: "chat-main",
             },
             children: [
-                {
-                    tag: 'div',
-                    attrs: {
-                        class: "scroll-area",
-                    },
-                    children: [
-                        new ChatBubble()
-                    ]
-                }
+                new ChatBubble(
+                    'https://ui-avatars.com/api/?name=Fatima+Keita&background=123861&color=fff',
+                    'System',
+                    'Welcome to the chat!'
+                )
             ]
         })
     }

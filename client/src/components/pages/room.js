@@ -1,6 +1,6 @@
 import gameState from '../../core/state.js'
 import { actors, ws } from "../../app.js";
-import ChatCpn from "../molecules/chat.js";
+import ChatCpn from "../orgarnisms/chat.js";
 import Bomb from "../molecules/bomb.js";
 import timer from "../molecules/timer.js";
 import VirtualNode from "../../core/node.js";
@@ -16,7 +16,6 @@ const Room = () => {
         return
     }
     document.body.innerHTML = '';
-    document.body.appendChild(new Bomb().render())
     document.body.append(header.render(), container.render())
     let chat = new ChatCpn();
     container.elem.append(timer.render(), main.render(), chat.render());

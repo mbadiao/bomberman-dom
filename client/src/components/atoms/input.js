@@ -26,17 +26,18 @@ class Input extends VirtualNode {
     }
 
     #joinRoom(nickname) {
-        gameState.set({
-            nickname: nickname,
-            playerCount: gameState.get('playerCount') + 1,
-        })
-
         if (ws.readyState == 1) {
             ws.send(JSON.stringify({
                 type: "join",
-                name: this.elem.value,
+                name: nickname,
             }));
         }
+        
+        gameState.set({
+            nickname: nickname,
+            playerCount: gameState.get('playerCount') + 1,
+            // error: 'Error'
+        })
 
         if (gameState.get('error') === '') {
             window.location.hash = "/room";

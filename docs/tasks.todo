@@ -5,6 +5,7 @@ Technologies:
 Registration Page:
     ✔ Prompt the player for a `nickname`. @done(24-09-16 15:59)
     ⭘ Check the nickname `validity` in the server. @started(24-09-17 14:59)
+    ⭘ Send an alert to client if nickname is `invalid`. @started(24-09-18 14:09)
     ✔ Add the player to the list if his nickname is `valid`. @done(24-09-17 14:59)
     ☐ Redirect the player to the `waiting` page.
 
