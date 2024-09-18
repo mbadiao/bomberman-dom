@@ -1,6 +1,6 @@
 import gameState from "../../core/state.js";
 import { ws } from "../../app.js";
-import ChatCpn from "../molecules/chat.js";
+import ChatCpn from "../orgarnisms/chat.js";
 import Bomb from "../molecules/bomb.js";
 import timer from "../molecules/timer.js";
 import VirtualNode from "../../core/node.js";
