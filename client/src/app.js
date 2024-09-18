@@ -32,7 +32,7 @@ gameState.set({
   nickname: "",
   playerCount: 0,
   avatars: [],
-  avatar: null
+  avatar: {}
 });
 
 //------------------------------------------------------------------------------
