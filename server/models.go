@@ -14,7 +14,7 @@ type Map struct {
 type Data struct {
 	Type        string `json:"type"`
 	Name        string `json:"name"`
-	Content     string `json:"content"`
+	Content     string `json:"content"` // REVIEW: Could be an interface...
 	PlayerCount int    `json:"playerCount"`
 }
 

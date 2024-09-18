@@ -11,7 +11,7 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-var (
+var ( // REVIEW: All global variables should be in UPPERCASE...
 	upgrader = websocket.Upgrader{CheckOrigin: func(r *http.Request) bool { return true }}
 	room     = &Room{
 		Players:       make(map[string]*Player),
@@ -21,7 +21,7 @@ var (
 		CountdownTime: 10 * time.Second,
 	}
 	broadcast = make(chan Data)
-	map = utils.Matrix()
+	MAP       = utils.Matrix()
 )
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -37,6 +37,6 @@ func main() {
 		}
 	}()
 
-	utils.OpenLocalHost("http://localhost:8989")
+	utils.OpenLink("http://localhost:8989")
 	log.Fatal(http.ListenAndServe(":8989", nil))
 }

@@ -8,6 +8,7 @@ Naming Conventions:
         ✘ File name: `kebab-case` @fix(24-09-17 15:02)
         ✘ Go functions : `PascalCase` @fix(24-09-17 15:02)
         ✔ Go struct & interface: `PascalStruct` @done(24-09-17 15:26)
+        ✘ Go global variables: `UPPERCASE` @fix(24-09-18 06:27)
         ✔ JS functions: `camelCase` @done(24-09-17 15:26)
         ✔ JS classes: `PascalCase` @done(24-09-17 15:03)
         ✔ HTML attributes: `kebab-case` @done(24-09-17 15:03)

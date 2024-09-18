@@ -44,7 +44,7 @@ func handleJoin(Conn *websocket.Conn, name string) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-func takePlayersNames(players map[string]*Player) string { // REVIEW: Function Name...
+func takePlayersNames(players map[string]*Player) string { // REVIEW: Function name seems confusing...
 	var names string
 
 	for name := range players {
@@ -91,7 +91,7 @@ func takePlayersNames(players map[string]*Player) string { // REVIEW: Function N
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-func startWaitingTime() { // REVIEW: Function Name... // TODO: startCountdown() {}...
+func startWaitingTime() { // REVIEW: Function name could be more concise... // TODO: startTimer() {}...
 	if room.PlayerCount == room.MaxPlayers {
 		room.GameStarted = true
 
@@ -111,7 +111,7 @@ func startWaitingTime() { // REVIEW: Function Name... // TODO: startCountdown() 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-func broadcastPlayerMsg(msg Data) {
+func broadcastPlayerMsg(msg Data) { // REVIEW: Function name could be more concise... // TODO: broadcastMsg() {}...
 	for name, player := range room.Players {
 		fmt.Println("name", name) // DEBUG: Check Player Name...
 

@@ -5,7 +5,7 @@ import (
 	"os/exec"
 	"runtime"
 )
-func OpenLocalHost(URL string) {
+func OpenLink(URL string) {
 	var cmd *exec.Cmd
 
 	// Set Up Command
