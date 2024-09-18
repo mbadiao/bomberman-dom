@@ -1,8 +1,8 @@
 import gameState from "../core/state.js";
 import { Avatar } from "../components/atoms/avatar.js";
 
-export function joinRoomHandle(avatars, data) {
-  avatars = [];
+export function joinRoomHandle(data) {
+  const avatars = [];
   if (data.playerCount <= 4) {
     let avatar;
     let names = data.content.split("*");

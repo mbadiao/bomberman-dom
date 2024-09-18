@@ -14,7 +14,7 @@ import Room from "./components/pages/room.js";
 import avartarCard from "./components/atoms/avatarCard.js";
 import timer from "./components/molecules/timer.js";
 import { main } from "./components/orgarnisms/main.js";
-import alert from './components/atoms/alert.js';
+import alert from "./components/atoms/alert.js";
 import {
   updateLifeScore,
   chronometre,
@@ -25,7 +25,7 @@ import {
 //------------------------------------------------------------------------------
 
 export const ws = new WebSocket(`ws://localhost:8989/`);
-export const actors = [];
+// export const actors = [];
 
 //------------------------------------------------------------------------------
 
@@ -34,10 +34,10 @@ gameState.set({
   playerCount: 0,
   avatars: [],
   avatar: {},
-  error: ''
+  error: "",
 });
 
-gameState.subscribe(alert.display.bind(alert))
+gameState.subscribe(alert.display.bind(alert));
 
 //------------------------------------------------------------------------------
 
@@ -72,11 +72,12 @@ ws.onmessage = (e) => {
 
   const messageHandlers = {
     InvalidName: () => {
+      0.0;
       gameState.set("error", data.content);
     },
 
     playerJoin: () => {
-      joinRoomHandle(actors, data);
+      joinRoomHandle(data);
       const avatars = gameState.get("avatars");
       main.elem.innerHTML = "";
       avatars.forEach((avatar) =>
@@ -99,16 +100,20 @@ ws.onmessage = (e) => {
     },
 
     Action: () => {
-      console.log("Action :>> ", data);
-      console.log("actors :>> ", actors);
-      const actionnedActor = actors.find((actor) => actor.name === data.name);
+      // console.log("Action :>> ", data);
+      const players = gameState.get("avatars");
+      const actionnedActor = players.find(
+        (player) => player.name === data.name
+      );
       if (actionnedActor) {
         console.log("actionnedActor :>> ", actionnedActor);
         const avatarElement = document.querySelector(
           `#avatar${actionnedActor.name}`
         );
         if (avatarElement) {
-          actionnedActor.move(avatarElement, true);
+          console.log("avatar Element: ", avatarElement);
+
+          actionnedActor.move(avatarElement, data.content, true);
         } else {
           console.error(`Avatar element for ${actionnedActor.name} not found`);
         }
