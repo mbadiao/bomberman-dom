@@ -52,16 +52,6 @@ class ChatFooter extends VirtualNode {
             sendMsg(inputValue)
         }
         this.elem.querySelector("#inputMsg").value = ""
-        
-        // if (gameState.get("ownerName") != "") {
-        //     ws.send(
-        //       JSON.stringify({
-        //         type: "Msg",
-        //         name: gameState.get("ownerName"),
-        //         content: e.key,
-        //       })
-        //     );
-        //   }
     }
 
 }

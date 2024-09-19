@@ -28,7 +28,7 @@ import { displayMsg } from "./services/message.js";
 
 //------------------------------------------------------------------------------
 
-export const ws = new WebSocket(`ws://localhost:8989/`);
+export const ws = new WebSocket(`ws://localhost:8080/`);
 
 //------------------------------------------------------------------------------
 
