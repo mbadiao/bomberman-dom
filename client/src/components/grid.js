@@ -1,4 +1,5 @@
 import VirtualNode from "../core/node.js";
+import { main } from "./orgarnisms/main.js";
 
 export let originGrid = [
   ["b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b"],
@@ -16,17 +17,18 @@ export let originGrid = [
   ["b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b"],
 ];
 
+export let divs = [];
+
 export function grid() {
   /* 
         b -> bloc, m -> mur, c -> chemin, x -> bonus
     */
 
-  const main = document.querySelector("main");
   
  
   // On enleve tout le contenu de main
 
-  main.innerHTML = "";
+  main.elem.innerHTML = "";
   for (let i = 0; i < originGrid.length; i++) {
     for (let j = 0; j < originGrid[i].length; j++) {
       let div = new VirtualNode({
@@ -35,7 +37,8 @@ export function grid() {
           class: originGrid[i][j],
         },
       });
-      main.appendChild(div.render());
+      main.elem.appendChild(div.render());
+      divs.push(div.elem);
     }
   }
 }

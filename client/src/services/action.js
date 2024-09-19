@@ -1,7 +1,9 @@
 import gameState from "../core/state.js";
 import boom from "../components/atoms/bomb.js";
+import { divs } from "../components/grid.js";
 
-export default actionOnAvatar = (data) => {
+const actionOnAvatar = (data) => {
+    console.log('divs :>> ', divs);
     const players = gameState.get("avatars");
     const actionnedActor = players.find(
         (player) => player.name === data.name
@@ -16,3 +18,5 @@ export default actionOnAvatar = (data) => {
         actionnedActor.move(avatarElement, data.content, true);
     }
 }
+
+export default actionOnAvatar;

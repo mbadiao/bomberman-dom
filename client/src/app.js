@@ -65,7 +65,6 @@ ws.onmessage = (e) => {
 
   try {
     data = JSON.parse(e.data);
-    console.log('e.data :>> ', e.data);
   } catch (error) {
     console.error("Error parsing message data: ", error);
     return;
@@ -97,7 +96,7 @@ ws.onmessage = (e) => {
 };
 
 
-
+//------------------------------------------------------------------------------
 
 
 // domLifeScore(actor);

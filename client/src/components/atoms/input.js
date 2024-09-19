@@ -20,12 +20,13 @@ export default class Input extends VirtualNode {
                 },
             }
         })
+        this.msgType = msgType;
     }
 
     #send(input) {
         if (ws.readyState == 1) {
             ws.send(JSON.stringify({
-                type: msgType,
+                type: this.msgType,
                 name: input,
             }));
         }
