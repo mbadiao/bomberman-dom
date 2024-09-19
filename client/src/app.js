@@ -23,6 +23,8 @@ import {
 } from "./interface/barreScore.js";
 import { timerCountDown } from "./services/timerCountDown.js";
 import actionOnAvatar from "./services/action.js";
+import { canPass } from "./services/allow.js";
+import { displayMsg } from "./services/message.js";
 
 //------------------------------------------------------------------------------
 
@@ -86,6 +88,9 @@ ws.onmessage = (e) => {
     Action: () => {
       actionOnAvatar(data);
     },
+    Msg:()=>{
+      displayMsg(data)
+    }
   };
 
   if (messageHandlers[data.type]) {
@@ -104,12 +109,7 @@ ws.onmessage = (e) => {
 
 // let counter = 0;
 export function keyHandler(e) {
-  if (e.key == "") {
-    // boom.poserBomb(divs, actor.position(), actor);
-    //   domNombreBombe(boom);
-    //   // } else if (e.key == 'Escape') {
-    //   //     pauseGame(actor)
-  } else if (e.key.includes("Arrow") || e.key != " ") {
+  if (canPass(e)) {
     console.log('gameState.get("ownerName") :>> ', gameState.get("ownerName"));
     if (gameState.get("ownerName") != "") {
       ws.send(
@@ -120,6 +120,9 @@ export function keyHandler(e) {
         })
       );
     }
+    
+  } //else{
+    
 
     // if (counter % 5 == 0) {
     // requestAnimationFrame(() => {
@@ -138,9 +141,22 @@ export function keyHandler(e) {
     // On regarde si on doit pas prendre de powerUp
     // }
     // counter++;
-  }
+  //}
 }
+//---------------------------------------------------------
 
+export function sendMsg(msg){
+  if (gameState.get("ownerName") != "") {
+    ws.send(
+      JSON.stringify({
+        type: "Msg",
+        name: gameState.get("ownerName"),
+        content: msg,
+      })
+    );
+  }
+  
+}
 document.addEventListener("keydown", keyHandler);
 
 // document.addEventListener("keyup", (e) => {

@@ -46,6 +46,7 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 			}
 
 		case "Msg":
+			fmt.Println("data", data)
 			{
 				broadcast <- Data{
 					Type:    "Msg",
