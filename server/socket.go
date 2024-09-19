@@ -55,6 +55,7 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 			}
 
 		case "Action":
+			fmt.Println("data.Name", data.Name)
 			{
 				broadcast <- Data{
 					Type:    "Action",

@@ -149,3 +149,6 @@ export class Bomb {
     }
   }
 }
+
+
+export default new Bomb();

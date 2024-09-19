@@ -6,6 +6,7 @@ import { joinRoomHandle } from "./services/join.js";
 // import { pauseGame } from "./interface/menuPause.js";
 import gameState from "./core/state.js";
 import router from "./core/router.js";
+import boom from "./components/atoms/bomb.js";
 import Home from "./components/pages/home.js";
 import Insert from "./components/pages/insert.js";
 import Game from "./components/pages/game.js";
@@ -20,6 +21,7 @@ import {
   domLifeScore,
   domNombreBombe,
 } from "./interface/barreScore.js";
+import { timerCountDown } from "./services/timerCountDown.js";
 
 //------------------------------------------------------------------------------
 
@@ -32,7 +34,7 @@ gameState.set({
   nickname: "",
   playerCount: 0,
   avatars: [],
-  avatar: {},
+  ownerName: "",
   error: "",
 });
 
@@ -63,7 +65,7 @@ ws.onmessage = (e) => {
 
   try {
     data = JSON.parse(e.data);
-    console.log("data :>> ", data); // DEBUG: Check Data...
+    console.log('e.data :>> ', e.data);
   } catch (error) {
     console.error("Error parsing message data: ", error);
     return;
@@ -77,57 +79,27 @@ ws.onmessage = (e) => {
 
     playerJoin: () => {
       joinRoomHandle(data);
-      const avatars = gameState.get("avatars");
-      main.elem.innerHTML = "";
-      avatars.forEach((avatar) =>
-        main.elem.appendChild(new avartarCard(avatar.representation).render())
-      );
-
-      // gameState.set({
-      //   nickname: nickname,
-      //   playerCount: gameState.get("playerCount") + 1,
-      // });
-
-      // if (gameState.get("error") === "") {
-      //   window.location.hash = "/room";
-      // }
     },
 
     startCountDown: () => {
-      let countdown = 9;
-      let chrono = setInterval(() => {
-        timer.elem.querySelector("#formattedTime").innerText =
-          "00:0" + countdown;
-        countdown--;
-      }, 1000);
-      setTimeout(() => {
-        clearInterval(chrono);
-        timer.elem.querySelector("#formattedTime").innerText = "00:00";
-        window.location.hash = "/game";
-      }, 10000);
-    },
+      timerCountDown();
+    }, // timerCountDown(), 
 
     Action: () => {
-      // console.log("Action :>> ", data);
       const players = gameState.get("avatars");
       const actionnedActor = players.find(
         (player) => player.name === data.name
       );
-      if (actionnedActor) {
-        console.log("actionnedActor :>> ", actionnedActor);
-        const avatarElement = document.querySelector(
-          `#avatar${actionnedActor.name}`
-        );
-        if (avatarElement) {
-          console.log("avatar Element: ", avatarElement);
-
-          actionnedActor.move(avatarElement, data.content, true);
-        } else {
-          console.error(`Avatar element for ${actionnedActor.name} not found`);
-        }
-      } else {
-        console.error(`Actor with name ${data.name} not found`);
+      const avatarElement = document.querySelector(
+        `#avatar${actionnedActor.name ?? ""}`
+      );
+      if (data.content == " ") {
+        boom.poserBomb(divs, actionnedActor.position(), actionnedActor);
+        domNombreBombe(boom);
+      } else if ((data.content).includes("Arrow")) {
+        actionnedActor.move(avatarElement, data.content, true);
       }
+
     },
   };
 
@@ -138,26 +110,27 @@ ws.onmessage = (e) => {
   }
 };
 
-const divs = main.elem?.querySelectorAll("div");
 
-// export let boom = new Bomb();
+
+
 
 // domLifeScore(actor);
 // domNombreBombe(boom);
 
 // let counter = 0;
 export function keyHandler(e) {
-  if (e.key == " ") {
+  if (e.key == "") {
     // boom.poserBomb(divs, actor.position(), actor);
     //   domNombreBombe(boom);
     //   // } else if (e.key == 'Escape') {
     //   //     pauseGame(actor)
-  } else if (e.key.includes("Arrow")) {
-    if (gameState.get("avatar") != null) {
+  } else if (e.key.includes("Arrow") || e.key != " ") {
+    console.log('gameState.get("ownerName") :>> ', gameState.get("ownerName"));
+    if (gameState.get("ownerName") != "") {
       ws.send(
         JSON.stringify({
           type: "Action",
-          name: gameState.get("avatar").name,
+          name: gameState.get("ownerName"),
           content: e.key,
         })
       );

@@ -129,7 +129,7 @@ func broadcastPlayerMsg(msg Data) { // REVIEW: Function name could be more conci
 		player.mu.Lock()
 		player.Connection.WriteJSON(Data{ // FIX: Handle Error...
 			Type:        msg.Type,
-			Name:        player.Name,
+			Name:        msg.Name,
 			Content:     msg.Content,
 			PlayerCount: room.PlayerCount,
 		})
