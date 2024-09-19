@@ -1,12 +1,10 @@
-/* Aller sur une logique Orientée Objet
-    Class
-        -propriete
-        -methode
-*/
 import { originGrid } from "../grid.js";
+import gameState from '../../core/state.js';
 // import { updateLifeScore } from "../interface/barreScore.js"
 import { domNombreBombe } from "../../interface/barreScore.js";
 import VirtualNode from "../../core/node.js";
+import { main } from "../orgarnisms/main.js";
+import { ws } from "../../app.js";
 // import { pause } from "../interface/menuPause.js"
 
 export class Avatar {
@@ -18,7 +16,8 @@ export class Avatar {
     this.initY = y;
     this.posX = 0;
     this.posY = 0;
-    this.life = 15;
+    this.life = 3;
+    this.tag = null;
   }
 
   position() {
@@ -27,6 +26,18 @@ export class Avatar {
       (this.initX * 40 + this.posX) / 40 -
       (this.initY * 40 + this.posY) / 40
     );
+  }
+
+  kill() {
+    if (this.life == 0) {
+      this.tag.remove();
+      gameState.set({ playerCount: gameState.get("playerCount") - 1 });
+      gameState.set({ avatars: gameState.get("avatars").filter((avatar) => avatar.name != this.name) });
+      console.log("Game Over !!!");
+      // ws.send(JSON.stringify({ type: "kill", name: this.name }));
+      // Redirection vers la page de game over
+      // window.location.hash = "/gameover";
+    }
   }
 
   addAvatarInGrid(actorID) {
@@ -40,7 +51,9 @@ export class Avatar {
       },
       children: [this.representation],
     })
-    const div = document.querySelector("main > div");
+    const div = main.elem.querySelector("div").appendChild(iconAvatar.render());
+    this.tag = iconAvatar.elem;
+    // const div = document.querySelector("main > div");
     div.appendChild(iconAvatar.render());
   }
 
@@ -170,10 +183,10 @@ export class Avatar {
     
 }) */
 
-function test(counter) {
+/* function test(counter) {
   counter++;
   if (counter % 24 == 0) console.log("bonjour");
   requestAnimationFrame(() => {
     test(counter);
   });
-}
+} */

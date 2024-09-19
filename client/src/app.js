@@ -75,6 +75,8 @@ ws.onmessage = (e) => {
   const messageHandlers = {
     InvalidName: () => {
       gameState.set("error", data.content);
+      // TODO: Transfert to the websocket handler
+      
     },
 
     playerJoin: () => {

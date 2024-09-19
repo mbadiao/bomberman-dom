@@ -18,7 +18,7 @@ if (window.location.href == 'http://127.0.0.1:5500/') {
     soundHome();
 }
 export function playSound(titleSound) {
-    const audio = new Audio('../../assets/soundEffect/' + titleSound);
+    const audio = new Audio('../../../assets/soundEffect/' + titleSound);
     audio.play();
 
 }

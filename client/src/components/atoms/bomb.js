@@ -1,12 +1,12 @@
 import { originGrid } from "../grid.js";
+import gameState from "../../core/state.js";
 import { updateLifeScore, updateScore } from "../../interface/barreScore.js";
 import VirtualNode from "../../core/node.js";
 // import { arrayOfGhost, intervalIDs } from "./avatar.js"
 // import { gameOver, winner } from "../interface/menuPause.js"
-// import { playSound } from "../interface/sound.js";
+import { playSound } from "../../interface/sound.js";
 
 export let detonationID = 0;
-export let argBombe = [];
 let deathCounter = 0;
 
 
@@ -19,33 +19,25 @@ export class Bomb {
   canCall = true;
   poserBomb(divs, position, actor) {
     if (!this.canCall) {
-      // console.log("Trop tot boy");
       return;
     }
 
-    if (this.max > 0) {
-      const iconBomb = new VirtualNode({
-        tag: "p",
-        attrs: {
-          class: "bomb",
-          style: `font-size: 35px;`,
-        },
-        children: ["💣"],
-      })
+    const iconBomb = new VirtualNode({
+      tag: "p",
+      attrs: {
+        class: "bomb",
+        style: `font-size: 30px;`,
+      },
+      children: ["💣"],
+    })
 
-      if (divs[position].innerHTML == "") {
-        divs[position].appendChild(iconBomb.render());
-      }
-      argBombe = [divs, position];
-      detonationID = setTimeout(() => {
-        this.#exploserBomb(divs, position, actor);
-        detonationID = 0;
-        argBombe = [];
-      }, this.delay);
-      this.max--;
-    } else {
-      // gameOver(1, "Vous n'avez plus de bombe !!!")
+    if (divs[position].innerHTML == "") {
+      divs[position].appendChild(iconBomb.render());
     }
+    setTimeout(() => {
+      this.#exploserBomb(divs, position, actor);
+    }, this.delay);
+
     /* Logique Debounce : est une technique utilisée pour limiter la
          fréquence à laquelle une fonction peut être appelée  */
     this.canCall = false;
@@ -59,20 +51,27 @@ export class Bomb {
     nodes[position].removeChild(nodes[position].firstChild);
 
     // On recupere tous les avatars et leur position
-    const allAvatar = nodes[0].querySelectorAll("img");
     let avatarPos = [];
-    for (let i = 0; i < allAvatar.length; i++) {
-      let xyAvatar = allAvatar[i].style.transform.match(/(-?\d+(?:\.\d+)?)/g);
+    gameState.get("avatars").forEach((avatar) => {
+      let xyAvatar = avatar.tag.style.transform.match(/(-?\d+(?:\.\d+)?)/g);
       let xAvat = parseInt(xyAvatar[0]),
         yAvat = parseInt(xyAvatar[1]);
       avatarPos.push(((yAvat + 40) / 40) * 16 + xAvat / 40 - yAvat / 40 - 16);
-    }
+    })
 
     // jouer le son de l'exposion
-    // playSound("sound_bomb.mp3");
+    playSound("sound_bomb.mp3");
 
     // Cassage des murs etc
     this.#boom(nodes[position]);
+
+    // console.log('actor.position() :>> ', actor.position());
+    let actorPos = actor.position();
+    if (actorPos == position + 1 || actorPos == position - 1 || actorPos == position + 15 || actorPos == position - 15 || actorPos == position) {
+      updateLifeScore(actor)
+    } 
+/* 
+
     if (
       nodes[position + 1].className == "c" ||
       nodes[position + 1].className == "m"
@@ -103,12 +102,11 @@ export class Bomb {
       originGrid[Math.floor((position + 15) / 15)][(position + 15) % 15] = "c";
       this.#boom(nodes[position + 15]);
     }
+
     // On diminue la vie du joueur s'il se trouve dans le champ de porté
     let actorPos = avatarPos[0]
-    if (actorPos == position + 1 || actorPos == position - 1 || actorPos == position + 15 || actorPos == position - 15 || actorPos == position) {
-        updateLifeScore(actor)
-    }
-
+    
+*/
     // On kill l'ennemi s'il est dans les parages, à i=0 on a l'acteur
     // console.log('Avatar lenght', avatarPos);
     // for (let i = 1; i < avatarPos.length; i++) {
@@ -127,7 +125,6 @@ export class Bomb {
 
   #boom(node) {
     node.textContent = "💥";
-    if (node.className === "m") updateScore();
     requestAnimationFrame(() => {
       this.#animateExplo(node, 25);
     });

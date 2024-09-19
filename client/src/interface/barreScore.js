@@ -7,17 +7,16 @@
 export let chronoId
 
 export function updateLifeScore(actor) {
-    setTimeout(() => {
-        // gameOver(actor.life, "Vous n'avez plus de vie")
-        actor.life--
-        domLifeScore(actor)
-    }, 100)
+    actor.life--
+    console.log('actor.life :>> ', actor.life);
+    actor.kill()
+    // domLifeScore(actor)
 }
 
 export function updateScore() {
     const divScore = document.querySelector('#score span')
-    let score = parseInt(divScore.textContent) 
-    divScore.textContent = `${score+=10}`
+    let score = parseInt(divScore.textContent)
+    divScore.textContent = `${score += 10}`
 }
 
 export function domLifeScore(actor) {

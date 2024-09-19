@@ -79,17 +79,17 @@ main div img {
 
 }
 
-.bomb {
+/* .bomb {
   animation: countdown .5s alternate infinite;
-}
+} */
 
 @keyframes countdown {
   from {
-    transform: scale(1);
+    transform: scale(0.9);
   }
 
   to {
-    transform: scale(1.5)
+    transform: scale(1)
   }
 }
 
