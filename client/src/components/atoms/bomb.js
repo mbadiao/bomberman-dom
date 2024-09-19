@@ -8,6 +8,8 @@ import VirtualNode from "../../core/node.js";
 export let detonationID = 0;
 export let argBombe = [];
 let deathCounter = 0;
+
+
 export class Bomb {
   constructor() {
     this.max = 100;

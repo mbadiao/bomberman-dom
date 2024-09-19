@@ -22,11 +22,11 @@ import {
   domNombreBombe,
 } from "./interface/barreScore.js";
 import { timerCountDown } from "./services/timerCountDown.js";
+import actionOnAvatar from "./services/action.js";
 
 //------------------------------------------------------------------------------
 
 export const ws = new WebSocket(`ws://localhost:8989/`);
-// export const actors = [];
 
 //------------------------------------------------------------------------------
 
@@ -73,7 +73,6 @@ ws.onmessage = (e) => {
 
   const messageHandlers = {
     InvalidName: () => {
-      0.0;
       gameState.set("error", data.content);
     },
 
@@ -83,23 +82,10 @@ ws.onmessage = (e) => {
 
     startCountDown: () => {
       timerCountDown();
-    }, // timerCountDown(), 
+    },
 
     Action: () => {
-      const players = gameState.get("avatars");
-      const actionnedActor = players.find(
-        (player) => player.name === data.name
-      );
-      const avatarElement = document.querySelector(
-        `#avatar${actionnedActor.name ?? ""}`
-      );
-      if (data.content == " ") {
-        boom.poserBomb(divs, actionnedActor.position(), actionnedActor);
-        domNombreBombe(boom);
-      } else if ((data.content).includes("Arrow")) {
-        actionnedActor.move(avatarElement, data.content, true);
-      }
-
+      actionOnAvatar(data);
     },
   };
 
