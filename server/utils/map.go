@@ -79,15 +79,15 @@ func randomize() rune {
 		return 'm'
 
 		// 10% chance to spawn a power up.
-	// case randInt.Int64()%5 == 0:
-	// 	switch true {
-	// 	case randInt.Int64()%2 == 0:
-	// 		return 'x'
-	// 	case randInt.Int64()%3 == 0:
-	// 		return 'y'
-	// 	default:
-	// 		return 'z'
-	// 	}
+	case randInt.Int64()%5 == 0:
+		switch true {
+		case randInt.Int64()%2 == 0:
+			return 'x'
+		case randInt.Int64()%3 == 0:
+			return 'y'
+		default:
+			return 'z'
+		}
 
 	default:
 		return 'c'

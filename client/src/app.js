@@ -1,4 +1,5 @@
 import { grid } from "./components/grid.js";
+import matrixToAscii from "./utils/convert.js";
 import { Avatar } from "./components/atoms/avatar.js";
 // import { Bomb } from "./atoms/bomb.js";
 import { ajoutPowersUp } from "./components/powerUp.js";
@@ -33,6 +34,8 @@ import EndGame from "./components/pages/EndGame.js";
 
 export const ws = new WebSocket(`ws://localhost:8080/`);
 
+export let originGrid;
+
 //------------------------------------------------------------------------------
 
 gameState.set({
@@ -60,14 +63,13 @@ router.add("/gameover", EndGame);
 
 //------------------------------------------------------------------------------
 
-
 ws.onopen = () => {
   console.log("connected");
 };
 
 ws.onmessage = (e) => {
   let data;
-  
+
   try {
     data = JSON.parse(e.data);
   } catch (error) {
@@ -75,9 +77,10 @@ ws.onmessage = (e) => {
     return;
   }
 
-//------------------------------------------------------------------------------
+  //------------------------------------------------------------------------------
 
   const messageHandlers = {
+    map: () => (originGrid = matrixToAscii(data.map)),
     InvalidName: () => gameState.set("error", data.content),
     playerJoin: () => joinRoomHandle(data),
     startCountDown: () => timerCountDown(),
@@ -112,13 +115,12 @@ export function keyHandler(e) {
         })
       );
     }
-    
-  } 
+  }
 }
 
 //------------------------------------------------------------------------------
 
-export function sendMsg(msg){
+export function sendMsg(msg) {
   if (gameState.get("nickname") != "") {
     ws.send(
       JSON.stringify({
@@ -128,32 +130,30 @@ export function sendMsg(msg){
       })
     );
   }
-  
 }
 
 document.addEventListener("keydown", keyHandler);
 
 //else{
-    
 
-    // if (counter % 5 == 0) {
-    // requestAnimationFrame(() => {
+// if (counter % 5 == 0) {
+// requestAnimationFrame(() => {
 
-    // actors.forEach((actor, i) => {
-    //   actor.move(avatarActor[i], e.key, true);
-    // });
-    // actor.takePowerUpBomb(divs, boom);
-    // });
-    // On regarde tranquille si on a pas plongé sur un ennemi
-    // for (let i = 0; i < arrayOfGhost.length; i++) {
-    //     if (arrayOfGhost[i].position() == actor.position() && arrayOfGhost[i].life != 0) {
-    //         updateLifeScore(actor)
-    //     }
-    // }
-    // On regarde si on doit pas prendre de powerUp
-    // }
-    // counter++;
-  //}
+// actors.forEach((actor, i) => {
+//   actor.move(avatarActor[i], e.key, true);
+// });
+// actor.takePowerUpBomb(divs, boom);
+// });
+// On regarde tranquille si on a pas plongé sur un ennemi
+// for (let i = 0; i < arrayOfGhost.length; i++) {
+//     if (arrayOfGhost[i].position() == actor.position() && arrayOfGhost[i].life != 0) {
+//         updateLifeScore(actor)
+//     }
+// }
+// On regarde si on doit pas prendre de powerUp
+// }
+// counter++;
+//}
 
 // document.addEventListener("keyup", (e) => {
 //   if (e.key.includes("Arrow")) counter = 0;

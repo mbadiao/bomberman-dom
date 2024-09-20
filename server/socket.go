@@ -15,6 +15,12 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Println("New Connection : ", Conn.RemoteAddr())
+
+	err1 := Conn.WriteJSON(Data{Type: "map", Map: MAP})
+	if err1 != nil {
+		fmt.Println("errro sending map")
+		return
+	}
 	defer CloseConn(Conn)
 
 	for {
@@ -46,7 +52,6 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 			}
 
 		case "Msg":
-			fmt.Println("data", data)
 			{
 				broadcast <- Data{
 					Type:    "Msg",
@@ -56,7 +61,6 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 			}
 
 		case "Action":
-			fmt.Println("data.Content", data.Content)
 			{
 				broadcast <- Data{
 					Type:    "Action",

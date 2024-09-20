@@ -1,4 +1,5 @@
-import { originGrid } from "../grid.js";
+// import { originGrid } from "../grid.js";
+import { originGrid } from "../../app.js";
 import gameState from "../../core/state.js";
 import { updateLifeScore, updateScore } from "../../interface/barreScore.js";
 import VirtualNode from "../../core/node.js";
@@ -8,7 +9,6 @@ import { playSound } from "../../interface/sound.js";
 
 export let detonationID = 0;
 let deathCounter = 0;
-
 
 export class Bomb {
   constructor() {
@@ -29,7 +29,7 @@ export class Bomb {
         style: `font-size: 30px;`,
       },
       children: ["💣"],
-    })
+    });
 
     if (divs[position].innerHTML == "") {
       divs[position].appendChild(iconBomb.render());
@@ -57,7 +57,7 @@ export class Bomb {
       let xAvat = parseInt(xyAvatar[0]),
         yAvat = parseInt(xyAvatar[1]);
       avatarPos.push(((yAvat + 40) / 40) * 16 + xAvat / 40 - yAvat / 40 - 16);
-    })
+    });
 
     // jouer le son de l'exposion
     playSound("sound_bomb.mp3");
@@ -67,30 +67,28 @@ export class Bomb {
 
     // console.log('actor.position() :>> ', actor.position());
     let actorPos = actor.position();
-    if (actorPos == position + 1 || actorPos == position - 1 || actorPos == position + 15 || actorPos == position - 15 || actorPos == position) {
-      updateLifeScore(actor)
-    }
     if (
-      ['c', 'm', 'x', 'y', 'z'].includes(nodes[position + 1].className)
+      actorPos == position + 1 ||
+      actorPos == position - 1 ||
+      actorPos == position + 15 ||
+      actorPos == position - 15 ||
+      actorPos == position
     ) {
+      updateLifeScore(actor);
+    }
+    if (["c", "m", "x", "y", "z"].includes(nodes[position + 1].className)) {
       // this.#boom(nodes[position + 1]);
       originGrid[Math.floor((position + 1) / 15)][(position + 1) % 15] = "c";
     }
-    if (
-      ['c', 'm', 'x', 'y', 'z'].includes(nodes[position - 1].className)
-    ) {
+    if (["c", "m", "x", "y", "z"].includes(nodes[position - 1].className)) {
       // this.#boom(nodes[position - 1]);
       originGrid[Math.floor((position - 1) / 15)][(position - 1) % 15] = "c";
     }
-    if (
-      ['c', 'm', 'x', 'y', 'z'].includes(nodes[position - 15].className)
-    ) {
+    if (["c", "m", "x", "y", "z"].includes(nodes[position - 15].className)) {
       originGrid[Math.floor((position - 15) / 15)][(position - 15) % 15] = "c";
       // this.#boom(nodes[position - 15]);
     }
-    if (
-      ['c', 'm', 'x', 'y', 'z'].includes(nodes[position + 15].className)  
-    ) {
+    if (["c", "m", "x", "y", "z"].includes(nodes[position + 15].className)) {
       originGrid[Math.floor((position + 15) / 15)][(position + 15) % 15] = "c";
       // this.#boom(nodes[position + 15]);
     }
@@ -128,7 +126,7 @@ export class Bomb {
         this.#animateExplo(node, taille);
       });
     } else {
-      console.log('node.className :>> ', node.className);
+      console.log("node.className :>> ", node.className);
       node.style.fontSize = "35px";
       if (node.className == "x") {
         node.textContent = "🔥";
@@ -143,6 +141,5 @@ export class Bomb {
     }
   }
 }
-
 
 export default new Bomb();

@@ -1,5 +1,6 @@
-import { originGrid } from "../grid.js";
-import gameState from '../../core/state.js';
+// import { originGrid } from "../grid.js";
+import { originGrid } from "../../app.js";
+import gameState from "../../core/state.js";
 // import { updateLifeScore } from "../interface/barreScore.js"
 import { domNombreBombe } from "../../interface/barreScore.js";
 import VirtualNode from "../../core/node.js";
@@ -48,10 +49,12 @@ export class Avatar {
       attrs: {
         id: `avatar${actorID}`,
         class: "avatarGame",
-        style: `transform: translate(${this.initX * this.#blocSize}px, ${this.initY * this.#blocSize}px)`,
+        style: `transform: translate(${this.initX * this.#blocSize}px, ${
+          this.initY * this.#blocSize
+        }px)`,
       },
       children: [this.representation],
-    })
+    });
     const div = main.elem.querySelector("div").appendChild(iconAvatar.render());
     this.tag = iconAvatar.elem;
     // const div = document.querySelector("main > div");
@@ -60,57 +63,40 @@ export class Avatar {
 
   // canCall = true;
   move(avatar, key, bon = false) {
-    let x0 = this.initX * this.#blocSize,
-      y0 = this.initY * this.#blocSize;
+    let x0 = this.initX * this.#blocSize;
+    let y0 = this.initY * this.#blocSize;
+    let dx = 0,
+      dy = 0;
+
     switch (key) {
       case "ArrowUp":
-        // console.log("y: ", (y0+this.posY-this.#blocSize)/this.#blocSize, " x: ", (x0 + this.posX)/this.#blocSize)
-        if (
-          ['c'].includes(originGrid[(y0 + this.posY - this.#blocSize) / this.#blocSize][
-            (x0 + this.posX) / this.#blocSize
-          ])
-        ) {
-          avatar.style.transform = `translate(${x0 + this.posX}px, ${y0 + this.posY - this.#blocSize
-            }px)`;
-          this.posY -= this.#blocSize;
-        }
+        dy = -this.#blocSize;
         break;
       case "ArrowDown":
-        // console.log("y: ", (y0+this.posY)/this.#blocSize, " x: ", (x0 + this.posX)/this.#blocSize)
-        if (
-          ['c'].includes(originGrid[(y0 + this.posY + this.#blocSize) / this.#blocSize][
-            (x0 + this.posX) / this.#blocSize
-          ])
-        ) {
-          avatar.style.transform = `translate(${x0 + this.posX}px, ${y0 + this.posY + this.#blocSize
-            }px)`;
-          this.posY += this.#blocSize;
-        }
+        dy = this.#blocSize;
         break;
       case "ArrowRight":
-        // console.log("y: ", (y0+this.posY)/this.#blocSize, " x: ", (x0 + this.posX+this.#blocSize)/this.#blocSize)
-        if (
-          ['c'].includes(originGrid[(y0 + this.posY) / this.#blocSize][
-            (x0 + this.posX + this.#blocSize) / this.#blocSize
-          ])
-        ) {
-          avatar.style.transform = `translate(${x0 + this.posX + this.#blocSize
-            }px, ${y0 + this.posY}px)`;
-          this.posX += this.#blocSize;
-        }
+        dx = this.#blocSize;
         break;
       case "ArrowLeft":
-        // console.log("y: ", (y0+this.posY)/this.#blocSize, " x: ", (x0 + this.posX-this.#blocSize)/this.#blocSize)
-        if (
-          ['c'].includes(originGrid[(y0 + this.posY) / this.#blocSize][
-            (x0 + this.posX - this.#blocSize) / this.#blocSize
-          ])
-        ) {
-          avatar.style.transform = `translate(${x0 + this.posX - this.#blocSize
-            }px, ${y0 + this.posY}px)`;
-          this.posX -= this.#blocSize;
-        }
+        dx = -this.#blocSize;
         break;
+      default:
+        return;
+    }
+
+    const nextPos = (dx, dy) => ({
+      x: (x0 + this.posX + dx) / this.#blocSize,
+      y: (y0 + this.posY + dy) / this.#blocSize,
+    });
+
+    const { x, y } = nextPos(dx, dy);
+    if (originGrid[y][x] === "c") {
+      avatar.style.transform = `translate(${x0 + this.posX + dx}px, ${
+        y0 + this.posY + dy
+      }px)`;
+      this.posX += dx;
+      this.posY += dy;
     }
   }
 

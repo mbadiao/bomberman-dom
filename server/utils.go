@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bomberman-dom/server/utils"
 	"fmt"
 	"log"
 	"time"
@@ -55,40 +54,6 @@ func takePlayersNames(players map[string]*Player) string { // REVIEW: Function n
 	return names
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// 	room.playersMutex.Lock()
-// 	defer room.playersMutex.Unlock()
-// 	if room.GameStarted {
-// 		player := room.Players[name]
-// 		player.mu.Lock()
-// 		Conn.WriteJSON(Data{Type: "gameStarted", Content: "the game has already started please retry later"})
-// 		player.mu.Unlock()
-// 		CloseConn(Conn)
-// 		return
-// 	}
-// 	if _, found := room.Players[name]; !found {
-// 		player := &Player{
-// 			Name:       name,
-// 			Connection: Conn,
-// 			Lives:      3,
-// 		}
-// 		room.Players[name] = player
-// 		room.PlayerCount++
-// 		fmt.Println("icic", room.PlayerCount)
-// 		fmt.Println("player", player)
-// 		fmt.Println("room ", room)
-// 		broadcast <- Data{
-// 			Type:        "playerJoin",
-// 			Content:     name + " joined the game ",
-// 			PlayerCount: room.PlayerCount,
-// 		}
-// 	} else {
-// 		Conn.WriteJSON(Data{Type: "InvalidName", Content: "This pseudo is already used, please choose another one"})
-// 		CloseConn(Conn)
-// 		return
-// 	}
-// }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -117,7 +82,6 @@ func startCountdown() {
 	room.GameStarted = true
 	broadcast <- Data{
 		Type: "startCountDown",
-		Map:  utils.Matrix(),
 	}
 }
 
@@ -126,25 +90,16 @@ func startCountdown() {
 func broadcastPlayerMsg(msg Data) { // REVIEW: Function name could be more concise... // TODO: broadcastMsg() {}
 	for name, player := range room.Players {
 		fmt.Println("name", name) // DEBUG: Check Player Name...
-		if msg.Type == "GameOver" && msg.Name == player.Name {
-			send(msg, player)
-		}
-		if (msg.Type != "GameOver"){
-			send(msg, player)
-		}
-	}
-}
 
-func send(msg Data, player *Player) {
-	player.mu.Lock()
-	player.Connection.WriteJSON(Data{ // FIX: Handle Error...
-		Type:        msg.Type,
-		Name:        msg.Name,
-		Content:     msg.Content,
-		PlayerCount: room.PlayerCount,
-		Map:         msg.Map,
-	})
-	player.mu.Unlock()
+		player.mu.Lock()
+		player.Connection.WriteJSON(Data{ // FIX: Handle Error...
+			Type:        msg.Type,
+			Name:        msg.Name,
+			Content:     msg.Content,
+			PlayerCount: room.PlayerCount,
+		})
+		player.mu.Unlock()
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
