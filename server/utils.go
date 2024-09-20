@@ -19,27 +19,27 @@ func handleJoin(Conn *websocket.Conn, name string) {
 
 	// Check if the player's name has already been taken
 	// before allowing him to play.
-	if _, found := room.Players[name]; !found {
-		player := &Player{
-			Name:       name,
-			Connection: Conn,
-			Lives:      3,
-		}
-
-		room.Players[name] = player
-		room.PlayerCount++
-
-		broadcast <- Data{
-			Type:        "playerJoin",
-			Content:     takePlayersNames(room.Players),
-			PlayerCount: room.PlayerCount,
-		}
-
-		startWaitingTime()
-	} else {
+	if _, found := room.Players[name]; found {
 		Conn.WriteJSON(Data{Type: "InvalidName", Content: "This pseudo is already used, please choose another one"}) // FIX: Handle Error...
 		return
 	}
+
+	player := &Player{
+		Name:       name,
+		Connection: Conn,
+		Lives:      3,
+	}
+
+	room.Players[name] = player
+	room.PlayerCount++
+
+	broadcast <- Data{
+		Type:        "playerJoin",
+		Content:     takePlayersNames(room.Players),
+		PlayerCount: room.PlayerCount,
+	}
+
+	startWaitingTime()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

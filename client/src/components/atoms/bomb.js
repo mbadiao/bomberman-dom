@@ -70,20 +70,19 @@ export class Bomb {
     if (actorPos == position + 1 || actorPos == position - 1 || actorPos == position + 15 || actorPos == position - 15 || actorPos == position) {
       updateLifeScore(actor)
     } 
-/* 
 
     if (
       nodes[position + 1].className == "c" ||
       nodes[position + 1].className == "m"
     ) {
-      this.#boom(nodes[position + 1]);
+      // this.#boom(nodes[position + 1]);
       originGrid[Math.floor((position + 1) / 15)][(position + 1) % 15] = "c";
     }
     if (
       nodes[position - 1].className == "c" ||
       nodes[position - 1].className == "m"
     ) {
-      this.#boom(nodes[position - 1]);
+      // this.#boom(nodes[position - 1]);
       originGrid[Math.floor((position - 1) / 15)][(position - 1) % 15] = "c";
     }
     if (
@@ -92,7 +91,7 @@ export class Bomb {
     ) {
       // console.log(Math.floor((position - 15) / 15), (position - 15) % 15, originGrid[Math.floor((position - 15) / 15)][(position - 15) % 15]);
       originGrid[Math.floor((position - 15) / 15)][(position - 15) % 15] = "c";
-      this.#boom(nodes[position - 15]);
+      // this.#boom(nodes[position - 15]);
     }
     if (
       nodes[position + 15].className == "c" ||
@@ -100,8 +99,9 @@ export class Bomb {
     ) {
       // console.log(Math.floor((position + 15) / 15), (position + 15) % 15, originGrid[Math.floor((position + 15) / 15)][(position + 15) % 15]);
       originGrid[Math.floor((position + 15) / 15)][(position + 15) % 15] = "c";
-      this.#boom(nodes[position + 15]);
+      // this.#boom(nodes[position + 15]);
     }
+/* 
 
     // On diminue la vie du joueur s'il se trouve dans le champ de porté
     let actorPos = avatarPos[0]

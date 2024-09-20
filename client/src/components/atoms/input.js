@@ -30,17 +30,5 @@ export default class Input extends VirtualNode {
                 name: input,
             }));
         }
-        
-        // TODO: Transfert to the websocket handler
-        gameState.set({
-            nickname: input,
-            playerCount: gameState.get('playerCount') + 1,
-            // error: 'Error'
-        })
-        
-        // TODO: Transfert to the websocket handler
-        if (gameState.get('error') === '') {
-            window.location.hash = "/room";
-        }
     }
 }

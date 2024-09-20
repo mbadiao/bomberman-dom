@@ -36,7 +36,6 @@ gameState.set({
   nickname: "",
   playerCount: 0,
   avatars: [],
-  ownerName: "",
   error: "",
 });
 
@@ -45,11 +44,8 @@ gameState.subscribe(alert.display.bind(alert));
 //------------------------------------------------------------------------------
 
 router.add("/", Home);
-
 router.add("/insert", Insert);
-
 router.add("/room", Room);
-
 router.add("/game", Game);
 
 //------------------------------------------------------------------------------
@@ -64,7 +60,7 @@ ws.onopen = () => {
 
 ws.onmessage = (e) => {
   let data;
-
+  
   try {
     data = JSON.parse(e.data);
   } catch (error) {
@@ -72,27 +68,14 @@ ws.onmessage = (e) => {
     return;
   }
 
+//------------------------------------------------------------------------------
+
   const messageHandlers = {
-    InvalidName: () => {
-      gameState.set("error", data.content);
-      // TODO: Transfert to the websocket handler
-      
-    },
-
-    playerJoin: () => {
-      joinRoomHandle(data);
-    },
-
-    startCountDown: () => {
-      timerCountDown();
-    },
-
-    Action: () => {
-      actionOnAvatar(data);
-    },
-    Msg:()=>{
-      displayMsg(data)
-    }
+    InvalidName: () => gameState.set("error", data.content),
+    playerJoin: () => joinRoomHandle(data),
+    startCountDown: () => timerCountDown(),
+    Action: () => actionOnAvatar(data),
+    Msg: () => displayMsg(data)
   };
 
   if (messageHandlers[data.type]) {
@@ -102,9 +85,7 @@ ws.onmessage = (e) => {
   }
 };
 
-
 //------------------------------------------------------------------------------
-
 
 // domLifeScore(actor);
 // domNombreBombe(boom);
@@ -112,18 +93,38 @@ ws.onmessage = (e) => {
 // let counter = 0;
 export function keyHandler(e) {
   if (canPass(e)) {
-    console.log('gameState.get("ownerName") :>> ', gameState.get("ownerName"));
-    if (gameState.get("ownerName") != "") {
+    console.log('gameState.get("nickname") :>> ', gameState.get("nickname"));
+    if (gameState.get("nickname") != "") {
       ws.send(
         JSON.stringify({
           type: "Action",
-          name: gameState.get("ownerName"),
+          name: gameState.get("nickname"),
           content: e.key,
         })
       );
     }
     
-  } //else{
+  } 
+}
+
+//------------------------------------------------------------------------------
+
+export function sendMsg(msg){
+  if (gameState.get("nickname") != "") {
+    ws.send(
+      JSON.stringify({
+        type: "Msg",
+        name: gameState.get("nickname"),
+        content: msg,
+      })
+    );
+  }
+  
+}
+
+document.addEventListener("keydown", keyHandler);
+
+//else{
     
 
     // if (counter % 5 == 0) {
@@ -144,22 +145,6 @@ export function keyHandler(e) {
     // }
     // counter++;
   //}
-}
-//---------------------------------------------------------
-
-export function sendMsg(msg){
-  if (gameState.get("ownerName") != "") {
-    ws.send(
-      JSON.stringify({
-        type: "Msg",
-        name: gameState.get("ownerName"),
-        content: msg,
-      })
-    );
-  }
-  
-}
-document.addEventListener("keydown", keyHandler);
 
 // document.addEventListener("keyup", (e) => {
 //   if (e.key.includes("Arrow")) counter = 0;

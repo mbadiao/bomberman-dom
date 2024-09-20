@@ -7,10 +7,6 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-type Map struct {
-	matrix [][]rune
-}
-
 type Data struct {
 	Type        string `json:"type"`
 	Name        string `json:"name"`

@@ -28,8 +28,9 @@ body {
 
 main {
   width: 45%;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(15, 1fr);
+  grid-template-rows: repeat(13, 1fr);
   width: calc(var(--bloc-size)*15);
   height: calc(var(--bloc-size)*13);
   margin: auto;

@@ -39,6 +39,6 @@ func main() {
 		}
 	}()
 
-	utils.OpenLink("http://localhost:8080")
+	utils.OpenLink("http://localhost:5500")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
