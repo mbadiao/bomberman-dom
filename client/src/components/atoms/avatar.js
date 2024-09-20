@@ -33,8 +33,9 @@ export class Avatar {
       this.tag.remove();
       gameState.set({ playerCount: gameState.get("playerCount") - 1 });
       gameState.set({ avatars: gameState.get("avatars").filter((avatar) => avatar.name != this.name) });
-      console.log("Game Over !!!");
-      // ws.send(JSON.stringify({ type: "kill", name: this.name }));
+      // this.window.location.hash = '/gameover'
+     
+       ws.send(JSON.stringify({ type: "GameOver", name: this.name , content: "kill"}));
       // Redirection vers la page de game over
       // window.location.hash = "/gameover";
     }

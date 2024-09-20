@@ -26,6 +26,8 @@ import actionOnAvatar from "./services/action.js";
 import { canPass } from "./services/allow.js";
 import { displayMsg } from "./services/message.js";
 import { soundHome } from "./interface/sound.js";
+import GameOver from "./components/pages/gameOver.js";
+import EndGame from "./components/pages/EndGame.js";
 
 //------------------------------------------------------------------------------
 
@@ -48,6 +50,8 @@ router.add("/", Home);
 router.add("/insert", Insert);
 router.add("/room", Room);
 router.add("/game", Game);
+router.add("/gameover", EndGame);
+
 
 //------------------------------------------------------------------------------
 
@@ -78,7 +82,8 @@ ws.onmessage = (e) => {
     playerJoin: () => joinRoomHandle(data),
     startCountDown: () => timerCountDown(),
     Action: () => actionOnAvatar(data),
-    Msg: () => displayMsg(data)
+    Msg: () => displayMsg(data),
+    GameOver:() => GameOver(),
   };
 
   if (messageHandlers[data.type]) {

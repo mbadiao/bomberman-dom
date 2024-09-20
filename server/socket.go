@@ -64,7 +64,15 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 					Content: data.Content,
 				}
 			}
-
+		case "GameOver":
+			fmt.Println("data", data)
+			{
+				broadcast <- Data{
+					Type:    "GameOver",
+					Name:    data.Name,
+					Content: data.Content,
+				}
+			}
 		default:
 			Conn.WriteJSON(Data{Type: "error", Content: "Invalid Data format"})
 		}
