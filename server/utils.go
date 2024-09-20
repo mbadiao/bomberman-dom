@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bomberman-dom/server/utils"
 	"fmt"
 	"log"
 	"time"
@@ -116,9 +117,9 @@ func startCountdown() {
 	room.GameStarted = true
 	broadcast <- Data{
 		Type: "startCountDown",
+		Map:  utils.Matrix(),
 	}
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -132,6 +133,7 @@ func broadcastPlayerMsg(msg Data) { // REVIEW: Function name could be more conci
 			Name:        msg.Name,
 			Content:     msg.Content,
 			PlayerCount: room.PlayerCount,
+			Map:         msg.Map,
 		})
 		player.mu.Unlock()
 	}

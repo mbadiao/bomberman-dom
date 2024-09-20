@@ -8,10 +8,11 @@ import (
 )
 
 type Data struct {
-	Type        string `json:"type"`
-	Name        string `json:"name"`
-	Content     string `json:"content"` // REVIEW: Could be an interface...
-	PlayerCount int    `json:"playerCount"`
+	Type        string   `json:"type"`
+	Name        string   `json:"name"`
+	Content     string   `json:"content"` // REVIEW: Could be an interface...
+	PlayerCount int      `json:"playerCount"`
+	Map         [][]rune `json:"map"`
 }
 
 type Player struct {
