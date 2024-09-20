@@ -65,64 +65,56 @@ export class Avatar {
       case "ArrowUp":
         // console.log("y: ", (y0+this.posY-this.#blocSize)/this.#blocSize, " x: ", (x0 + this.posX)/this.#blocSize)
         if (
-          originGrid[(y0 + this.posY - this.#blocSize) / this.#blocSize][
-          (x0 + this.posX) / this.#blocSize
-          ] === "c"
+          ['c'].includes(originGrid[(y0 + this.posY - this.#blocSize) / this.#blocSize][
+            (x0 + this.posX) / this.#blocSize
+          ])
         ) {
-          requestAnimationFrame(() => {
-            avatar.style.transform = `translate(${x0 + this.posX}px, ${y0 + this.posY - this.#blocSize
-              }px)`;
-            this.posY -= this.#blocSize;
-          });
+          avatar.style.transform = `translate(${x0 + this.posX}px, ${y0 + this.posY - this.#blocSize
+            }px)`;
+          this.posY -= this.#blocSize;
         }
         break;
       case "ArrowDown":
         // console.log("y: ", (y0+this.posY)/this.#blocSize, " x: ", (x0 + this.posX)/this.#blocSize)
         if (
-          originGrid[(y0 + this.posY + this.#blocSize) / this.#blocSize][
-          (x0 + this.posX) / this.#blocSize
-          ] === "c"
+          ['c'].includes(originGrid[(y0 + this.posY + this.#blocSize) / this.#blocSize][
+            (x0 + this.posX) / this.#blocSize
+          ])
         ) {
-          requestAnimationFrame(() => {
-            avatar.style.transform = `translate(${x0 + this.posX}px, ${y0 + this.posY + this.#blocSize
-              }px)`;
-            this.posY += this.#blocSize;
-          });
+          avatar.style.transform = `translate(${x0 + this.posX}px, ${y0 + this.posY + this.#blocSize
+            }px)`;
+          this.posY += this.#blocSize;
         }
         break;
       case "ArrowRight":
         // console.log("y: ", (y0+this.posY)/this.#blocSize, " x: ", (x0 + this.posX+this.#blocSize)/this.#blocSize)
         if (
-          originGrid[(y0 + this.posY) / this.#blocSize][
-          (x0 + this.posX + this.#blocSize) / this.#blocSize
-          ] === "c"
+          ['c'].includes(originGrid[(y0 + this.posY) / this.#blocSize][
+            (x0 + this.posX + this.#blocSize) / this.#blocSize
+          ])
         ) {
-          requestAnimationFrame(() => {
-            avatar.style.transform = `translate(${x0 + this.posX + this.#blocSize
-              }px, ${y0 + this.posY}px)`;
-            this.posX += this.#blocSize;
-          });
+          avatar.style.transform = `translate(${x0 + this.posX + this.#blocSize
+            }px, ${y0 + this.posY}px)`;
+          this.posX += this.#blocSize;
         }
         break;
       case "ArrowLeft":
         // console.log("y: ", (y0+this.posY)/this.#blocSize, " x: ", (x0 + this.posX-this.#blocSize)/this.#blocSize)
         if (
-          originGrid[(y0 + this.posY) / this.#blocSize][
-          (x0 + this.posX - this.#blocSize) / this.#blocSize
-          ] === "c"
+          ['c'].includes(originGrid[(y0 + this.posY) / this.#blocSize][
+            (x0 + this.posX - this.#blocSize) / this.#blocSize
+          ])
         ) {
-          requestAnimationFrame(() => {
-            avatar.style.transform = `translate(${x0 + this.posX - this.#blocSize
-              }px, ${y0 + this.posY}px)`;
-            this.posX -= this.#blocSize;
-          });
+          avatar.style.transform = `translate(${x0 + this.posX - this.#blocSize
+            }px, ${y0 + this.posY}px)`;
+          this.posX -= this.#blocSize;
         }
         break;
     }
   }
 
   takePowerUpBomb(divs, bomb) {
-    if (divs[this.position()].dataset.powerUp == "bombe") {
+    if (divs[this.position()].className == "x") {
       bomb.max += 5;
       divs[this.position()].dataset.powerUp = "";
       divs[this.position()].textContent = "";

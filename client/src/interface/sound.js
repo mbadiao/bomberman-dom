@@ -7,15 +7,9 @@ function showHelp() {
 }
 
 
-function soundHome() {
-    const playButton = document.querySelector('#playButton');
-    const button1 = document.querySelector('.button1');
+export function soundHome() {
+    playSound("title-screen.mp3");
 
-    playButton.addEventListener('click', launch);
-    button1.addEventListener('click', showHelp);
-}
-if (window.location.href == 'http://127.0.0.1:5500/') {
-    soundHome();
 }
 export function playSound(titleSound) {
     const audio = new Audio('../../../assets/soundEffect/' + titleSound);

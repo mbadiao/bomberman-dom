@@ -69,44 +69,36 @@ export class Bomb {
     let actorPos = actor.position();
     if (actorPos == position + 1 || actorPos == position - 1 || actorPos == position + 15 || actorPos == position - 15 || actorPos == position) {
       updateLifeScore(actor)
-    } 
-
+    }
     if (
-      nodes[position + 1].className == "c" ||
-      nodes[position + 1].className == "m"
+      ['c', 'm', 'x', 'y', 'z'].includes(nodes[position + 1].className)
     ) {
       // this.#boom(nodes[position + 1]);
       originGrid[Math.floor((position + 1) / 15)][(position + 1) % 15] = "c";
     }
     if (
-      nodes[position - 1].className == "c" ||
-      nodes[position - 1].className == "m"
+      ['c', 'm', 'x', 'y', 'z'].includes(nodes[position - 1].className)
     ) {
       // this.#boom(nodes[position - 1]);
       originGrid[Math.floor((position - 1) / 15)][(position - 1) % 15] = "c";
     }
     if (
-      nodes[position - 15].className == "c" ||
-      nodes[position - 15].className == "m"
+      ['c', 'm', 'x', 'y', 'z'].includes(nodes[position - 15].className)
     ) {
-      // console.log(Math.floor((position - 15) / 15), (position - 15) % 15, originGrid[Math.floor((position - 15) / 15)][(position - 15) % 15]);
       originGrid[Math.floor((position - 15) / 15)][(position - 15) % 15] = "c";
       // this.#boom(nodes[position - 15]);
     }
     if (
-      nodes[position + 15].className == "c" ||
-      nodes[position + 15].className == "m"
+      ['c', 'm', 'x', 'y', 'z'].includes(nodes[position + 15].className)  
     ) {
-      // console.log(Math.floor((position + 15) / 15), (position + 15) % 15, originGrid[Math.floor((position + 15) / 15)][(position + 15) % 15]);
       originGrid[Math.floor((position + 15) / 15)][(position + 15) % 15] = "c";
       // this.#boom(nodes[position + 15]);
     }
-/* 
-
-    // On diminue la vie du joueur s'il se trouve dans le champ de porté
-    let actorPos = avatarPos[0]
-    
-*/
+    /*
+        // On diminue la vie du joueur s'il se trouve dans le champ de porté
+        let actorPos = avatarPos[0]
+        
+    */
     // On kill l'ennemi s'il est dans les parages, à i=0 on a l'acteur
     // console.log('Avatar lenght', avatarPos);
     // for (let i = 1; i < avatarPos.length; i++) {
@@ -125,9 +117,7 @@ export class Bomb {
 
   #boom(node) {
     node.textContent = "💥";
-    requestAnimationFrame(() => {
-      this.#animateExplo(node, 25);
-    });
+    this.#animateExplo(node, 25);
   }
 
   #animateExplo(node, taille) {
@@ -138,13 +128,18 @@ export class Bomb {
         this.#animateExplo(node, taille);
       });
     } else {
-      node.className = "c";
+      console.log('node.className :>> ', node.className);
       node.style.fontSize = "35px";
-      if (node.dataset.powerUp == "bombe") {
+      if (node.className == "x") {
+        node.textContent = "🔥";
+      } else if (node.className == "y") {
         node.textContent = "💣";
+      } else if (node.className == "z") {
+        node.textContent = "🚀";
       } else {
         node.textContent = "";
       }
+      node.className = "c";
     }
   }
 }

@@ -1,16 +1,17 @@
 import VirtualNode from "../core/node.js";
 import { main } from "./orgarnisms/main.js";
+import { ajoutPowersUp } from "./powerUp.js";
 
 export let originGrid = [
   ["b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b"],
-  ["b", "c", "c", "c", "c", "m", "m", "c", "m", "c", "c", "c", "c", "c", "b"],
+  ["b", "c", "c", "c", "c", "x", "m", "c", "m", "c", "c", "c", "c", "c", "b"],
   ["b", "c", "b", "c", "b", "m", "b", "m", "b", "c", "b", "c", "b", "c", "b"],
   ["b", "c", "c", "c", "m", "c", "m", "m", "m", "m", "c", "c", "c", "c", "b"],
   ["b", "m", "b", "m", "b", "m", "b", "c", "b", "c", "b", "c", "b", "c", "b"],
-  ["b", "c", "m", "m", "m", "c", "m", "m", "m", "m", "m", "c", "c", "c", "b"],
+  ["b", "c", "m", "m", "m", "c", "m", "y", "m", "m", "m", "c", "c", "c", "b"],
   ["b", "m", "b", "m", "b", "m", "b", "m", "b", "c", "b", "c", "b", "c", "b"],
-  ["b", "c", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "m", "c", "b"],
-  ["b", "m", "b", "c", "b", "m", "b", "m", "b", "m", "b", "c", "b", "c", "b"],
+  ["b", "c", "m", "z", "m", "m", "m", "m", "m", "m", "m", "m", "m", "c", "b"],
+  ["b", "m", "b", "c", "b", "m", "b", "m", "b", "x", "b", "c", "b", "c", "b"],
   ["b", "m", "m", "m", "m", "m", "m", "m", "c", "c", "c", "c", "c", "c", "b"],
   ["b", "m", "b", "m", "b", "m", "b", "c", "b", "c", "b", "c", "b", "c", "b"],
   ["b", "c", "c", "c", "m", "c", "m", "m", "c", "c", "c", "c", "c", "c", "b"],
@@ -18,6 +19,7 @@ export let originGrid = [
 ];
 
 export let divs = [];
+export let murs = [];
 
 export function grid() {
   /* 
@@ -38,7 +40,9 @@ export function grid() {
         },
       });
       main.elem.appendChild(div.render());
+      if (originGrid[i][j] === "m") murs.push(div.elem);
       divs.push(div.elem);
     }
   }
+  // ajoutPowersUp();
 }

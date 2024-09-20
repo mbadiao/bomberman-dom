@@ -14,6 +14,7 @@ const actionOnAvatar = (data) => {
         boom.poserBomb(divs, actionnedActor.position(), actionnedActor);
     } else if ((data.content).includes("Arrow")) {
         actionnedActor.move(avatarElement, data.content, true);
+        actionnedActor.takePowerUpBomb(divs, boom);
     }
 }
 

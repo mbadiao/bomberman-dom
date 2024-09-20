@@ -66,7 +66,7 @@ main>div img {
   background-size: cover;
 }
 
-.m {
+.m , .x, .y, .z {
   background: url('./assets/map/mur.png');
   background-size: cover;
 }

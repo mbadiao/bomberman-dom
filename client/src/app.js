@@ -25,6 +25,7 @@ import { timerCountDown } from "./services/timerCountDown.js";
 import actionOnAvatar from "./services/action.js";
 import { canPass } from "./services/allow.js";
 import { displayMsg } from "./services/message.js";
+import { soundHome } from "./interface/sound.js";
 
 //------------------------------------------------------------------------------
 
@@ -52,7 +53,9 @@ router.add("/game", Game);
 
 // chronometre();
 // ajoutPowersUp();
-let myName;
+
+//------------------------------------------------------------------------------
+
 
 ws.onopen = () => {
   console.log("connected");
@@ -87,6 +90,7 @@ ws.onmessage = (e) => {
 
 //------------------------------------------------------------------------------
 
+soundHome();
 // domLifeScore(actor);
 // domNombreBombe(boom);
 
