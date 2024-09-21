@@ -90,16 +90,26 @@ func startCountdown() {
 func broadcastPlayerMsg(msg Data) { // REVIEW: Function name could be more concise... // TODO: broadcastMsg() {}
 	for name, player := range room.Players {
 		fmt.Println("name", name) // DEBUG: Check Player Name...
-
-		player.mu.Lock()
-		player.Connection.WriteJSON(Data{ // FIX: Handle Error...
-			Type:        msg.Type,
-			Name:        msg.Name,
-			Content:     msg.Content,
-			PlayerCount: room.PlayerCount,
-		})
-		player.mu.Unlock()
+		if msg.Type == "GameOver" && msg.Name == player.Name {
+			send(msg, player)
+			
+		}
+		if (msg.Type != "GameOver"){
+			send(msg, player)
+		}
 	}
+}
+
+func send(msg Data, player *Player) {
+	player.mu.Lock()
+	player.Connection.WriteJSON(Data{ // FIX: Handle Error...
+		Type:        msg.Type,
+		Name:        msg.Name,
+		Content:     msg.Content,
+		PlayerCount: room.PlayerCount,
+		Map:         msg.Map,
+	})
+	player.mu.Unlock()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
