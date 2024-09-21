@@ -341,18 +341,18 @@ classDiagram
 
 ### Contributors
 
-[![fakeita](https://img.shields.io/badge/Zone01-fakeita-yellow)](http://learn.zone01dakar.sn/git/fakeita)
+[![fakeita](https://img.shields.io/badge/Zone01-fakeita-magenta)](http://learn.zone01dakar.sn/git/fakeita)
 [![aliouniang](https://img.shields.io/badge/Zone01-aliouniang-yellow)](http://learn.zone01dakar.sn/git/aliouniang)
 [![mamadbah](https://img.shields.io/badge/Zone01-mamadbah-yellow)](http://learn.zone01dakar.sn/git/mamadbah)
 [![jefaye](https://img.shields.io/badge/Zone01-jefaye-yellow)](http://learn.zone01dakar.sn/git/jefaye)
 
 ### Peers
 
-[![](https://img.shields.io/badge/Zone01-green)](http://learn.zone01dakar.sn/git/)
+[![lodiouf](https://img.shields.io/badge/Zone01-lodiouf-blue)](http://learn.zone01dakar.sn/git/lodiouf)
 
 ### Testers
 
-[![](https://img.shields.io/badge/Zone01-green)](http://learn.zone01dakar.sn/git/)
+[![mandaw](https://img.shields.io/badge/Zone01-mandaw-red)](http://learn.zone01dakar.sn/git/mandaw)
 
 ### Auditors
 
@@ -369,3 +369,5 @@ classDiagram
 ###### [_Table of Contents ⤴️_](#table-of-contents)
 
 ## License
+
+[![MIT](https://img.shields.io/badge/License-MIT-yellow)](./LICENSE)
