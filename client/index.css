@@ -545,8 +545,8 @@ body {
 
 .timer {
   width: 25%;
-  /* display: flex; */
-  /* align-items: center; */
+  display: flex;
+  align-items: center;
   background-color: #081a2d;
   padding: 2%;
   display: flex;
@@ -563,6 +563,7 @@ body {
   max-width: 350px;
   padding: 20px;
   color: #e7e7e7;
+
   /* background-color: #081a2d; */
   /* border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
