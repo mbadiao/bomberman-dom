@@ -81,12 +81,12 @@ ws.onmessage = (e) => {
 
   const messageHandlers = {
     map: () => (originGrid = matrixToAscii(data.map)),
-    InvalidName: () => gameState.set("error", data.content),
+    alert: () => gameState.set({ error: data.content }),
     playerJoin: () => joinRoomHandle(data),
     startCountDown: () => timerCountDown(),
     Action: () => actionOnAvatar(data),
     Msg: () => displayMsg(data),
-    GameOver:() => GameOver(),
+    GameOver: () => GameOver(),
   };
 
   if (messageHandlers[data.type]) {

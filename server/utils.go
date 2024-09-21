@@ -13,14 +13,14 @@ func handleJoin(Conn *websocket.Conn, name string) {
 	defer room.playersMutex.Unlock()
 
 	if room.GameStarted {
-		Conn.WriteJSON(Data{Type: "gameStarted", Content: "the game has already started please retry later"}) // FIX: Handle Error...
+		Conn.WriteJSON(Data{Type: "alert", Content: "the game has already started please retry later"}) // FIX: Handle Error...
 		return
 	}
 
 	// Check if the player's name has already been taken
 	// before allowing him to play.
 	if _, found := room.Players[name]; found {
-		Conn.WriteJSON(Data{Type: "InvalidName", Content: "This pseudo is already used, please choose another one"}) // FIX: Handle Error...
+		Conn.WriteJSON(Data{Type: "alert", Content: "Pseudo already taken, please choose another one"}) // FIX: Handle Error...
 		return
 	}
 
