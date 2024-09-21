@@ -128,7 +128,6 @@ export class Bomb {
         this.#animateExplo(node, taille);
       });
     } else {
-      console.log("node.className :>> ", node.className);
       node.style.fontSize = "35px";
       if (node.className == "x") {
         node.textContent = "🔥"; // portee

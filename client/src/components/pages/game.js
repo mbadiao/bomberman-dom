@@ -7,8 +7,6 @@ const Game = () => {
         window.location.hash = "/";
         return
     }
-
-    console.log('actors :>> ', gameState.get('avatars'));
     const actors = gameState.get('avatars')
     grid();
     actors.forEach(actor => {

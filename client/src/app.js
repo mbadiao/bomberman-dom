@@ -108,7 +108,6 @@ soundHome();
 // let counter = 0;
 export function keyHandler(e) {
   if (canPass(e)) {
-    console.log('gameState.get("nickname") :>> ', gameState.get("nickname"));
     if (gameState.get("nickname") != "") {
       ws.send(
         JSON.stringify({

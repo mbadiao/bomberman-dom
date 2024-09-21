@@ -103,8 +103,6 @@ export class Avatar {
   }
 
   takePowerUpSpeed() {
-    console.log("powerUp speed");
-    console.log('divs[this.position()] :>> ', divs[this.position()]);
     if (divs[this.position()].textContent === "🚀") {
       this.speed = 4;
       // ON enleve le powerUp speed apres 1 minute plus tard
@@ -117,7 +115,6 @@ export class Avatar {
   }
 
   takePowerUpBomb(bomb) { // Elle prend l'objet de la classe bomb
-    console.log("powerUp bomb");
     if (divs[this.position()].textContent === "🔥") {
       bomb.portee = 2;
       setTimeout(() => {

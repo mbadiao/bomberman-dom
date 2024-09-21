@@ -36,10 +36,8 @@ class ChatFooter extends VirtualNode {
     }
     #sendMessage(e) {
         e.preventDefault()
-        console.log("ok");
 
         let inputValue = e.target.querySelector('#inputMsg').value
-        console.log(inputValue);
 
         if (inputValue != ""){
             sendMsg(inputValue)

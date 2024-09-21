@@ -39,7 +39,7 @@ export function joinRoomHandle(data) {
         avatar.representation = "👮🏾";
         break;
       default:
-        console.log("error in joinRoomHandle");
+        console.error("Error: Too many players");
         break;
     }
 
