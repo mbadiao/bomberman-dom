@@ -61,12 +61,26 @@ main>div img {
   position: absolute;
 }
 
+.avatars-representations {
+  width: 90%;
+}
+
+.actor {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
 .b {
   background: url('./assets/map/bloc.png');
   background-size: cover;
 }
 
-.m , .x, .y, .z {
+.m,
+.x,
+.y,
+.z {
   background: url('./assets/map/mur.png');
   background-size: cover;
 }
@@ -114,6 +128,24 @@ main div img {
   font-weight: bold;
 }
 
+.actor-rep {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 7px;
+  /* background-color: #f1f1f1; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
+  color: #000;
+  font-weight: bold;
+}
+.heart-container{
+  display: flex;
+  gap: 10px;
+  width: 35%;
+}
 header {
   margin-bottom: 10%;
 }
@@ -514,7 +546,16 @@ body {
 .timer {
   width: 25%;
   /* display: flex; */
-  align-items: center;
+  /* align-items: center; */
+  background-color: #081a2d;
+  padding: 2%;
+  display: flex;
+  flex-direction: column;
+   border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+
+  /* justify-content: center; */
+
 }
 
 .time {
@@ -522,10 +563,10 @@ body {
   max-width: 350px;
   padding: 20px;
   color: #e7e7e7;
-  background-color: #081a2d;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-/* }
+  /* background-color: #081a2d; */
+  /* border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+}
 
 .time-header { */
   text-align: center;

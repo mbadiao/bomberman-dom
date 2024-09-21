@@ -2,6 +2,9 @@ import gameState from "../core/state.js";
 import { Avatar } from "../components/molecules/avatar.js";
 import { main } from "../components/orgarnisms/main.js";
 import avartarCard from "../components/molecules/avatarCard.js";
+import timer from "../components/molecules/timer.js";
+import LifeAndActor from "../components/molecules/life.js";
+import Actor from "../components/molecules/actor.js";
 
 export function joinRoomHandle(data) {
   const avatars = []; // OPTIMIZE: Already in game state...
@@ -60,9 +63,14 @@ export function joinRoomHandle(data) {
   // Affichage des avatars dans le waiting room
 
   setTimeout(() => {
+
     main.elem.innerHTML = "";
+
     avatars.forEach((avatar) =>
       main.elem.appendChild(new avartarCard(avatar.representation).render())
     );
+    let lifeCpn = document.querySelectorAll('.avatars-representations')
+    lifeCpn.forEach(element => element.remove());
+    timer.elem.appendChild((new LifeAndActor(gameState.get("avatars").map(avatar => new Actor(avatar)))).render())
   }, 500);
 }

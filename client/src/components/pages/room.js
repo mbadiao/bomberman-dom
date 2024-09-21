@@ -7,6 +7,8 @@ import container from "../molecules/container.js";
 import { joinRoomHandle } from "../../services/join.js";
 import avartarCard from "../molecules/avatarCard.js";
 import { main } from "../orgarnisms/main.js";
+import LifeAndActor from "../molecules/life.js";
+import Actor from "../molecules/actor.js";
 
 const Room = () => {
   if (gameState.get("nickname") === "") {
@@ -26,6 +28,7 @@ const Room = () => {
       children: ["Waiting..."],
     }).render()
   );
+  timer.elem.appendChild((new LifeAndActor(gameState.get("avatars").map(avatar => new Actor(avatar)))).render())
 };
 
 export default Room;

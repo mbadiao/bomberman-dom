@@ -29,6 +29,7 @@ import { displayMsg } from "./services/message.js";
 import { soundHome } from "./interface/sound.js";
 import GameOver from "./components/pages/game-over.js";
 import EndGame from "./components/pages/end-game.js";
+import Hearts from "./components/molecules/hearts.js";
 
 //------------------------------------------------------------------------------
 
