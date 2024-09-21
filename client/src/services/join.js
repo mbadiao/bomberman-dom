@@ -14,9 +14,11 @@ export function joinRoomHandle(data) {
 
   let avatar;
   let names = data.content.split("*");
-
+  
+  
   if (gameState.get("nickname") === "") {
-    gameState.set({ nickname: names[data.playerCount - 1] });
+    gameState.set({nickname: data.name});
+    console.log('data.name :>> ', data.name);
   }
 
   names.map((name, i) => {
@@ -50,10 +52,13 @@ export function joinRoomHandle(data) {
     avatars.push(avatar);
   });
 
+  let me = avatars.find((avatar) => avatar.name === gameState.get("nickname"));
+
   gameState.set({
     avatars: avatars,
     playerCount: avatars.length,
-    error: ''
+    error: '',
+    avatar: me,
   });
 
   if (gameState.get('error') === '') {
@@ -62,8 +67,7 @@ export function joinRoomHandle(data) {
 
   // Affichage des avatars dans le waiting room
 
-  setTimeout(() => {
-
+  let timer = setTimeout(() => {
     main.elem.innerHTML = "";
 
     avatars.forEach((avatar) =>
@@ -72,5 +76,6 @@ export function joinRoomHandle(data) {
     let lifeCpn = document.querySelectorAll('.avatars-representations')
     lifeCpn.forEach(element => element.remove());
     timer.elem.appendChild((new LifeAndActor(gameState.get("avatars").map(avatar => new Actor(avatar)))).render())
+    clearTimeout(timer);
   }, 500);
 }

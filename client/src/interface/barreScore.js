@@ -8,9 +8,8 @@ export let chronoId
 
 export function updateLifeScore(actor) {
     actor.life--
-    console.log('actor.life :>> ', actor.life);
+    console.log('actor.life :>> ', actor.name, " - ", actor.life);
     actor.kill()
-    // domLifeScore(actor)
 }
 
 export function updateScore() {

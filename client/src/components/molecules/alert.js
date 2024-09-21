@@ -20,9 +20,10 @@ class Alert extends VirtualNode {
         this.elem.style.display = 'block';
         this.elem.innerText = state.error;
 
-        setTimeout(() => {
+        let timer = setTimeout(() => {
             this.elem.style.display = 'none';
             this.elem.innerText = ''
+            clearTimeout(timer);
         }, 1000)
     }
 }

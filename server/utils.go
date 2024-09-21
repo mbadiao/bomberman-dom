@@ -45,6 +45,7 @@ func handleJoin(Conn *websocket.Conn, name string) {
 
 	broadcast <- Data{
 		Type:        "playerJoin",
+		Name: 	  name,
 		Content:     takePlayersNames(room.Players),
 		PlayerCount: room.PlayerCount,
 	}

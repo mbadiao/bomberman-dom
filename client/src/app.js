@@ -4,7 +4,6 @@ import { Avatar } from "./components/molecules/avatar.js";
 // import { Bomb } from "./atoms/bomb.js";
 import { ajoutPowersUp } from "./components/powerUp.js";
 import { joinRoomHandle } from "./services/join.js";
-// import { pauseGame } from "./interface/menuPause.js";
 import gameState from "./core/state.js";
 import router from "./core/router.js";
 import boom from "./components/molecules/bomb.js";
@@ -33,7 +32,7 @@ import Hearts from "./components/molecules/hearts.js";
 
 //------------------------------------------------------------------------------
 
-export const ws = new WebSocket(`ws://localhost:8080/`);
+export const ws = new WebSocket(`ws://${window.location.host.split(":")[0]}:8080/`);
 
 export let originGrid;
 
@@ -47,6 +46,7 @@ gameState.set({
   avatars: [],
   error: "",
   timerDebounce: 0,
+  avatar: {},
 });
 
 gameState.subscribe(alert.display.bind(alert));
@@ -103,18 +103,31 @@ ws.onmessage = (e) => {
 //------------------------------------------------------------------------------
 
 soundHome();
-// domLifeScore(actor);
-// domNombreBombe(boom);
 
-// let counter = 0;
 export function keyHandler(e) {
   if (canPass(e)) {
-    if (gameState.get("nickname") != "") {
+    if (gameState.get("nickname") != "" && gameState.get("timerDebounce") == 0 && (e.key).includes("Arrow")) {
+      let me = gameState.get("avatar");
+      let timerDebounce = setTimeout(() => {
+        ws.send(
+          JSON.stringify({
+            type: "Action",
+            name: gameState.get("nickname"),
+            content: e.key,
+          })
+        );
+        clearTimeout(timerDebounce);
+        gameState.set({ timerDebounce: 0 });
+      }, 200 / me.speed);
+      gameState.set({ timerDebounce: timerDebounce });
+
+    }
+    if (e.key === " ") {
       ws.send(
         JSON.stringify({
           type: "Action",
           name: gameState.get("nickname"),
-          content: e.key,
+          content: " ",
         })
       );
     }
@@ -137,29 +150,4 @@ export function sendMsg(msg) {
 
 document.addEventListener("keydown", keyHandler);
 
-//else{
 
-// if (counter % 5 == 0) {
-// requestAnimationFrame(() => {
-
-// actors.forEach((actor, i) => {
-//   actor.move(avatarActor[i], e.key, true);
-// });
-// actor.takePowerUpBomb(divs, boom);
-// });
-// On regarde tranquille si on a pas plongé sur un ennemi
-// for (let i = 0; i < arrayOfGhost.length; i++) {
-//     if (arrayOfGhost[i].position() == actor.position() && arrayOfGhost[i].life != 0) {
-//         updateLifeScore(actor)
-//     }
-// }
-// On regarde si on doit pas prendre de powerUp
-// }
-// counter++;
-//}
-
-// document.addEventListener("keyup", (e) => {
-//   if (e.key.includes("Arrow")) counter = 0;
-// });
-
-// ennemies(actor)

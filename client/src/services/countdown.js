@@ -15,5 +15,6 @@ export default () => {
         clearInterval(chrono);
         span.innerText = "00:00";
         window.location.hash = "/game";
+        clearTimeout(timer);
     }, 10000);
 }

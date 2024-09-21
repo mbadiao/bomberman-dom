@@ -13,19 +13,11 @@ const actionOnAvatar = (data) => {
     if (data.content == " ") {
         boom.poserBomb(divs, actionnedActor.position(), actionnedActor);
     } else if ((data.content).includes("Arrow")) {
-        // Debounce logic
-        let timerDebounce = gameState.get("timerDebounce");
-        if (timerDebounce == 0) { // s'il y a plus de timer en cours
-            timerDebounce = setTimeout(()=> {
-                actionnedActor.move(avatarElement, data.content, true);
-                actionnedActor.takePowerUpSpeed();
-                actionnedActor.takePowerUpBomb(boom);
-                gameState.set({timerDebounce: 0});
-            }, 200/actionnedActor.speed);
-
-            gameState.set({timerDebounce: timerDebounce});
-        }
+        actionnedActor.move(avatarElement, data.content, true);
+        actionnedActor.takePowerUpSpeed();
+        actionnedActor.takePowerUpBomb(boom);
     }
 }
+
 
 export default actionOnAvatar;
