@@ -530,20 +530,14 @@ body {
 .time-header {
   text-align: center;
   margin-bottom: 20px;
-}
-
-.time-title {
   font-size: 24px;
   font-weight: bold;
 }
 
-.time-content {
+.time-display {
   display: flex;
   flex-direction: column;
   gap: 20px;
-}
-
-.time-display {
   font-size: 48px;
   font-weight: bold;
   text-align: center;

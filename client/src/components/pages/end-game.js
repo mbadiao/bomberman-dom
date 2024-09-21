@@ -9,7 +9,7 @@ export default () => {
 
     const endCover = new Cover(new Cover(
       // <img>
-        new Image("logo", "./assets/man.svg", {
+        new Image("logo", "./assets/crying.svg", {
           width: "200",
           height: "200",
         }),
@@ -17,9 +17,7 @@ export default () => {
         // <h1>
         new Heading(
           "title",
-          "GAME-OVER".split("").map((letter) => {
-            return new Span("letter", letter);
-          })
+          ["GAME-OVER!!!"]
         ),
       ))
       

@@ -1,12 +1,13 @@
 import VirtualNode from '../../core/node.js';
 
 export default class Span extends VirtualNode {
-    constructor(tagClass, text, adds = {}) {
+    constructor(id, text, adds = {}) {
         super({
             tag: 'span',
             attrs: {
                 ...adds,
-                class: tagClass,
+                id: id,
+                class: id,
             },
             children: [text],
         })
