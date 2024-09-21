@@ -1,7 +1,7 @@
 import VirtualNode from "../../core/node.js";
 
 export default class Heading extends VirtualNode {
-    constructor(tagClass, content, adds = {}, size = 1 ) {
+    constructor(tagClass, content, size = 1, adds = {}) {
         super({
             tag: `h${size}`,
             attrs: {

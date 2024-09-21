@@ -1,4 +1,5 @@
 import VirtualNode from '../../core/node.js';
+import Heading from '../atoms/heading.js';
 
 class ChatHeader extends VirtualNode {
     constructor() {
@@ -7,15 +8,7 @@ class ChatHeader extends VirtualNode {
             attrs: {
                 class: "chat-header",
             },
-            children: [
-                {
-                    tag: 'h2',
-                    attrs: {
-                        class: "chat-title",
-                    },
-                    children: ["Chat de Jeu"],
-                }
-            ]
+            children: [new Heading('chat-title', ['Game Chat'], 2)]
         })
     }
 }

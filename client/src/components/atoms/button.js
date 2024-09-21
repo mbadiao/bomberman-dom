@@ -1,7 +1,7 @@
 import VirtualNode from '../../core/node.js';
 
 export default class Button extends VirtualNode {
-    constructor(callback, children, tagClass = '', adds = {}) {
+    constructor(children, tagClass = '', callback, adds = {}) {
         super({
             tag: 'button',
             attrs: {
