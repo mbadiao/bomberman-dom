@@ -1,6 +1,6 @@
 import VirtualNode from '../../core/node.js';
 import Image from '../atoms/image.js';
-import Text from '../atoms/text.js';
+import Text from '../atoms/paragraph.js';
 
 export default class ChatBubble extends VirtualNode {
     constructor(imgSrc, senderName, msgContent) {

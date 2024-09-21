@@ -8,7 +8,7 @@ import alert from "../atoms/alert.js";
 const Insert = () => {
   document.body.innerHTML = "";
 
-  const info = new Heading(1, "info", "Please enter your nickname ");
+  const info = new Heading("info", ["Please enter your nickname"], 1);
 
   const nameInput = new Input(
     "nickname-input",

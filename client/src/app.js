@@ -27,8 +27,8 @@ import actionOnAvatar from "./services/action.js";
 import { canPass } from "./services/allow.js";
 import { displayMsg } from "./services/message.js";
 import { soundHome } from "./interface/sound.js";
-import GameOver from "./components/pages/gameOver.js";
-import EndGame from "./components/pages/EndGame.js";
+import GameOver from "./components/pages/game-over.js";
+import EndGame from "./components/pages/end-game.js";
 
 //------------------------------------------------------------------------------
 

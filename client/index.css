@@ -483,12 +483,12 @@ body {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-.message-form {
+.chat-form {
   display: flex;
   gap: 10px;
 }
 
-.input-message {
+.chat-input {
   flex-grow: 1;
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.3);

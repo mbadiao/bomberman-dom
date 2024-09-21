@@ -11,7 +11,7 @@ class ChatFooter extends VirtualNode {
                 {
                     tag: 'form',
                     attrs: {
-                        class: "message-form",
+                        class: "chat-form",
                     },
                     listeners: {
                         onsubmit : (e) => this.#sendMessage(e)
@@ -23,7 +23,7 @@ class ChatFooter extends VirtualNode {
                                 type: "text",
                                 placeholder: "Tapez votre message...",
                                 id: "inputMsg",
-                                class: "input-message"
+                                class: "chat-input"
                             },
                         },
                         {

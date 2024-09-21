@@ -1,13 +1,32 @@
-import startBtn from "../atoms/startBtn.js";
-import titre from "../atoms/titre.js";
-import entry from "../atoms/entry.js";
-import logo from "../atoms/logo.js";
+import Cover from "../molecules/cover.js";
+import Image from "../atoms/image.js";
+import Heading from "../atoms/heading.js";
+import Span from "../atoms/span.js";
+import Button from "../atoms/button.js";
 
-const Home = () => {
-    document.body.innerHTML = '';
-    document.body.appendChild(entry.render())
-    entry.elem.append(logo.render(), titre.render(), startBtn.render())
-}
+export default () => {
+  document.body.innerHTML = "";
+  
+  const entryCover = new Cover(
+    // <img>
+    new Image("logo", "./assets/man.svg", {
+      width: "200",
+      height: "200",
+    }),
 
-export default Home;
-// ()
+    // <h1>
+    new Heading(
+      "title",
+      "BOMBERMAN-DOM".split("").map((letter) => {
+        return new Span("letter", letter);
+      })
+    ),
+
+    // <button>
+    new Button(() => {
+      window.location.hash = "/insert";
+    }, ["Start"])
+  )
+
+  document.body.appendChild(entryCover.render());
+};

@@ -18,7 +18,7 @@ Functional:
 
         ✔ Did the player counter `increment by 1`? @started(24-09-17 10:21) @done(24-09-17 10:21) @lasted(20s)
 
-        ☐ After entering with another user, can all users chat with each other in `real time` (using websockets)?
+        ✔ After entering with another user, can all users chat with each other in `real time` (using websockets)? @done(24-09-20 18:28)
 
 
     Wait 20 seconds with two users in the waiting page:
