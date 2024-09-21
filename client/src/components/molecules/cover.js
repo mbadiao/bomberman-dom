@@ -11,7 +11,7 @@ export default class Cover extends VirtualNode {
       attrs: {
         class: "entry",
       },
-      children: [children],
+      children: [...children],
     });
   }
 }
