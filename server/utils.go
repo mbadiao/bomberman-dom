@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bomberman-dom/server/utils"
 	"fmt"
 	"log"
 	"time"
@@ -12,15 +13,24 @@ func handleJoin(Conn *websocket.Conn, name string) {
 	room.playersMutex.Lock()
 	defer room.playersMutex.Unlock()
 
+	var alertData = Data{Type: "alert"}
+
 	if room.GameStarted {
-		Conn.WriteJSON(Data{Type: "alert", Content: "the game has already started please retry later"}) // FIX: Handle Error...
-		return
+		alertData.Content = "Game already started."
+	}
+
+	if !utils.Valid(name) {
+		alertData.Content = "Only accept lowercase letters."
 	}
 
 	// Check if the player's name has already been taken
 	// before allowing him to play.
 	if _, found := room.Players[name]; found {
-		Conn.WriteJSON(Data{Type: "alert", Content: "Pseudo already taken, please choose another one"}) // FIX: Handle Error...
+		alertData.Content = "Pseudo already taken."
+	}
+
+	if alertData.Content != "" {
+		Conn.WriteJSON(alertData)
 		return
 	}
 
@@ -53,7 +63,6 @@ func takePlayersNames(players map[string]*Player) string { // REVIEW: Function n
 
 	return names
 }
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -92,9 +101,9 @@ func broadcastPlayerMsg(msg Data) { // REVIEW: Function name could be more conci
 		fmt.Println("name", name) // DEBUG: Check Player Name...
 		if msg.Type == "GameOver" && msg.Name == player.Name {
 			send(msg, player)
-			
+
 		}
-		if (msg.Type != "GameOver"){
+		if msg.Type != "GameOver" {
 			send(msg, player)
 		}
 	}
