@@ -2,6 +2,10 @@
     Implementation de la logique du score dependant du temps
 */
 
+import Actor from "../components/molecules/actor";
+import LifeAndActor from "../components/molecules/life";
+import timer from "../components/molecules/timer";
+
 // import { gameOver } from "./menuPause.js"
 
 export let chronoId
@@ -10,6 +14,10 @@ export function updateLifeScore(actor) {
     actor.life--
     console.log('actor.life :>> ', actor.name, " - ", actor.life);
     actor.kill()
+    let lifeCpn = document.querySelectorAll('.avatars-representations')
+    lifeCpn.forEach(element => element.remove());
+    timer.elem.appendChild((new LifeAndActor(gameState.get("avatars").map(avatar => new Actor(avatar)))).render())
+
 }
 
 export function updateScore() {
