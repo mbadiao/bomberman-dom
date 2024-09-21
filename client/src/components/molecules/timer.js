@@ -2,7 +2,7 @@ import VirtualNode from "../../core/node.js";
 import Heading from '../atoms/heading.js';
 import Span from '../atoms/span.js';
 
-class TimerCpn extends VirtualNode {
+class Timer extends VirtualNode {
     constructor() {
         super({
             tag: 'div',
@@ -25,4 +25,4 @@ class TimerCpn extends VirtualNode {
     }
 }
 
-export default new TimerCpn()
+export default new Timer()

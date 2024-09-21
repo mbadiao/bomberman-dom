@@ -1,16 +1,19 @@
 import timer from "../components/molecules/timer.js";
 
 
-export const timerCountDown = () => {
+export default () => {
     let countdown = 9;
+    const span = timer.select(0).select(1).elem
+    
     let chrono = setInterval(() => {
-        timer.elem.querySelector("#formattedTime").innerText =
+        span.innerText =
             "00:0" + countdown;
         countdown--;
     }, 1000);
+
     setTimeout(() => {
         clearInterval(chrono);
-        timer.elem.querySelector("#formattedTime").innerText = "00:00";
+        span.innerText = "00:00";
         window.location.hash = "/game";
     }, 10000);
 }

@@ -22,7 +22,7 @@ import {
   domLifeScore,
   domNombreBombe,
 } from "./interface/barreScore.js";
-import { timerCountDown } from "./services/timerCountDown.js";
+import countdown from "./services/countdown.js";
 import actionOnAvatar from "./services/action.js";
 import { canPass } from "./services/allow.js";
 import { displayMsg } from "./services/message.js";
@@ -86,7 +86,7 @@ ws.onmessage = (e) => {
     map: () => (originGrid = matrixToAscii(data.map)),
     alert: () => gameState.set({ error: data.content }),
     playerJoin: () => joinRoomHandle(data),
-    startCountDown: () => timerCountDown(),
+    startCountDown: () => countdown(),
     Action: () => actionOnAvatar(data),
     Msg: () => displayMsg(data),
     GameOver: () => GameOver(),

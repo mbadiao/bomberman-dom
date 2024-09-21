@@ -20,12 +20,30 @@ export default class VirtualNode {
         Object.entries(this.listeners).forEach(([event, callback]) => {
             this.elem[event] = callback;
         });
-  
+
         this.children.forEach(child => {
             this.add(child);
         })
 
         return this.elem;
+    }
+
+    // Get an 'non-string' element from the children array
+    // using the index. The method then virtualises it if needed.
+    // It finally returns the element as a virtual node.
+    // Useful for internal manipulation.
+    select(index) {
+        let child = this.children[index]
+
+        if (!child) {
+            return
+        }
+
+        if (!(child instanceof VirtualNode) && typeof child !== 'string') {
+            child = new VirtualNode(child)
+        }
+
+        return child
     }
 
     // If the component has already been rendered,
@@ -37,17 +55,17 @@ export default class VirtualNode {
             this.children.push(child);
             return
         }
-        
+
         if (typeof child === 'string') {
             this.elem.textContent += child;
             return
         }
-        
+
         if (!(child instanceof VirtualNode)) {
             child = new VirtualNode(child)
         }
-                
-        this.elem.appendChild(child.render())
+
+        this.elem.appendChild(child.elem || child.render())
     }
 
     // Empty the element first,
@@ -59,6 +77,6 @@ export default class VirtualNode {
             return
         }
 
-        this.children = [...newChild];
+        this.children = [...children];
     }
 }
