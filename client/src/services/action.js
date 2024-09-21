@@ -1,5 +1,5 @@
 import gameState from "../core/state.js";
-import boom from "../components/atoms/bomb.js";
+import boom from "../components/molecules/bomb.js";
 import { divs } from "../components/grid.js";
 
 const actionOnAvatar = (data) => {

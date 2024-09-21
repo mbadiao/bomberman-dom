@@ -30,38 +30,38 @@ Functional:
 
     Try to enter with 4 different users in the waiting page:
         
-        ! As soon as the `fourth player entered`, did you get 10 second game start countdown? @blocked(24-09-17 10:22)
+        ✔ As soon as the `fourth player entered`, did you get 10 second game start countdown? @done(24-09-21 21:27)
         
-        ☐ While playing the game, are you able to `move` and `place bombs`?
+        ✔ While playing the game, are you able to `move` and `place bombs`? @done(24-09-21 21:27)
         
-        ☐ Can players see the `whole map` at once?
+        ✔ Can players see the `whole map` at once? @done(24-09-21 21:27)
 
 
     Try placing a bomb and standing by it when it explodes:
         
-        ☐ Did you lose 1 of your `3 lives`?
+        ✔ Did you lose 1 of your `3 lives`? @done(24-09-21 21:27)
 
 
     Try to lose all your 3 lives:
         
-        ☐ Did you lose the game and are `not able to play` anymore?
+        ✔ Did you lose the game and are `not able to play` anymore? @done(24-09-21 21:28)
 
 
     Try placing a bomb next to another player:
         
-        ☐ Did the `other player` lose a life when the `bomb exploded`?
+        ✔ Did the `other player` lose a life when the `bomb exploded`? @done(24-09-21 21:29)
 
 
     Place a bomb next to a destroyable block:
         
-        ☐ Did the `block disappear` when the bomb exploded?
+        ✔ Did the `block disappear` when the bomb exploded? @done(24-09-21 21:29)
 
 
     Try to destroy every block on the map:
         
-        ☐ Did the `power ups` appear in place of `some` of the blocks?
+        ✔ Did the `power ups` appear in place of `some` of the blocks? @done(24-09-21 21:29)
         
-        ☐ Can you confirm that there are at least `3 types` of power ups?
+        ✔ Can you confirm that there are at least `3 types` of power ups? @done(24-09-21 21:29)
 
 
     Open the Dev Tool in the Performance tab:

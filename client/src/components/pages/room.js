@@ -3,9 +3,9 @@ import { ws } from "../../app.js";
 import ChatCpn from "../orgarnisms/chat.js";
 import timer from "../molecules/timer.js";
 import VirtualNode from "../../core/node.js";
-import container from "../atoms/container.js";
+import container from "../molecules/container.js";
 import { joinRoomHandle } from "../../services/join.js";
-import avartarCard from "../atoms/avatarCard.js";
+import avartarCard from "../molecules/avatarCard.js";
 import { main } from "../orgarnisms/main.js";
 
 const Room = () => {

@@ -1,7 +1,7 @@
 import gameState from "../core/state.js";
-import { Avatar } from "../components/atoms/avatar.js";
+import { Avatar } from "../components/molecules/avatar.js";
 import { main } from "../components/orgarnisms/main.js";
-import avartarCard from "../components/atoms/avatarCard.js";
+import avartarCard from "../components/molecules/avatarCard.js";
 
 export function joinRoomHandle(data) {
   const avatars = []; // OPTIMIZE: Already in game state...

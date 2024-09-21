@@ -10,7 +10,7 @@ class State {
 
   set(newState, callback = () => {}) {
     this.current = {...this.current, ...newState};
-    this.notify();
+    this.#notify();
     callback()
   }
 
@@ -22,7 +22,7 @@ class State {
     this.subscribers = this.subscribers.filter(subscriber => subscriber !== callback);
   }
 
-  notify() {
+  #notify() {
     this.subscribers.forEach(callback => callback(this.current));
   }
 }

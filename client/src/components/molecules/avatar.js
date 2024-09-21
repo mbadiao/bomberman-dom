@@ -6,7 +6,7 @@ import { domNombreBombe } from "../../interface/barreScore.js";
 import VirtualNode from "../../core/node.js";
 import { main } from "../orgarnisms/main.js";
 import { ws } from "../../app.js";
-import { divs } from "../../components/grid.js";
+import { divs } from "../grid.js";
 // import { pause } from "../interface/menuPause.js"
 
 export class Avatar {
