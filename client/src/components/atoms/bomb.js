@@ -8,44 +8,37 @@ import VirtualNode from "../../core/node.js";
 import { playSound } from "../../interface/sound.js";
 
 export let detonationID = 0;
-let deathCounter = 0;
 
 export class Bomb {
   constructor() {
-    this.max = 100;
+    this.max = 1000;
     this.delay = 2000; // en milliseconde
     this.portee = 1; // powerUp pour augmenter la portée de la bombe de 2
     this.minage = 1; // powerUp pour poser plusieurs bombes a la fois
   }
 
-  canCall = true;
   poserBomb(divs, position, actor) {
-    if (!this.canCall) {
-      return;
+    if (actor.nombreActualBomb < this.minage) {
+
+      const iconBomb = new VirtualNode({
+        tag: "p",
+        attrs: {
+          class: "bomb",
+          style: `font-size: 30px;`,
+        },
+        children: ["💣"],
+      });
+
+      if (divs[position].innerHTML == "") {
+        divs[position].appendChild(iconBomb.render());
+      }
+      setTimeout(() => {
+        this.#exploserBomb(divs, position, actor);
+        actor.nombreActualBomb--;
+      }, this.delay);
+      actor.nombreActualBomb++;
     }
 
-    const iconBomb = new VirtualNode({
-      tag: "p",
-      attrs: {
-        class: "bomb",
-        style: `font-size: 30px;`,
-      },
-      children: ["💣"],
-    });
-
-    if (divs[position].innerHTML == "") {
-      divs[position].appendChild(iconBomb.render());
-    }
-    setTimeout(() => {
-      this.#exploserBomb(divs, position, actor);
-    }, this.delay);
-
-    /* Logique Debounce : est une technique utilisée pour limiter la
-         fréquence à laquelle une fonction peut être appelée  */
-    this.canCall = false;
-    setTimeout(() => {
-      this.canCall = true;
-    }, this.delay);
   }
 
   /*   #exploserBomb(nodes, position, actor) {
@@ -100,7 +93,7 @@ export class Bomb {
 
   #exploserBomb(nodes, position, actor) {
     // On enleve d'abord la bombe
-    nodes[position].removeChild(nodes[position].firstChild);
+    nodes[position].textContent = "";
 
     // On recupere tous les avatars et leur position
     let avatarPos = [];

@@ -19,6 +19,7 @@ export class Avatar {
     this.posX = 0;
     this.posY = 0;
     this.life = 3;
+    this.nombreActualBomb = 0;
     this.speed = 1; // powerUp speed
     this.tag = null;
   }
