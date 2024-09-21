@@ -48,6 +48,56 @@ export class Bomb {
     }, this.delay);
   }
 
+  /*   #exploserBomb(nodes, position, actor) {
+      // On enleve d'abord la bombe
+      nodes[position].removeChild(nodes[position].firstChild);
+  
+      // On recupere tous les avatars et leur position
+      let avatarPos = [];
+      gameState.get("avatars").forEach((avatar) => {
+        let xyAvatar = avatar.tag.style.transform.match(/(-?\d+(?:\.\d+)?)/g);
+        let xAvat = parseInt(xyAvatar[0]),
+          yAvat = parseInt(xyAvatar[1]);
+        avatarPos.push(((yAvat + 40) / 40) * 16 + xAvat / 40 - yAvat / 40 - 16);
+      });
+  
+      // jouer le son de l'exposion
+      playSound("sound_bomb.mp3");
+  
+      // Cassage des murs etc
+      this.#boom(nodes[position]);
+  
+      
+      let actorPos = actor.position();
+      if (
+        actorPos == position + 1 ||
+        actorPos == position - 1 ||
+        actorPos == position + 15 ||
+        actorPos == position - 15 ||
+        actorPos == position
+      ) {
+        updateLifeScore(actor);
+      }
+  
+      if (["c", "m", "x", "y", "z"].includes(nodes[position + 1].className)) {
+        this.#boom(nodes[position + 1]);
+        originGrid[Math.floor((position + 1) / 15)][(position + 1) % 15] = "c";
+      }
+      if (["c", "m", "x", "y", "z"].includes(nodes[position - 1].className)) {
+        this.#boom(nodes[position - 1]);
+        originGrid[Math.floor((position - 1) / 15)][(position - 1) % 15] = "c";
+      }
+      if (["c", "m", "x", "y", "z"].includes(nodes[position - 15].className)) {
+        originGrid[Math.floor((position - 15) / 15)][(position - 15) % 15] = "c";
+        this.#boom(nodes[position - 15]);
+      }
+      if (["c", "m", "x", "y", "z"].includes(nodes[position + 15].className)) {
+        originGrid[Math.floor((position + 15) / 15)][(position + 15) % 15] = "c";
+        this.#boom(nodes[position + 15]);
+      }
+  
+    } */
+
   #exploserBomb(nodes, position, actor) {
     // On enleve d'abord la bombe
     nodes[position].removeChild(nodes[position].firstChild);
@@ -67,7 +117,6 @@ export class Bomb {
     // Cassage des murs etc
     this.#boom(nodes[position]);
 
-    // console.log('actor.position() :>> ', actor.position());
     let actorPos = actor.position();
     if (
       actorPos == position + 1 ||
@@ -78,42 +127,20 @@ export class Bomb {
     ) {
       updateLifeScore(actor);
     }
-    if (["c", "m", "x", "y", "z"].includes(nodes[position + 1].className)) {
-      this.#boom(nodes[position + 1]);
-      originGrid[Math.floor((position + 1) / 15)][(position + 1) % 15] = "c";
-    }
-    if (["c", "m", "x", "y", "z"].includes(nodes[position - 1].className)) {
-      this.#boom(nodes[position - 1]);
-      originGrid[Math.floor((position - 1) / 15)][(position - 1) % 15] = "c";
-    }
-    if (["c", "m", "x", "y", "z"].includes(nodes[position - 15].className)) {
-      originGrid[Math.floor((position - 15) / 15)][(position - 15) % 15] = "c";
-      this.#boom(nodes[position - 15]);
-    }
-    if (["c", "m", "x", "y", "z"].includes(nodes[position + 15].className)) {
-      originGrid[Math.floor((position + 15) / 15)][(position + 15) % 15] = "c";
-      this.#boom(nodes[position + 15]);
-    }
-    /*
-        // On diminue la vie du joueur s'il se trouve dans le champ de porté
-        let actorPos = avatarPos[0]
-        
-    */
-    // On kill l'ennemi s'il est dans les parages, à i=0 on a l'acteur
-    // console.log('Avatar lenght', avatarPos);
-    // for (let i = 1; i < avatarPos.length; i++) {
-    //     if ((avatarPos[i] == position + 1 || avatarPos[i] == position - 1 || avatarPos[i] == position + 15 || avatarPos[i] == position - 15 || avatarPos[i] == position) && arrayOfGhost[i - 1].life != 0) {
-    //         allAvatar[i].style.display = 'none'
-    //         arrayOfGhost[i - 1].life = 0
-    //         cancelAnimationFrame(intervalIDs[i - 1])
-    //         deathCounter++
-    //         console.log(deathCounter);
-    //         if (deathCounter === arrayOfGhost.length ){
-    //             winner()
-    //         }
-    //     }
-    // }
+
+    // Détruire les blocs dans un rayon de 2 autour de la bombe
+    const directions = [1, -1, 15, -15]; // Droite, Gauche, Bas, Haut
+    directions.forEach((dir) => {
+      for (let i = 1; i <= this.portee; i++) { // Parcourir de 1 à 2 blocs dans chaque direction
+        const currentPos = position + dir * i;
+        if (["c", "m", "x", "y", "z"].includes(nodes[currentPos]?.className)) {
+          this.#boom(nodes[currentPos]);
+          originGrid[Math.floor(currentPos / 15)][currentPos % 15] = "c";
+        }
+      }
+    });
   }
+
 
   #boom(node) {
     node.textContent = "💥";
