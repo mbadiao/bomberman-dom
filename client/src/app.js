@@ -15,7 +15,7 @@ import Room from "./components/pages/room.js";
 import avartarCard from "./components/atoms/avatarCard.js";
 import timer from "./components/molecules/timer.js";
 import { main } from "./components/orgarnisms/main.js";
-import alert from "./components/atoms/alert.js";
+import alert from "./components/molecules/alert.js";
 import {
   updateLifeScore,
   chronometre,
