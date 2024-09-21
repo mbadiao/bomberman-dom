@@ -1,5 +1,6 @@
 import { sendMsg } from '../../app.js';
 import VirtualNode from '../../core/node.js';
+import Button from '../atoms/button.js';
 class ChatFooter extends VirtualNode {
     constructor() {
         super({
@@ -26,15 +27,7 @@ class ChatFooter extends VirtualNode {
                                 class: "chat-input"
                             },
                         },
-                        {
-                            tag: 'button',
-                            attrs: {
-                                type: "submit",
-                                class: "send-button"
-                            },
-                            children: ["Envoyer"],
-                            
-                        }
+                        new Button(["Envoyer"], 'send-button', 'submit')
                     ]
                 }
 

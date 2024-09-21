@@ -6,7 +6,7 @@ import Button from "../atoms/button.js";
 
 export default () => {
   document.body.innerHTML = "";
-  
+
   const entryCover = new Cover(
     // <img>
     new Image("logo", "./assets/man.svg", {
@@ -23,9 +23,12 @@ export default () => {
     ),
 
     // <button>
-    new Button(() => {
-      window.location.hash = "/insert";
-    }, ["Start"])
+    new Button(
+      ["Start"],
+      'home-button',
+      'button',
+      () => window.location.hash = "/insert"
+    )
   )
 
   document.body.appendChild(entryCover.render());
