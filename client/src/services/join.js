@@ -58,8 +58,11 @@ export function joinRoomHandle(data) {
   }
 
   // Affichage des avatars dans le waiting room
-  main.elem.innerHTML = "";
-  avatars.forEach((avatar) =>
-    main.elem.appendChild(new avartarCard(avatar.representation).render())
-  );
+
+  setTimeout(() => {
+    main.elem.innerHTML = "";
+    avatars.forEach((avatar) =>
+      main.elem.appendChild(new avartarCard(avatar.representation).render())
+    );
+  }, 500);
 }

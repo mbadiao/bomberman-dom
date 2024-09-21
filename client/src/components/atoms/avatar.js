@@ -6,6 +6,7 @@ import { domNombreBombe } from "../../interface/barreScore.js";
 import VirtualNode from "../../core/node.js";
 import { main } from "../orgarnisms/main.js";
 import { ws } from "../../app.js";
+import { divs } from "../../components/grid.js";
 // import { pause } from "../interface/menuPause.js"
 
 export class Avatar {
@@ -18,6 +19,7 @@ export class Avatar {
     this.posX = 0;
     this.posY = 0;
     this.life = 3;
+    this.speed = 1; // powerUp speed
     this.tag = null;
   }
 
@@ -100,12 +102,35 @@ export class Avatar {
     }
   }
 
-  takePowerUpBomb(divs, bomb) {
-    if (divs[this.position()].className == "x") {
-      bomb.max += 5;
-      divs[this.position()].dataset.powerUp = "";
+  takePowerUpSpeed() {
+    console.log("powerUp speed");
+    console.log('divs[this.position()] :>> ', divs[this.position()]);
+    if (divs[this.position()].textContent === "🚀") {
+      this.speed = 4;
+      // ON enleve le powerUp speed apres 1 minute plus tard
+      setTimeout(() => {
+        this.speed = 1;
+      }, 60*1000);
       divs[this.position()].textContent = "";
-      domNombreBombe(bomb);
+      // domNombreBombe(bomb);
+    }
+  }
+
+  takePowerUpBomb(bomb) { // Elle prend l'objet de la classe bomb
+    console.log("powerUp bomb");
+    if (divs[this.position()].textContent === "🔥") {
+      bomb.portee = 2;
+      setTimeout(() => {
+        bomb.portee = 1;
+      }, 60*1000);
+      divs[this.position()].textContent = "";
+      // domNombreBombe(bomb);
+    } else if (divs[this.position()].textContent === "☘") {
+      bomb.minage = 2;
+      setTimeout(() => {
+        bomb.minage = 1;
+      }, 60*1000);
+      divs[this.position()].textContent = "";
     }
   }
 }

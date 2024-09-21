@@ -14,6 +14,8 @@ export class Bomb {
   constructor() {
     this.max = 100;
     this.delay = 2000; // en milliseconde
+    this.portee = 1; // powerUp pour augmenter la portée de la bombe de 2
+    this.minage = 1; // powerUp pour poser plusieurs bombes a la fois
   }
 
   canCall = true;
@@ -77,20 +79,20 @@ export class Bomb {
       updateLifeScore(actor);
     }
     if (["c", "m", "x", "y", "z"].includes(nodes[position + 1].className)) {
-      // this.#boom(nodes[position + 1]);
+      this.#boom(nodes[position + 1]);
       originGrid[Math.floor((position + 1) / 15)][(position + 1) % 15] = "c";
     }
     if (["c", "m", "x", "y", "z"].includes(nodes[position - 1].className)) {
-      // this.#boom(nodes[position - 1]);
+      this.#boom(nodes[position - 1]);
       originGrid[Math.floor((position - 1) / 15)][(position - 1) % 15] = "c";
     }
     if (["c", "m", "x", "y", "z"].includes(nodes[position - 15].className)) {
       originGrid[Math.floor((position - 15) / 15)][(position - 15) % 15] = "c";
-      // this.#boom(nodes[position - 15]);
+      this.#boom(nodes[position - 15]);
     }
     if (["c", "m", "x", "y", "z"].includes(nodes[position + 15].className)) {
       originGrid[Math.floor((position + 15) / 15)][(position + 15) % 15] = "c";
-      // this.#boom(nodes[position + 15]);
+      this.#boom(nodes[position + 15]);
     }
     /*
         // On diminue la vie du joueur s'il se trouve dans le champ de porté
@@ -129,11 +131,11 @@ export class Bomb {
       console.log("node.className :>> ", node.className);
       node.style.fontSize = "35px";
       if (node.className == "x") {
-        node.textContent = "🔥";
+        node.textContent = "🔥"; // portee
       } else if (node.className == "y") {
-        node.textContent = "💣";
+        node.textContent = "☘"; // many
       } else if (node.className == "z") {
-        node.textContent = "🚀";
+        node.textContent = "🚀"; // speed
       } else {
         node.textContent = "";
       }

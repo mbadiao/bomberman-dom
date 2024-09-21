@@ -36,6 +36,8 @@ export const ws = new WebSocket(`ws://localhost:8080/`);
 
 export let originGrid;
 
+
+
 //------------------------------------------------------------------------------
 
 gameState.set({
@@ -43,6 +45,7 @@ gameState.set({
   playerCount: 0,
   avatars: [],
   error: "",
+  timerDebounce: 0,
 });
 
 gameState.subscribe(alert.display.bind(alert));

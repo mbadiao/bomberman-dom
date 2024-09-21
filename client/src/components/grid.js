@@ -24,7 +24,7 @@ export let murs = [];
 
 export function grid() {
   /* 
-        b -> bloc, m -> mur, c -> chemin, x -> bonus
+        b -> bloc, m -> mur, c -> chemin, x -> bonus, y -> bonus, z -> bonus
     */
 
   // On enleve tout le contenu de main
