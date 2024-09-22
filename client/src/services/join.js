@@ -67,7 +67,7 @@ export function joinRoomHandle(data) {
 
   // Affichage des avatars dans le waiting room
 
-  let timer = setTimeout(() => {
+  let timerout = setTimeout(() => {
     main.elem.innerHTML = "";
 
     avatars.forEach((avatar) =>
@@ -76,6 +76,6 @@ export function joinRoomHandle(data) {
     let lifeCpn = document.querySelectorAll('.avatars-representations')
     lifeCpn.forEach(element => element.remove());
     timer.elem.appendChild((new LifeAndActor(gameState.get("avatars").map(avatar => new Actor(avatar)))).render())
-    clearTimeout(timer);
+    clearTimeout(timerout);
   }, 500);
 }

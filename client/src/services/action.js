@@ -7,13 +7,10 @@ const actionOnAvatar = (data) => {
     const actionnedActor = players.find(
         (player) => player.name === data.name
     );
-    const avatarElement = document.querySelector(
-        `#avatar${actionnedActor.name ?? ""}`
-    );
     if (data.content == " ") {
         boom.poserBomb(divs, actionnedActor.position(), actionnedActor);
     } else if ((data.content).includes("Arrow")) {
-        actionnedActor.move(avatarElement, data.content, true);
+        actionnedActor.move(data.content);
         actionnedActor.takePowerUpSpeed();
         actionnedActor.takePowerUpBomb(boom);
     }

@@ -5,6 +5,7 @@
 import Actor from "../components/molecules/actor.js";
 import LifeAndActor from "../components/molecules/life.js";
 import timer from "../components/molecules/timer.js";
+import gameState from "../core/state.js";
 
 // import { gameOver } from "./menuPause.js"
 

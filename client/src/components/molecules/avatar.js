@@ -18,7 +18,9 @@ export class Avatar {
     this.posX = 0;
     this.posY = 0;
     this.life = 3;
-    this.nombreActualBomb = 0;
+    this.nombreActualBomb = 0; // nombre de bombe poser par le joueur
+    this.portee = 1; // powerUp pour augmenter la portée de la bombe de 2
+    this.minage = 1; // powerUp pour poser plusieurs bombes a la fois
     this.speed = 1; // powerUp speed
     this.tag = null;
   }
@@ -61,7 +63,7 @@ export class Avatar {
   }
 
   // canCall = true;
-  move(avatar, key, bon = false) {
+  move(key) {
     let x0 = this.initX * this.#blocSize;
     let y0 = this.initY * this.#blocSize;
     let dx = 0,
@@ -91,7 +93,7 @@ export class Avatar {
 
     const { x, y } = nextPos(dx, dy);
     if (originGrid[y][x] === "c") {
-      avatar.style.transform = `translate(${x0 + this.posX + dx}px, ${y0 + this.posY + dy
+      this.tag.style.transform = `translate(${x0 + this.posX + dx}px, ${y0 + this.posY + dy
         }px)`;
       this.posX += dx;
       this.posY += dy;
@@ -111,20 +113,20 @@ export class Avatar {
     }
   }
 
-  takePowerUpBomb(bomb) { // Elle prend l'objet de la classe bomb
+  takePowerUpBomb() { // Elle prend l'objet de la classe bomb
 
     if (divs[this.position()].textContent === "🔥") {
-      bomb.portee = 2;
+      this.portee = 2;
       let timer = setTimeout(() => {
-        bomb.portee = 1;
+        this.portee = 1;
         clearTimeout(timer);
       }, 60 * 1000);
       divs[this.position()].textContent = "";
 
     } else if (divs[this.position()].textContent === "☘") {
-      bomb.minage = 2;
+      this.minage = 2;
       let timer = setTimeout(() => {
-        bomb.minage = 1;
+        this.minage = 1;
         clearTimeout(timer);
       }, 60 * 1000);
       divs[this.position()].textContent = "";
