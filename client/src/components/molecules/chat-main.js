@@ -17,6 +17,18 @@ class ChatMain extends VirtualNode {
             ]
         })
     }
+
+    newMessage(data) {
+        this.add(
+            new ChatBubble(
+                `https://ui-avatars.com/api/?name=${data.name}&background=123861&color=fff`,
+                `${data.name}`,
+                `${data.content}`
+            )
+        );
+        
+        this.elem.scrollTo(0, 0);
+    }
 }
 
 export default new ChatMain();

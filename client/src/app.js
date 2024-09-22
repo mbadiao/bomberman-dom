@@ -32,7 +32,7 @@ import Hearts from "./components/molecules/hearts.js";
 
 //------------------------------------------------------------------------------
 
-export const ws = new WebSocket(`ws://${window.location.host.split(":")[0]}:8080/`);
+export const ws = new WebSocket(`ws://${window.location.host.split(":")[0]}:8181/`);
 
 export let originGrid;
 
@@ -102,8 +102,6 @@ ws.onmessage = (e) => {
 
 //------------------------------------------------------------------------------
 
-soundHome();
-
 export function keyHandler(e) {
   if (canPass(e)) {
     if (gameState.get("nickname") != "" && gameState.get("timerDebounce") == 0 && (e.key).includes("Arrow")) {
@@ -120,8 +118,8 @@ export function keyHandler(e) {
         gameState.set({ timerDebounce: 0 });
       }, 200 / me.speed);
       gameState.set({ timerDebounce: timerDebounce });
-
     }
+
     if (e.key === " ") {
       ws.send(
         JSON.stringify({

@@ -16,8 +16,8 @@ class Timer extends VirtualNode {
                         class: "time"
                     },
                     children: [
-                        new Heading('time-header', ['Bomber-Time'], 2),
-                        new Span('time-display', '00:00'),
+                        new Heading('time-header', ['Gamers'], 2),
+                        new Span('time-display', ''),
                     ]
                 }
             ]

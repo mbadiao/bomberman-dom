@@ -55,6 +55,7 @@ main {
 main div {
   width: var(--bloc-size);
   height: var(--bloc-size);
+  font-size: 30px;
 }
 
 main>div img {
@@ -580,7 +581,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  font-size: 48px;
+  font-size: 30px;
   font-weight: bold;
   text-align: center;
   font-family: 'Courier New', monospace;

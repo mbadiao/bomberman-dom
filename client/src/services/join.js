@@ -5,6 +5,7 @@ import avartarCard from "../components/molecules/avatarCard.js";
 import timer from "../components/molecules/timer.js";
 import LifeAndActor from "../components/molecules/life.js";
 import Actor from "../components/molecules/actor.js";
+import countdown from "./countdown.js";
 
 export function joinRoomHandle(data) {
   const avatars = []; // OPTIMIZE: Already in game state...
@@ -78,4 +79,7 @@ export function joinRoomHandle(data) {
     timer.elem.appendChild((new LifeAndActor(gameState.get("avatars").map(avatar => new Actor(avatar)))).render())
     clearTimeout(timerout);
   }, 500);
+
+
+ 
 }

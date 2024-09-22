@@ -8,7 +8,7 @@ export default class Image extends VirtualNode {
                 ...adds,
                 class: tagClass,
                 src: src,
-                alt: tagClass.charAt(0).toUpperCase() + tagClass.slice(1)
+                alt: tagClass
             }
         })
     }

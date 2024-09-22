@@ -6,6 +6,7 @@ import VirtualNode from "../../core/node.js";
 // import { arrayOfGhost, intervalIDs } from "./avatar.js"
 // import { gameOver, winner } from "../interface/menuPause.js"
 import { playSound } from "../../interface/sound.js";
+import Image from "../atoms/image.js";
 
 export let detonationID = 0;
 let deathCounter = 0;
@@ -16,35 +17,28 @@ export class Bomb {
     this.delay = 2000; // en milliseconde
   }
 
-
   poserBomb(divs, position, actor) {
-
-    if (actor.nombreActualBomb < actor.minage) {
-      const iconBomb = new VirtualNode({
-        tag: "p",
-        attrs: {
-          class: "bomb",
-          style: `font-size: 30px;`,
-        },
-        children: ["💣"],
-      });
-
-      if (divs[position].innerHTML == "") {
-        divs[position].appendChild(iconBomb.render());
-      }
-      let timerout = setTimeout(() => {
-        this.#exploserBomb(divs, position, actor);
-        actor.nombreActualBomb--;
-        clearTimeout(timerout);
-      }, this.delay);
-      actor.nombreActualBomb++;
+    console.log(actor) // DEBUG: Check Actor
+    if (actor.nombreActualBomb >= actor.minage) {
+      return
     }
 
+    if (divs[position].innerHTML == "") {
+      divs[position].appendChild(new Image('💣', './assets/svg/bomb.svg').render());
+    }
+
+    let timerout = setTimeout(() => {
+      this.#exploserBomb(divs, position, actor);
+      actor.nombreActualBomb--;
+      clearTimeout(timerout);
+    }, this.delay);
+
+    actor.nombreActualBomb++;
   }
 
   #exploserBomb(nodes, position, actor) {
     // On enleve d'abord la bombe
-    nodes[position].textContent = "";
+    nodes[position].querySelector('img')?.remove()
 
     // On recupere tous les avatars et leur position
     let avatars = gameState.get("avatars");
@@ -74,6 +68,7 @@ export class Bomb {
     // Détruire les blocs dans un rayon de 2 autour de la bombe
     const directions = [1, -1, 15, -15]; // Droite, Gauche, Bas, Haut
     directions.forEach((dir) => {
+      console.log(actor) // DEBUG: Check Actor
       for (let i = 1; i <= actor.portee; i++) { // Parcourir de 1 à 2 blocs dans chaque direction
         const currentPos = position + dir * i;
 
@@ -94,19 +89,19 @@ export class Bomb {
   }
 
   #boom(node) {
-    if (node.textContent != '🔥' && node.textContent != '☘' && node.textContent != '🚀') {
-      node.textContent = "💥";
+    if (node.innerHTML == '') {
+      node.appendChild(new Image('💥', './assets/svg/explosion.svg').render())
       this.#animateExplo(node);
-     /*  if (node.className == "x") {
-        node.textContent = "🔥"; // portee
-      } else if (node.className == "y") {
-        node.textContent = "☘"; // many
-      } else if (node.className == "z") {
-        node.textContent = "🚀"; // speed
-      } else {
-        node.textContent = "";
-      }
-      node.className = "c"; */
+      /*  if (node.className == "x") {
+         node.textContent = "🔥"; // portee
+       } else if (node.className == "y") {
+         node.textContent = "☘"; // many
+       } else if (node.className == "z") {
+         node.textContent = "🚀"; // speed
+       } else {
+         node.textContent = "";
+       }
+       node.className = "c"; */
     }
   }
 
@@ -148,17 +143,17 @@ export class Bomb {
       /* node.style.fontSize = "35px"; // Taille normale après l'animation
       node.style.transition = 'none'; // Réinitialiser la transition après l'animation
       node.style.willChange = 'auto'; // Réinitialiser will-change après l'animation */
+      node.innerHTML = "";
 
       // Gérer les changements de contenu selon la classe de l'élément
       if (node.className == "x") {
-        node.textContent = "🔥"; // portee
+        node.appendChild(new Image('🔥', './assets/svg/hyper-bomb.svg').render())
       } else if (node.className == "y") {
-        node.textContent = "☘"; // many
+        node.appendChild(new Image('☘', './assets/svg/hyper-bomb.svg').render())
       } else if (node.className == "z") {
-        node.textContent = "🚀"; // speed
-      } else {
-        node.textContent = "";
+        node.appendChild(new Image('🚀', './assets/svg/hyper-bomb.svg').render())
       }
+
       node.className = "c"; // Reset de la classe
 
       clearTimeout(timeout); // Nettoyer le timeout

@@ -9,16 +9,30 @@ import avartarCard from "../molecules/avatarCard.js";
 import { main } from "../orgarnisms/main.js";
 import LifeAndActor from "../molecules/life.js";
 import Actor from "../molecules/actor.js";
+import chatMain from "../molecules/chat-main.js";
+import countdown from "../../services/countdown.js";
 
 const Room = () => {
   if (gameState.get("nickname") === "") {
     window.location.hash = "/insert";
     return;
   }
+  
   document.body.innerHTML = "";
   document.body.append(container.render());
+
   let chat = new ChatCpn();
   container.elem.append(timer.render(), main.render(), chat.render());
+
+  let msgInterval = setInterval(() => chatMain.newMessage({
+    name: 'Fatima+Keita',
+    content: "Is the room ready?",
+  }), 4000);
+
+  setTimeout(() => {
+    clearInterval(msgInterval);
+  }, 10000)
+
   main.elem.appendChild(
     new VirtualNode({
       tag: "div",
@@ -29,6 +43,9 @@ const Room = () => {
     }).render()
   );
   timer.elem.appendChild((new LifeAndActor(gameState.get("avatars").map(avatar => new Actor(avatar)))).render())
+  if (gameState.get("playerCount") == 4) {
+    countdown()
+  }
 };
 
 export default Room;

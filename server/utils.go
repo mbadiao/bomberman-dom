@@ -41,8 +41,7 @@ func handleJoin(Conn *websocket.Conn, name string) {
 	}
 
 	room.Players[name] = player
-	room.PlayerCount++
-
+	
 	broadcast <- Data{
 		Type:        "playerJoin",
 		Name: 	  name,
@@ -50,7 +49,9 @@ func handleJoin(Conn *websocket.Conn, name string) {
 		PlayerCount: room.PlayerCount,
 	}
 
-	startWaitingTime()
+	room.PlayerCount++
+
+    startWaitingTime()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -71,7 +72,8 @@ func startWaitingTime() {
 	if countdownStarted {
 		return
 	}
-	if room.PlayerCount == room.MaxPlayers {
+
+	if room.PlayerCount >= room.MaxPlayers {
 		startCountdown()
 	} else if room.PlayerCount >= 2 {
 		time.AfterFunc(room.WaitingTime, func() {
@@ -83,6 +85,8 @@ func startWaitingTime() {
 		})
 	}
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 func startCountdown() {
 	if countdownStarted {
@@ -109,6 +113,8 @@ func broadcastPlayerMsg(msg Data) { // REVIEW: Function name could be more conci
 		}
 	}
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 func send(msg Data, player *Player) {
 	player.mu.Lock()

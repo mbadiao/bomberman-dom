@@ -101,35 +101,34 @@ export class Avatar {
   }
 
   takePowerUpSpeed() {
-    if (divs[this.position()].textContent === "🚀") {
+    if (divs[this.position()].querySelector('img')?.alt == "🚀") {
       this.speed = 4;
       // ON enleve le powerUp speed apres 1 minute plus tard
       let timer = setTimeout(() => {
         this.speed = 1;
         clearTimeout(timer);
       }, 60 * 1000);
-      divs[this.position()].textContent = "";
+      divs[this.position()].innerHTML = "";
       // domNombreBombe(bomb);
     }
   }
 
   takePowerUpBomb() { // Elle prend l'objet de la classe bomb
-
-    if (divs[this.position()].textContent === "🔥") {
+    if (divs[this.position()].querySelector('img')?.alt == "🔥") {
       this.portee = 2;
       let timer = setTimeout(() => {
         this.portee = 1;
         clearTimeout(timer);
       }, 60 * 1000);
-      divs[this.position()].textContent = "";
+      divs[this.position()].innerHTML = "";
 
-    } else if (divs[this.position()].textContent === "☘") {
+    } else if (divs[this.position()].querySelector('img')?.alt == "☘") {
       this.minage = 2;
       let timer = setTimeout(() => {
         this.minage = 1;
         clearTimeout(timer);
       }, 60 * 1000);
-      divs[this.position()].textContent = "";
+      divs[this.position()].innerHTML = "";
     }
   }
 }

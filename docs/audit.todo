@@ -66,12 +66,12 @@ Functional:
 
     Open the Dev Tool in the Performance tab:
         
-        ☐ Does the game run without `frame drops`?
+        ✔ Does the game run without `frame drops`? @done(24-09-22 18:04)
 
 
     Open the Dev Tool in the Performance tab:
         
-        ☐ Does the game run at or around `60fps`?
+        ✔ Does the game run at or around `60fps`? @done(24-09-22 18:04)
 
 
     Open the Dev Tool in the performance tab and select the option rendering with the paint ON:

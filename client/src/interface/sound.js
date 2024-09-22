@@ -12,7 +12,7 @@ export function soundHome() {
 
 }
 export function playSound(titleSound) {
-    const audio = new Audio('../../../assets/soundEffect/' + titleSound);
+    const audio = new Audio('./assets/soundEffect/' + titleSound);
     audio.play();
 
 }
