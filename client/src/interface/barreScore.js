@@ -2,9 +2,9 @@
     Implementation de la logique du score dependant du temps
 */
 
-import Actor from "../components/molecules/actor";
-import LifeAndActor from "../components/molecules/life";
-import timer from "../components/molecules/timer";
+import Actor from "../components/molecules/actor.js";
+import LifeAndActor from "../components/molecules/life.js";
+import timer from "../components/molecules/timer.js";
 
 // import { gameOver } from "./menuPause.js"
 
