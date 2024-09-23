@@ -19,7 +19,6 @@ export function joinRoomHandle(data) {
   
   if (gameState.get("nickname") === "") {
     gameState.set({nickname: data.name});
-    console.log('data.name :>> ', data.name);
   }
 
   names.map((name, i) => {
@@ -45,7 +44,7 @@ export function joinRoomHandle(data) {
         avatar.representation = "👮🏾";
         break;
       default:
-        console.error("Error: Too many players");
+        console.log("Error: Too many players");
         break;
     }
 

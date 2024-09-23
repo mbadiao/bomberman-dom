@@ -77,7 +77,7 @@ ws.onmessage = (e) => {
   try {
     data = JSON.parse(e.data);
   } catch (error) {
-    console.error("Error parsing message data: ", error);
+    console.log("Error parsing message data: ", error);
     return;
   }
 
@@ -96,7 +96,7 @@ ws.onmessage = (e) => {
   if (messageHandlers[data.type]) {
     messageHandlers[data.type]();
   } else {
-    console.error(`Unhandled message type: ${data.type}`);
+    console.log(`Unhandled message type: ${data.type}`);
   }
 };
 

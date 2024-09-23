@@ -1,8 +1,8 @@
-# bomberman-dom
+# ![bomberman-dom](./client/assets/logo.png)
 
 # Table of Contents
 
-- [**Description**](#description)
+- [**Overview**](#overview)
 - [**Tech Stack**](#tech-stack)
   - [Languages](#languages)
   - [Development](#development)
@@ -27,7 +27,9 @@
 - [**Sources**](#sources)
 - [**License**](#license)
 
-## Description
+## Overview
+
+![Example](./client/assets/bumberman.png)
 
 ###### [_Table of Contents ⤴️_](#table-of-contents)
 

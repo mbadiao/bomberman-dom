@@ -9,7 +9,7 @@ export default () => {
 
   const entryCover = new Cover(
     // <img>
-    new Image("logo", "./assets/man.svg", {
+    new Image("logo", "./assets/svg/man.svg", {
       width: "200",
       height: "200",
     }),

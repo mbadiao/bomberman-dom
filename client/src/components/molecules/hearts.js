@@ -8,7 +8,7 @@ export default class Hearts extends VirtualNode {
                 class : "heart-container"
             },
             children: Array.from({ length: hearts }, () =>
-                new Image('heart', './assets/heart1.svg', {
+                new Image('heart', './assets/svg/heart.svg', {
                     width: '30px',
                     height: '30px'
                 })

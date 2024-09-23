@@ -2,7 +2,6 @@ package main
 
 import (
 	"bomberman-dom/server/utils"
-	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -35,7 +34,6 @@ func main() {
 		for {
 			msg := <-broadcast
 			broadcastPlayerMsg(msg)
-			fmt.Println("room", room.Players) // DEBUG: Check Player List...
 		}
 	}()
 

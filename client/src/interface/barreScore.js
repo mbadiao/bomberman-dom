@@ -13,7 +13,6 @@ export let chronoId
 
 export function updateLifeScore(actor) {
     actor.life--
-    console.log('actor.life :>> ', actor.name, " - ", actor.life);
     actor.kill()
     let lifeCpn = document.querySelectorAll('.avatars-representations')
     lifeCpn.forEach(element => element.remove());

@@ -18,7 +18,6 @@ export class Bomb {
   }
 
   poserBomb(divs, position, actor) {
-    console.log(actor) // DEBUG: Check Actor
     if (actor.nombreActualBomb >= actor.minage) {
       return
     }
@@ -35,6 +34,8 @@ export class Bomb {
 
     actor.nombreActualBomb++;
   }
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   #exploserBomb(nodes, position, actor) {
     // On enleve d'abord la bombe
@@ -68,7 +69,6 @@ export class Bomb {
     // Détruire les blocs dans un rayon de 2 autour de la bombe
     const directions = [1, -1, 15, -15]; // Droite, Gauche, Bas, Haut
     directions.forEach((dir) => {
-      console.log(actor) // DEBUG: Check Actor
       for (let i = 1; i <= actor.portee; i++) { // Parcourir de 1 à 2 blocs dans chaque direction
         const currentPos = position + dir * i;
 
@@ -88,70 +88,30 @@ export class Bomb {
     });
   }
 
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
   #boom(node) {
     if (node.innerHTML == '') {
       node.appendChild(new Image('💥', './assets/svg/explosion.svg').render())
       this.#animateExplo(node);
-      /*  if (node.className == "x") {
-         node.textContent = "🔥"; // portee
-       } else if (node.className == "y") {
-         node.textContent = "☘"; // many
-       } else if (node.className == "z") {
-         node.textContent = "🚀"; // speed
-       } else {
-         node.textContent = "";
-       }
-       node.className = "c"; */
     }
   }
 
-  /*  #animateExplo(node) {
-     // Ajouter une transition CSS pour lisser l'animation de la taille
-     node.style.transition = 'font-size 0.05s ease-out'; // Transition fluide en 0.3s
-     node.style.fontSize = '45px'; // Taille finale après explosion
-   
-     // Attendre la fin de la transition
-     let timerout = setTimeout(() => {
-       node.style.fontSize = "35px"; // Taille normale après l'animation
-       node.style.transition = 'none'; // Réinitialiser la transition
-       // Gérer les changements de contenu selon la classe de l'élément
-       if (node.className == "x") {
-         node.textContent = "🔥"; // portee
-       } else if (node.className == "y") {
-         node.textContent = "☘"; // many
-       } else if (node.className == "z") {
-         node.textContent = "🚀"; // speed
-       } else {
-         node.textContent = "";
-       }
-       node.className = "c"; // Reset de la classe
- 
-       clearTimeout(timerout); // Arrêter le timer
-     }, 50); // Durée correspondant à la transition CSS
-   } */
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   #animateExplo(node) {
-    // Préparer le DOM à la modification de font-size pour améliorer les performances
-    // node.style.willChange = 'font-size';
-
-    // Ajouter une transition CSS pour lisser l'animation de la taille
-    // node.style.transition = 'font-size 50ms ease-out'; // Transition fluide en 0.1s
-    // node.style.fontSize = '45px'; // Taille finale après explosion
-
     // Attendre la fin de la transition
     let timeout = setTimeout(() => {
-      /* node.style.fontSize = "35px"; // Taille normale après l'animation
-      node.style.transition = 'none'; // Réinitialiser la transition après l'animation
-      node.style.willChange = 'auto'; // Réinitialiser will-change après l'animation */
       node.innerHTML = "";
 
       // Gérer les changements de contenu selon la classe de l'élément
       if (node.className == "x") {
         node.appendChild(new Image('🔥', './assets/svg/hyper-bomb.svg').render())
       } else if (node.className == "y") {
-        node.appendChild(new Image('☘', './assets/svg/hyper-bomb.svg').render())
+        node.appendChild(new Image('☘', './assets/svg/dual-bomb.svg').render())
       } else if (node.className == "z") {
-        node.appendChild(new Image('🚀', './assets/svg/hyper-bomb.svg').render())
+        node.appendChild(new Image('🚀', './assets/svg/speed-up.svg').render())
       }
 
       node.className = "c"; // Reset de la classe

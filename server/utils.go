@@ -2,7 +2,6 @@ package main
 
 import (
 	"bomberman-dom/server/utils"
-	"fmt"
 	"log"
 	"time"
 
@@ -41,17 +40,17 @@ func handleJoin(Conn *websocket.Conn, name string) {
 	}
 
 	room.Players[name] = player
-	
+
 	broadcast <- Data{
 		Type:        "playerJoin",
-		Name: 	  name,
+		Name:        name,
 		Content:     takePlayersNames(room.Players),
 		PlayerCount: room.PlayerCount,
 	}
 
 	room.PlayerCount++
 
-    startWaitingTime()
+	startWaitingTime()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -102,8 +101,7 @@ func startCountdown() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 func broadcastPlayerMsg(msg Data) { // REVIEW: Function name could be more concise... // TODO: broadcastMsg() {}
-	for name, player := range room.Players {
-		fmt.Println("name", name) // DEBUG: Check Player Name...
+	for _, player := range room.Players {
 		if msg.Type == "GameOver" && msg.Name == player.Name {
 			send(msg, player)
 

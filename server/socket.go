@@ -26,7 +26,6 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 	for {
 		var data Data
 		err := Conn.ReadJSON(&data)
-		fmt.Println("Data", data) // DEBUG: Check Received Data...
 		if err != nil {
 			fmt.Println("Error reading JSON: ", err)
 
