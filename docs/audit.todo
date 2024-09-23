@@ -76,26 +76,26 @@ Functional:
 
     Open the Dev Tool in the performance tab and select the option rendering with the paint ON:
         
-        ☐ Is `paint` used as little as possible?
+        ✔ Is `paint` used as little as possible? @done(24-09-23 00:25)
 
 
     Open the Dev Tool in the performance tab and select the option rendering with the layer ON:
         
-        ☐ Are `layers` used as little as possible?
+        ✔ Are `layers` used as little as possible? @done(24-09-23 00:25)
         
-        ☐ Are layers being `promoted` (https://developers.google.com/web/fundamentals/performance/rendering/stick-to-compositor-only-properties-and-manage-layer-count) properly?
+        ✔ Are layers being `promoted` (https://developers.google.com/web/fundamentals/performance/rendering/stick-to-compositor-only-properties-and-manage-layer-count) properly? @done(24-09-23 00:25)
 
         
 Bonus:
 
-    ☐ Is there a `Solo + Co-Op mode` in the game as described in the subject?
+    ✘ Is there a `Solo + Co-Op mode` in the game as described in the subject? @cancelled(24-09-23 00:26)
 
-    ☐ Are `2 or more` extra power ups, as described in the subject's bonus section (../README.md), implemented?
+    ✘ Are `2 or more` extra power ups, as described in the subject's bonus section (../README.md), implemented? @cancelled(24-09-23 00:26)
 
-    ☐ When a player dies, is a `random power up` release as described in the subject's bonus section?
+    ✘ When a player dies, is a `random power up` release as described in the subject's bonus section? @cancelled(24-09-23 00:26)
 
-    ☐ Is there a `team mode` implemented?
+    ✘ Is there a `team mode` implemented? @cancelled(24-09-23 00:26)
 
-    ☐ Can the player `interact` with the game `after death` as described in the subject's bonus section?
+    ✘ Can the player `interact` with the game `after death` as described in the subject's bonus section? @cancelled(24-09-23 00:26)
 
-    ☐ Do you think in general this project is well done?
+    ✔ Do you think in general this project is well done? @done(24-09-23 00:26)
